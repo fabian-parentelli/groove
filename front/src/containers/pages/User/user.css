@@ -1,0 +1,82 @@
+.user {
+    margin-top: 70px;
+    width: 100%;
+    min-height: 88vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 1re, ;
+}
+
+.userSect {
+    max-width: 600px;
+    width: 90%;
+    min-height: 350px;
+    height: 90%;
+    margin-bottom: 3rem;
+    box-shadow: 0px 0px 5px var(--colc);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.userSect h2 {
+    margin: 1rem 0;
+}
+
+/* Imágen */
+
+.user .userImg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user .userImg p {
+    max-width: 350px;
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 3px;
+}
+
+.user .userImg img {
+    max-width: 350px;
+    width: 90%;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 12px;
+    margin-bottom: 6px;
+}
+
+.userFirst {
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.userFirst:hover {
+    opacity: 0.7;
+}
+
+.userSecond {
+    color: gray;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.userSecond:hover {
+    color: gainsboro;
+}
+
+@media (max-width: 1007px) {
+    
+    .user {
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+}
