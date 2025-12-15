@@ -1,6 +1,4 @@
-import { postman } from "../config/nast.config.js";
-
-const logger = async ({ error, route, user = 'anonymous', context }) => {
+const logger = async ({ error, route, user = 'anonymous', context = null }) => {
     const stack = getStack(error)
     const { func, file, line, column } = stack || {};
     const obj = {
@@ -9,7 +7,9 @@ const logger = async ({ error, route, user = 'anonymous', context }) => {
         func, file, line, column, route, user, context
     };
     printColoredObject(obj.level, obj);
-    if (obj.level !== 'info') postman('analytic.logs_postLogs', obj, false);
+    
+    // Función que guarda en bd
+
 };
 
 export { logger };
@@ -39,4 +39,4 @@ function printColoredObject(label, obj) {
     console.log('}');
 };
 
-// logger({ error, route: req.originalUrl, user: req.user.user._id });
+// logger({ error, route: req.originalUrl, user: req.user._id });

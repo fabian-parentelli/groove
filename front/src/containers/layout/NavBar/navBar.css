@@ -5,5 +5,5 @@
     top: 0;
     transition: top .3s;
     background-color: #141414;
-    z-index: 1001;
+    z-index: 999;
 }

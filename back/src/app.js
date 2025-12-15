@@ -6,7 +6,7 @@ import cors from 'cors';
 import env from './config/env.config.js';
 import cookieParser from 'cookie-parser';
 
-import { sessionRouter } from './routes/index.router.js';
+import { musicRouter, sessionRouter } from './routes/index.router.js';
 
 const app = express();
 mongoDB();
@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 initializePassport();
 app.use(passport.initialize());
 
+app.use('/api/music', musicRouter);
 app.use('/api/session', sessionRouter);
 
 app.listen(env.port, async () => console.log(`Server conected ${env.port}`));

@@ -1,8 +1,15 @@
 import './navBarCont.css';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Icons, Tooltip } from 'fara-comp-react';
+import NavBarMenu from '../NavBarMenu/NavBarMenu';
+import { useLoginContext } from '../../../../context/LoginContext';
 
 const NavBarCont = () => {
+
+    const { user, current } = useLoginContext();
+
+    useEffect(() => { current() }, []);
 
     return (
         <div className="navBarCont">
@@ -26,12 +33,15 @@ const NavBarCont = () => {
             </div>
 
             <section className='navBarContR'>
-                
-                <Tooltip text='Iniciar sesión' position='left' backgroundColor='#1B263B'>
-                    <Link to={'/user?path=login'} className='navBarContNavMenu'>
-                        <Icons type='user' color='white' />
-                    </Link>
-                </Tooltip>
+
+                {user.logged
+                    ? <NavBarMenu user={user.data} />
+                    : <Tooltip text='Iniciar sesión' position='left' backgroundColor='#1B263B'>
+                        <Link to={'/user?path=login'} className='navBarContNavMenu'>
+                            <Icons type='user' color='white' />
+                        </Link>
+                    </Tooltip>
+                }
 
             </section>
         </div>

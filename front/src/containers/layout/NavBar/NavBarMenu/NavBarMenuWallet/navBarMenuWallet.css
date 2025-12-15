@@ -1,0 +1,20 @@
+.navBarMenuWallet {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    border-top: 1px solid var(--colee);
+    border-bottom: 1px solid var(--colee);
+    padding: 12px 0;
+}
+
+.navBarMenuWallet a {
+    font-size: 12px;
+    background-color: var(--colpay);
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    color: gray;
+    border-radius: 6px;
+    text-decoration: none;
+}

@@ -2,28 +2,38 @@ import './user.css';
 import Login from './login.jsx';
 import { useState } from 'react';
 import Register from './Register.jsx';
+import WhatEmail from './WhatEmail.jsx';
+import { useNavigate } from 'react-router-dom';
 import { images } from '@/utils/images.utils.js';
 import { useQueryParams } from '@/hooks/useQueryParams.jsx';
-import WhatEmail from './WhatEmail.jsx';
+import { useLoginContext } from '@/context/LoginContext.jsx';
+import { useAlertContext } from '@/context/AlertContext.jsx';
 import { getGeoData } from '@/helpers/session/getGeoData.api.js';
-import { postSessionApi } from '@/helpers/session/postSession.api.js';
 
 const User = () => {
 
+    const navigate = useNavigate();
     const [params, setParams] = useQueryParams();
+    const { postUserContext } = useLoginContext();
+    const { setLoading, showAlert } = useAlertContext();
 
     const [values, setValues] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const data = { ...values };
         if (params.path === 'register') {
-            // const location = await getGeoData();
-            // if (location.status == 'success') data.location = location.result;
+            const location = await getGeoData();
+            if (location.status == 'success') data.location = location.result;
         };
         data.type = params.path;
-        const response = await postSessionApi(data);
-
+        const response = await postUserContext(data);
+        if (response) {
+            showAlert(message(params.path));
+            navigate('/');
+        };
+        setLoading(false);
     };
 
     return (
@@ -46,3 +56,12 @@ const User = () => {
 };
 
 export default User;
+
+function message(status) {
+    const type = {
+        'login': () => { return 'Inicio de sesión exitoso' },
+        'register': () => { return 'Registro e inicio de sesión exitoso' },
+        'password': () => { return 'Te hemos enviado un email, revisa tu correo' }
+    };
+    return (type[status])();
+};

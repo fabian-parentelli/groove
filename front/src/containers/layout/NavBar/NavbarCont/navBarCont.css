@@ -84,3 +84,11 @@
 .navBarCont .navBarContCent input:focus {
     border: 1px solid var(--cola);
 }
+
+@media (max-width: 767px) {
+    
+    .navBarCont {
+        padding: 0 3px;
+    }
+
+}
