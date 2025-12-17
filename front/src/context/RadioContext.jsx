@@ -9,21 +9,31 @@ const RadioProvider = ({ children }) => {
     const [params, setParams] = useQueryParams();
 
     useEffect(() => {
-        console.log(params);
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        // Estoy acá no importa que cambie la url, se supone que la muscia sigue corriendo
-        
-    },[params]);
+        const fetchData = async () => {
+
+            if (!playerRef.current || typeof playerRef.current.loadPlaylist !== 'function') return;
+
+            if (params?.lid) {
+                playerRef.current.loadPlaylist({
+                    list: params.lid,
+                    listType: 'playlist',
+                    index: 0,
+                    suggestedQuality: 'default'
+                });
+                setIsPlaying(true);
+            } else if (params?.sid) {
+                // aca cuando sea una canción ...
+            }
+        };
+        fetchData();
+    }, [params?.lid, params?.sid]);
 
     const playerRef = useRef(null);
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '' });
-    const [playlist, setPlayList] = useState(['kPa7bsKwL-c', 'CFPLIaMpGrY', 'kTJczUoc26U']);
+
+    const [playlist, setPlayList] = useState([]);
 
     useEffect(() => {
         if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist);
@@ -35,6 +45,8 @@ const RadioProvider = ({ children }) => {
         };
     }, []);
 
+    console.log(playlist);
+
     const handlePlayPause = () => {
         if (!playerRef.current) return;
         if (isPlaying) playerRef.current.pauseVideo();
@@ -45,7 +57,9 @@ const RadioProvider = ({ children }) => {
     const handlePrev = () => playerRef.current?.previousVideo();
 
     return (
-        <RadioContext.Provider value={{ isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams }}>
+        <RadioContext.Provider value={{
+            isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams, setPlayList
+        }}>
             {children}
         </RadioContext.Provider>
     );

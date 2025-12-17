@@ -10,8 +10,7 @@ const BodyList = () => {
 
     const navigate = useNavigate();
     const { showAlert } = useAlertContext();
-    const { setParams } = useRadioContext();
-
+    const { setParams, setPlayList } = useRadioContext();
 
     const [lists, setLists] = useState(null);
 
@@ -23,7 +22,12 @@ const BodyList = () => {
         }; fetchData();
     }, []);
 
+    console.log(lists);
+    
+
     const handleList = (id) => {
+        const ids = lists.docs.find(doc => doc._id === id);
+        setPlayList(ids.list)
         navigate(`/list`);
         setParams({ lid: id })
     };
