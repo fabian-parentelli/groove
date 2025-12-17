@@ -1,12 +1,14 @@
 import './dashAdMusic.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Icons, CheckBoxes } from "fara-comp-react";
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { postMusicApi } from '../../../../helpers/music/postMusic.api';
 
 const DashAdMusic = () => {
 
+    const navigate = useNavigate();
     const { showAlert, setLoading } = useAlertContext();
 
     const [type, setType] = useState(null);
@@ -19,10 +21,15 @@ const DashAdMusic = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if (values.path == '' || values.type == '') return showAlert('Debes completar los dos inputs', 'error');
         const response = await postMusicApi(values);
-
-        console.log(values);
+        if (response.status === 'success') {
+            showAlert('Operación exitosa');
+            const path = `/${values.type.startsWith("p") ? 'list' : 'song'}?id=${response.result}`;
+            navigate(path)
+        } else showAlert(response.error, 'error');
+        setLoading(false);
     };
 
     return (
@@ -41,8 +48,15 @@ const DashAdMusic = () => {
 
                     <input
                         type="text" placeholder='Url de la canción' value={values?.path || ''}
-                        onChange={(e) => setValues({ ...values, path: e.target.value })}
+                        onChange={(e) => setValues({ ...values, path: e.target.value })} required
                     />
+
+                    {values.type.startsWith("p") &&
+                        <input
+                            type="text" placeholder='Nombre de la playlist' value={values?.name || ''}
+                            onChange={(e) => setValues({ ...values, name: e.target.value })} required
+                        />
+                    }
 
                     <button className='btn btnA'>Agragar</button>
                 </form>

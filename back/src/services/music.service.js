@@ -3,6 +3,7 @@ import { getPlayListApi } from '../helpers/getPlayList.api.js';
 import { getVideoInfoApi } from '../helpers/getVideoInfo.api.js';
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
 import * as musicValidate from '../utils/validates/music.validate.js';
+import { postCategory } from "./category.service.js";
 
 const postMusic = async (body, user) => {
 
@@ -24,6 +25,7 @@ const postMusic = async (body, user) => {
     if (!body.type.startsWith("p")) {
         setImmediate(async () => {
             await activityRepository.postActivity({ eid: saveMusic.upsertedIds[0], uid: user._id, type: 'newSong' });
+            await postCategory(musicFormat);
         });
         return { status: 'success', result: saveMusic.upsertedIds[0] };
     };
@@ -33,6 +35,7 @@ const postMusic = async (body, user) => {
 
     setImmediate(async () => {
         await activityRepository.postActivity({ eid: saveList._id, uid: user._id, type: 'newList' });
+        await postCategory(musicFormat);
     });
 
     return { status: 'success', result: saveList._id };

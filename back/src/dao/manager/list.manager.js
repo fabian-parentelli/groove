@@ -6,4 +6,8 @@ export default class Musci {
         return await listModel.create(list);
     };
 
+    getLists = async (query, page, limit) => {
+        return await listModel.paginate(query, { page, limit, lean: true });
+    };
+
 };

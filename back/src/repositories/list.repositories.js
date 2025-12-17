@@ -6,5 +6,10 @@ export default class ListRepository {
         const result = await listManager.postList(songs);
         return result;
     };
+   
+    getLists = async (query, page, limit) => {
+        const result = await listManager.getLists(query, page, limit);
+        return result;
+    };
 
 };

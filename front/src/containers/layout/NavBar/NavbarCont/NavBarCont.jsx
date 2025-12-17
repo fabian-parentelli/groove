@@ -2,8 +2,8 @@ import './navBarCont.css';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Icons, Tooltip } from 'fara-comp-react';
-import NavBarMenu from '../NavBarMenu/NavBarMenu';
-import { useLoginContext } from '../../../../context/LoginContext';
+import NavBarMenu from '../NavBarMenu/NavBarMenu.jsx';
+import { useLoginContext } from '@/context/LoginContext.jsx';
 
 const NavBarCont = () => {
 

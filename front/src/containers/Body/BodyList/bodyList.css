@@ -1,0 +1,61 @@
+.bodyList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+    margin: 1rem auto;
+}
+
+.bodyList .bodyListSect {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.bodyList .bodyListSect .bodyListSectCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px black;
+    padding-bottom: 1rem;
+    gap: 1rem;
+}
+
+.bodyList .bodyListSect .bodyListSectCard:hover .bodyListImg .bodyListImgIcons {
+    display: flex;
+}
+
+.bodyList .bodyListSect .bodyListSectCard:hover .bodyListImg {
+    opacity: 0.8;
+}
+
+.bodyList .bodyListSect .bodyListSectCard .bodyListImg {
+    position: relative;
+}
+
+.bodyList .bodyListSect .bodyListSectCard .bodyListImg .bodyListImgIcons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 5px;
+    right: 5px;
+    height: 90%;
+    justify-content: space-between;
+    display: none;
+}
+
+.bodyList .bodyListSect .bodyListSectCard .bodyListImg .bodyListImgIcons .bodyListImgIconsIc {
+    background-color: var(--cola);
+    padding: 6px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bodyList .bodyListSect .bodyListSectCard .bodyListImg .bodyListImgIcons .bodyListImgIconsIc:hover {
+    background-color: #2d3c58;
+}

@@ -4,6 +4,9 @@ import NavBar from "../containers/layout/NavBar/NavBar.jsx";
 import User from "../containers/pages/User/User.jsx";
 import { useLoginContext } from "../context/LoginContext.jsx";
 import DashRouter from "./DashRouter.jsx";
+import Radio from "../containers/layout/Radio/Radio.jsx";
+import Body from "../containers/Body/Body.jsx";
+import ListPage from "../containers/pages/ListPage/ListPage.jsx";
 
 const WrapRoutes = () => {
 
@@ -16,8 +19,9 @@ const WrapRoutes = () => {
                 <NavBar />
 
                 <Routes>
-                    <Route path="/" element={''} />
+                    <Route path="/" element={<Body />} />
                     <Route path="/user" element={<User />} />
+                    <Route path="/list" element={<ListPage />} />
 
                     {user.logged &&
                         <>
@@ -25,6 +29,8 @@ const WrapRoutes = () => {
                         </>
                     }
                 </Routes>
+
+                <Radio />
 
             </ScrollToTop>
         </BrowserRouter>

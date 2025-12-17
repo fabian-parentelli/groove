@@ -6,5 +6,10 @@ export default class MusicRepository {
         const result = await musicManager.postMany(songs);
         return result;
     };
+    
+    getAll = async () => {
+        const result = await musicManager.getAll();
+        return result;
+    };
 
 };

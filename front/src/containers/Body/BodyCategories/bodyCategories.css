@@ -1,0 +1,30 @@
+.bodyCategories {
+    padding: 1.4rem 0;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    width: 90%;
+    margin: 0 auto;
+    scroll-padding-left: 10px;
+}
+
+.bodyCategories div {
+    width: 200px;
+    padding: 12px;
+    background-color: var(--colee);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;   
+    align-items: center;
+    justify-content: center;
+} 
+
+.bodyCategories div:hover {
+    background-color: #8080802f;
+}
+
+.bodyCategories div p {
+    display: inline;
+    white-space: nowrap;
+}
