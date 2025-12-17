@@ -13,7 +13,7 @@ const postMusicVal = (body, user) => {
     });
 
     Object.keys(body).forEach(key => {
-        if (!['path', 'type'].includes(key)) {
+        if (!['path', 'type', 'name'].includes(key)) {
             errors.push(`Campo no permitido: ${key}`);
         };
     });
