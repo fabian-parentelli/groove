@@ -50,7 +50,7 @@ const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
         if (!list) throw new CustomNotFound('Error al tarer la lista de reproducción');
         const songs = await musicRepository.getAll({ yid: { $in: list.list }, active: true });
         if (!songs) throw new CustomNotFound('Error a tarer las canciones');
-        return { status: 'success', result: { songs, listName: list.name } };
+        return { status: 'success', result: { songs, listName: list.name, lid } };
     };
 
     // paginador ....

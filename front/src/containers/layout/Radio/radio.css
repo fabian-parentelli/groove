@@ -10,6 +10,20 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
+
+    border-top: 2px solid #333;
+    overflow: hidden;
+}
+
+.radio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: var(--progress, 0%);
+    background: linear-gradient(90deg, #00ffcc, #0066ff);
+    transition: width 0.3s linear;
 }
 
 #radioTv {
@@ -48,7 +62,7 @@
 
 .radio .radioData div h4 {
     font-size: 14px;
-} 
+}
 
 .radio .radioData img {
     width: 60px;

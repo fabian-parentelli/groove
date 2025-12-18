@@ -4,10 +4,14 @@ import { useRadioContext } from '../../../context/RadioContext.jsx';
 
 const Radio = () => {
 
-    const { isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack } = useRadioContext();
+    const {
+        isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, duration, currentTime
+    } = useRadioContext();
+
+    const progress = duration > 0 ? `${(currentTime / duration) * 100}%` : '0%';
 
     return (
-        <div className="radio">
+        <div className="radio" style={{ '--progress': progress }}>
 
             <div id='radioTv'></div>
 
@@ -19,11 +23,11 @@ const Radio = () => {
                 <div className='radioIcon' onClick={handlePlayPause}>
                     <Icons color='white' type={isPlaying ? 'pause' : 'play'} />
                 </div>
-                
+
                 <div className='radioIcon' onClick={handleNext}>
                     <Icons color='white' type='playnext' />
                 </div>
-                <p className='pgray'>1:36 / 4:35</p>
+                <p className='pgray'>{`${formatTime(currentTime)} / ${formatTime(duration)}`}</p>
             </section>
 
             <section className='radioData'>
@@ -56,3 +60,11 @@ const Radio = () => {
 };
 
 export default Radio;
+
+const formatTime = (seconds) => {
+    if (!seconds) return "00:00";
+    const date = new Date(seconds * 1000);
+    const mm = date.getUTCMinutes().toString().padStart(2, '0');
+    const ss = date.getUTCSeconds().toString().padStart(2, '0');
+    return `${mm}:${ss}`;
+};

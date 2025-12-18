@@ -1,25 +1,26 @@
 import './featureImg.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { categoriesDic } from '@/utils/dictionary.utils.js';
+import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const FeatureImg = ({ currentTrack, songs }) => {
 
-    const [data, setData] = useState(null);
+    const { setCurrentTrack } = useRadioContext();
 
     useEffect(() => {
-        if(!songs) return;
+        if (!songs) return;
         const song = songs.songs.find(doc => doc.yid === currentTrack.id);
-        if(song) setData(song);
-    },[currentTrack]);
+        if (song) setCurrentTrack(prev => ({ ...prev, image: song.img, topics: song.topics }));
+    }, [currentTrack.id]);
 
     return (
         <div className="featureImg">
             <h2>{currentTrack.title}</h2>
-            <img src={data?.img || '/list.jpg'} alt="img" style={{maxWidth: currentTrack?.image ? '500px' : '300px'}} />
+            <img src={currentTrack?.image || '/list.png'} alt="img" style={{ maxWidth: currentTrack?.image ? '500px' : '300px' }} />
             <p>{currentTrack?.author}</p>
-            
+
             <section>
-                {data && data.topics.map(doc=> (
+                {currentTrack && currentTrack?.topics && currentTrack?.topics.map(doc => (
                     <div key={doc}>
                         <p>{categoriesDic(doc)}</p>
                     </div>

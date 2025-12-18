@@ -1,4 +1,91 @@
 .listSongs {
     min-width: 280px;
-    margin: 2rem 2rem 0 0 ;
+    max-width: 400px;
+    width: 100%;
+    margin: 2rem 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.listSongs h2 {
+    text-align: end;
+}
+
+.listSongs .listSongsSect {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.listSongs .listSongsSect .listSongsOne {
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    border-bottom: 1px solid var(--colee);
+}
+
+.listSongs .listSongsSect .listSongsOne:hover {
+    background-color: #181818;
+}
+
+.listSongs .listSongsSect .listSongsOne:hover .listSongsOneIcon {
+    background-color: #181818a4;
+    opacity: 1;
+}
+
+.listSongs .listSongsSect .listSongsOne:hover .listSongsOneIconTwo {
+    opacity: 1;
+}
+
+.listSongs .listSongsSect .listSongsOne:hover section:nth-child(2) p {
+    opacity: 0;
+}
+
+.listSongs .listSongsSect .listSongsOne section {
+    user-select: none;
+    position: relative;
+}
+
+.listSongs .listSongsSect .listSongsOne section .listSongsOneIcon {
+    position: absolute;
+    height: 23px;
+    width: 40px;
+    opacity: 0;
+}
+
+.listSongs .listSongsSect .listSongsOne section:nth-child(1) {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.listSongs .listSongsSect .listSongsOne section:nth-child(1) div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.listSongs .listSongsSect .listSongsOne section:nth-child(1) .listSongsOneText p {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listSongs .listSongsSect .listSongsOne section .listSongsOneIconTwo {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    opacity: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listSongs .listSongsSect .listSongsOne section .listSongsOneIconTwo:hover {
+    background-color: #0000003f;
 }
