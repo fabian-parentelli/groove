@@ -13,6 +13,7 @@ const RadioProvider = ({ children }) => {
     const [index, setIndex] = useState(0);
     const [duration, setDuration] = useState(0);
     const [playlist, setPlayList] = useState([]);
+    const [volume, setVolumeState] = useState(50);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '', id: '', lid: '' });
@@ -68,12 +69,28 @@ const RadioProvider = ({ children }) => {
             }, 1000);
         } else clearInterval(interval);
         return () => clearInterval(interval);
-    }, [isPlaying]);    
+    }, [isPlaying]);
+
+    const seekTime = (seconds) => {
+        if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
+            playerRef.current.seekTo(seconds, true);
+            setCurrentTime(seconds);
+        };
+    };
+
+    const changeVolume = (newVolume) => {
+        const vol = Number(newVolume);
+        setVolumeState(vol);
+        if (playerRef.current && typeof playerRef.current.setVolume === 'function') {
+            playerRef.current.setVolume(vol);
+        }
+    };
 
     return (
         <RadioContext.Provider value={{
             isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams,
-            setPlayList, params, playlist, playAtIndex, setCurrentTrack, setIndex, duration, currentTime
+            setPlayList, params, playlist, playAtIndex, setCurrentTrack, setIndex, duration, currentTime,
+            seekTime, changeVolume, volume
         }}>
             {children}
         </RadioContext.Provider>

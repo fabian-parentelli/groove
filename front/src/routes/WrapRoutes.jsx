@@ -7,6 +7,7 @@ import DashRouter from "./DashRouter.jsx";
 import Radio from "../containers/layout/Radio/Radio.jsx";
 import Body from "../containers/Body/Body.jsx";
 import ListPage from "../containers/pages/ListPage/ListPage.jsx";
+import NotFound from "../containers/layout/NotFound/NotFound.jsx";
 
 const WrapRoutes = () => {
 
@@ -22,6 +23,8 @@ const WrapRoutes = () => {
                     <Route path="/" element={<Body />} />
                     <Route path="/user" element={<User />} />
                     <Route path="/list" element={<ListPage />} />
+                    
+                    <Route path="*" element={<NotFound />} />
 
                     {user.logged &&
                         <>

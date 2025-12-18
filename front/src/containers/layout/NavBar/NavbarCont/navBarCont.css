@@ -86,9 +86,17 @@
 }
 
 @media (max-width: 767px) {
-    
+
     .navBarCont {
         padding: 0 3px;
+    }
+
+    .navBarCont .navBarContCent {
+        width: 50px;
+    }
+
+    .navBarCont .navBarContCent input {
+        display: none;
     }
 
 }
