@@ -7,7 +7,7 @@ export default class Music {
         return await musicModel.insertMany(validSongs, { ordered: false });
     };
 
-    getAll = async () => {
-        return await musicModel.find().lean();
+    getAll = async (query = {}) => {
+        return await musicModel.find(query).lean();
     };
 };

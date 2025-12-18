@@ -6,46 +6,37 @@ export const useRadioContext = () => useContext(RadioContext);
 
 const RadioProvider = ({ children }) => {
 
+    const playerRef = useRef(null);
     const [params, setParams] = useQueryParams();
 
-    useEffect(() => {
-        const fetchData = async () => {
-
-            if (!playerRef.current || typeof playerRef.current.loadPlaylist !== 'function') return;
-
-            if (params?.lid) {
-                playerRef.current.loadPlaylist({
-                    list: params.lid,
-                    listType: 'playlist',
-                    index: 0,
-                    suggestedQuality: 'default'
-                });
-                setIsPlaying(true);
-            } else if (params?.sid) {
-                // aca cuando sea una canción ...
-            }
-        };
-        fetchData();
-    }, [params?.lid, params?.sid]);
-
-    const playerRef = useRef(null);
-
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '' });
-
     const [playlist, setPlayList] = useState([]);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '', id: '' });
 
     useEffect(() => {
-        if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist);
-        else {
-            const tag = document.createElement("script");
-            tag.src = "https://www.youtube.com/iframe_api";
-            document.body.appendChild(tag);
-            window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist);
-        };
-    }, []);
+        if (playlist.length > 0) {
 
-    console.log(playlist);
+            if (!playerRef.current) {
+
+                if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist);
+                else {
+                    const tag = document.createElement("script");
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    document.body.appendChild(tag);
+                    window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist);
+                };
+
+            } else {
+                playerRef.current.stopVideo();
+                playerRef.current.loadPlaylist(playlist, 0, 0, 'default');
+                setTimeout(() => {
+                    playerRef.current.playVideo();
+                    setIsPlaying(true);
+                }, 200);
+            };
+        };
+
+    }, [playlist]);
 
     const handlePlayPause = () => {
         if (!playerRef.current) return;
@@ -58,7 +49,8 @@ const RadioProvider = ({ children }) => {
 
     return (
         <RadioContext.Provider value={{
-            isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams, setPlayList
+            isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams, 
+            setPlayList, params
         }}>
             {children}
         </RadioContext.Provider>
@@ -71,32 +63,31 @@ function createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist) {
 
     if (playerRef.current) return;
 
-    const playlistString = playlist.join(',');
-
     playerRef.current = new window.YT.Player('radioTv', {
         height: "0",
         width: "0",
         playerVars: {
-            listType: playlist[0],
-            playlist: playlistString,
-            autoplay: 0,
+            autoplay: 1,
             controls: 0,
-            loop: 1
+            loop: 1,
+            playlist: playlist.length > 0 ? playlist.join(',') : undefined
         },
         events: {
             onReady: (event) => {
                 event.target.setLoop(true);
+                if (playlist.length > 0) event.target.setShuffle(true);
                 event.target.setShuffle(true);
-                setTimeout(() => { event.target.nextVideo() }, 100);
+
             },
             onStateChange: (event) => {
                 if (event.data === window.YT.PlayerState.PLAYING) {
                     setIsPlaying(true);
                     const data = event.target.getVideoData();
                     setCurrentTrack({
+                        id: data.video_id,
                         title: data.title,
                         author: data.author,
-                        image: `https://img.youtube.com/vi/${data.video_id}/mqdefault.jpg`
+                        image: `https://img.youtube.com/vi/${data.video_id}/maxresdefault.jpg`
                     });
                 } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
                     setIsPlaying(false);

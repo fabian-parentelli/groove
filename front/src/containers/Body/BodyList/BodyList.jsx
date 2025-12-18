@@ -22,9 +22,6 @@ const BodyList = () => {
         }; fetchData();
     }, []);
 
-    console.log(lists);
-    
-
     const handleList = (id) => {
         const ids = lists.docs.find(doc => doc._id === id);
         setPlayList(ids.list)

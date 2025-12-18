@@ -14,4 +14,15 @@ const postMusic = async (req, res) => {
     };
 };
 
-export { postMusic };
+const getMusic = async (req, res) => {
+    try {
+        const result = await musicService.getMusic({ ...req.query });
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl });
+        if (error instanceof CustomNotFound) return res.status(401).res.send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+export { postMusic, getMusic };

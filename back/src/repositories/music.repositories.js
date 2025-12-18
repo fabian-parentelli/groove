@@ -7,8 +7,8 @@ export default class MusicRepository {
         return result;
     };
     
-    getAll = async () => {
-        const result = await musicManager.getAll();
+    getAll = async (query) => {
+        const result = await musicManager.getAll(query);
         return result;
     };
 

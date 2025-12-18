@@ -1,0 +1,42 @@
+.featureImg {
+    margin-top: 2rem;
+    min-height: 70vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.featureImg img {
+    width: 90%;
+    object-fit: cover;
+}
+
+.featureImg h2 {
+    font-size: 2rem;
+}
+
+.featureImg section {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.featureImg section div {
+    background-color: var(--cola);
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.featureImg section div:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+    .featureImg {
+        margin-top: 0;
+    }
+}

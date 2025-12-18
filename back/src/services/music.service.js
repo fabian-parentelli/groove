@@ -41,7 +41,22 @@ const postMusic = async (body, user) => {
     return { status: 'success', result: saveList._id };
 };
 
-export { postMusic };
+const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
+
+    // validar datos ...
+
+    if (lid) {
+        const list = await listRepository.getById(lid);
+        if (!list) throw new CustomNotFound('Error al tarer la lista de reproducción');
+        const songs = await musicRepository.getAll({ yid: { $in: list.list }, active: true });
+        if (!songs) throw new CustomNotFound('Error a tarer las canciones');
+        return { status: 'success', result: { songs, listName: list.name } };
+    };
+
+    // paginador ....
+};
+
+export { postMusic, getMusic };
 
 function getYoutubeId(body) {
     if (body.type === 'sid' || body.type === 'pid') return body.path;

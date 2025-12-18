@@ -10,4 +10,8 @@ export default class Musci {
         return await listModel.paginate(query, { page, limit, lean: true });
     };
 
+    getById = async (id) => {
+        return await listModel.findById(id).lean();
+    };
+
 };

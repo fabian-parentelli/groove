@@ -12,4 +12,9 @@ export default class ListRepository {
         return result;
     };
 
+    getById = async (id) => {
+        const result = await listManager.getById(id);
+        return result;
+    };
+
 };
