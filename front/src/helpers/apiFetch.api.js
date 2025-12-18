@@ -1,4 +1,4 @@
-const url = 'http://localhost:9092';
+const url = 'https://api.groovemusic.online';
 
 export const apiFetch = async (path, options = {}, isFormData = false) => {
 
