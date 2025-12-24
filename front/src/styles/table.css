@@ -1,0 +1,101 @@
+.table-container {
+    width: 96%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: var(--cole);
+    color: var(--colb);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th {
+    background-color: black;
+    height: 60px;
+    color: var(--colb);
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 2px solid var(--colee);
+}
+
+.table-container td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--colee);
+    color: var(--colb);
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #161616;
+}
+
+.table-container tr:hover {
+    background-color: #202020;
+    color: var(--cole);
+}
+
+@media screen and (max-width: 768px) {
+
+    .table-container table,
+    .table-container thead,
+    .table-container tbody,
+    .table-container th,
+    .table-container td,
+    .table-container tr {
+        display: block;
+    }
+
+    .table-container thead tr {
+        display: none;
+    }
+
+    .table-container tr {
+        margin-bottom: 10px;
+        background-color: var(--cole);
+        border-radius: 6px;
+        padding: 6px 8px;
+        box-shadow: 0 1px 4px rgba(255, 255, 255, 0.08);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .table-container tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(255, 255, 255, 0.12);
+    }
+
+    .table-container td {
+        position: relative;
+        padding-left: 28%;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid var(--colee);
+        font-size: 12px;
+        color: var(--colb);
+    }
+
+    .table-container td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        font-weight: bold;
+        color: var(--cold);
+        font-size: 12px;
+        width: 20%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table-container td:last-child {
+        border-bottom: none;
+    }
+
+    .table-container td img,
+    .table-container td svg {
+        width: 30px;
+        height: 30px;
+    }
+}

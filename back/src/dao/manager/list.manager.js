@@ -14,4 +14,8 @@ export default class Musci {
         return await listModel.findById(id).lean();
     };
 
+    getMany = async (query, get = {}) => {
+        return await listModel.find(query, get).lean();
+    };
+
 };

@@ -1,8 +1,8 @@
 import './listSongs.css';
-import { Icons } from "fara-comp-react";
+import { Icons, Pager } from "fara-comp-react";
 import { useRadioContext } from '@/context/RadioContext.jsx';
 
-const ListSongs = ({ currentTrack, songs, handleNewList }) => {
+const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
 
     const { handlePlayPause, isPlaying, playAtIndex, params } = useRadioContext();
 
@@ -11,7 +11,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
             <h2>{songs?.listName || 'Playlist'}</h2>
 
             <section className='listSongsSect'>
-                {songs && params && params?.lid && songs.songs.map((doc, ind) => (
+                {songs && songs.songs.map((doc, ind) => (
                     <div
                         key={doc._id} className='listSongsOne'
                         style={{ backgroundColor: currentTrack.id == doc.yid ? '#1B263B' : '' }}
@@ -64,6 +64,8 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                     </div>
                 ))}
             </section>
+
+            {setQuery && <Pager docs={songs} setQuery={setQuery} backgroundColor='#1B263B' />}
         </div>
     );
 };

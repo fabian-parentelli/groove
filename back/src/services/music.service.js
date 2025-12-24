@@ -41,7 +41,7 @@ const postMusic = async (body, user) => {
     return { status: 'success', result: saveList._id };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active, id, lid, category }) => {
+const getMusic = async ({ page = 1, limit = 1, active = true, lid, category }) => {
 
     // validar datos ...
     const query = {};
@@ -55,6 +55,8 @@ const getMusic = async ({ page = 1, limit = 1, active, id, lid, category }) => {
     };
 
     if (category) query.topics = category;
+    if (active !== undefined) query.active = active;
+
     const result = await musicRepository.getMusic(query, page, limit);
     if (!result) throw new CustomNotFound('Error al tarer al traer las canciones');
     return { status: 'success', result };
@@ -87,7 +89,7 @@ function formatYoTube(music) {
             title: doc.snippet.title,
             img: doc.snippet.thumbnails.medium.url,
             duration: timeFormat(doc.contentDetails.duration),
-            topics: getTopicNames(doc.topicDetails.topicCategories)
+            topics: getTopicNames(doc.topicDetails.topicCategories),
         }
     });
 

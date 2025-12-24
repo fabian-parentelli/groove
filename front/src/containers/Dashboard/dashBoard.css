@@ -1,9 +1,10 @@
 .dashBoard {
-    min-height: 88vh;
+    min-height: 100vh;
     position: relative;
+    padding-bottom: 3rem;
 }
 
 .dashBoardSect {
-    padding-top: 70px;
+    padding: 70px 0 3rem 0;
     margin-left: 80px;
 }
