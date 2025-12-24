@@ -89,3 +89,29 @@
 .listSongs .listSongsSect .listSongsOne section .listSongsOneIconTwo:hover {
     background-color: #0000003f;
 }
+
+.listSongs .listSongsSect .listSongsOne section .listSongCel {
+    display: none !important;
+}
+
+@media (max-width: 800px) {
+
+    .listSongs {
+        align-items: center;
+        margin: 4rem auto;
+    }
+
+    .listSongs .listSongsSect {
+        width: 96%;
+        margin: 0 auto;
+    }
+
+    .listSongs .listSongsSect .listSongsOne section .listSongCel {
+        display: flex !important;
+    }
+
+    .listSongs .listSongsSect .listSongsOne:hover .listSongsOneIcon {
+        display: none;
+    }
+
+}

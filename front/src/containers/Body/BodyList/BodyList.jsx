@@ -1,7 +1,7 @@
 import './bodyList.css';
 import { Icons } from 'fara-comp-react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { getListApi } from '@/helpers/list/getList.api.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from '../../../context/RadioContext';

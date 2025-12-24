@@ -18,6 +18,21 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                     >
 
                         <section>
+
+                            <div className='listSongCel'>
+                                <Icons
+                                    type={currentTrack.id !== doc.yid ? 'play'
+                                        : isPlaying ? 'pause' : 'play'
+                                    }
+                                    color='white'
+                                    onClick={
+                                        currentTrack.lid === params?.lid
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : () => playAtIndex(ind)
+                                            : () => handleNewList(doc.yid)
+                                    }
+                                />
+                            </div>
+
                             <div className='listSongsOneIcon'>
                                 <Icons
                                     type={currentTrack.id !== doc.yid ? 'play'
@@ -46,7 +61,6 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                                 <Icons type='dotver' color='white' onClick={() => console.log('camina')} size='20px' />
                             </div>
                         </section>
-
                     </div>
                 ))}
             </section>

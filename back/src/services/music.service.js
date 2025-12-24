@@ -41,9 +41,10 @@ const postMusic = async (body, user) => {
     return { status: 'success', result: saveList._id };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
+const getMusic = async ({ page = 1, limit = 1, active, id, lid, category }) => {
 
     // validar datos ...
+    const query = {};
 
     if (lid) {
         const list = await listRepository.getById(lid);
@@ -53,7 +54,10 @@ const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
         return { status: 'success', result: { songs, listName: list.name, lid } };
     };
 
-    // paginador ....
+    if (category) query.topics = category;
+    const result = await musicRepository.getMusic(query, page, limit);
+    if (!result) throw new CustomNotFound('Error al tarer al traer las canciones');
+    return { status: 'success', result };
 };
 
 export { postMusic, getMusic };

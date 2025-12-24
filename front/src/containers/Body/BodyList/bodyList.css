@@ -59,3 +59,11 @@
 .bodyList .bodyListSect .bodyListSectCard .bodyListImg .bodyListImgIcons .bodyListImgIconsIc:hover {
     background-color: #2d3c58;
 }
+
+@media (max-width: 800px) {
+
+    .bodyList .bodyListSect .bodyListSectCard .bodyListImg .bodyListImgIcons {
+        display: flex;
+    }
+
+}

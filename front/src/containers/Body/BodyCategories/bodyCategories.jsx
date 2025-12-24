@@ -1,4 +1,5 @@
 import './bodyCategories.css';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { categoriesDic } from '@/utils/dictionary.utils.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
@@ -20,9 +21,9 @@ const BodyCategories = () => {
     return (
         <div className="bodyCategories">
             {categories && categories.length > 0 && categories.map(doc => (
-                <div key={doc._id}>
+                <Link to={`/category/${doc.name}`} key={doc._id}>
                     <p>{categoriesDic(doc.name)}</p>
-                </div>
+                </Link>
             ))}
         </div>
     );
