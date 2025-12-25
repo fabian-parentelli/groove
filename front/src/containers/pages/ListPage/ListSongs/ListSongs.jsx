@@ -27,7 +27,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
                                     color='white'
                                     onClick={
                                         currentTrack.lid === params?.lid
-                                            ? currentTrack.id === doc.yid ? handlePlayPause : () => playAtIndex(ind)
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid) 
                                             : () => handleNewList(doc.yid)
                                     }
                                 />
@@ -41,7 +41,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
                                     color='white'
                                     onClick={
                                         currentTrack.lid === params?.lid
-                                            ? currentTrack.id === doc.yid ? handlePlayPause : () => playAtIndex(ind)
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid) 
                                             : () => handleNewList(doc.yid)
                                     }
                                 />
@@ -51,7 +51,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
 
                             <div className='listSongsOneText'>
                                 <h5>{doc.title.split('-')[0]}</h5>
-                                <p className='pgray'>{doc.title.split('-')[1]}</p>
+                                <p className='pgray'>{doc?.author}</p>
                             </div>
                         </section>
 

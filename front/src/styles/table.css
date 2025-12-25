@@ -12,7 +12,7 @@
 }
 
 .table-container th {
-    background-color: black;
+    background-color: rgb(17, 17, 17);
     height: 60px;
     color: var(--colb);
     font-weight: bold;
@@ -32,7 +32,7 @@
 }
 
 .table-container tr:hover {
-    background-color: #202020;
+    background-color: #181717;
     color: var(--cole);
 }
 
@@ -93,8 +93,7 @@
         border-bottom: none;
     }
 
-    .table-container td img,
-    .table-container td svg {
+    .table-container td img {
         width: 30px;
         height: 30px;
     }

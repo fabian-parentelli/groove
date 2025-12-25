@@ -1,0 +1,67 @@
+.data2412 {
+    background-color: #141414;
+    color: #dcdcdc;
+    padding: 25px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 1000px;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.data2412 h2 {
+    color: #B89C6F;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.data2412 h3 {
+    color: #FFFFFF;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.data2412 pre {
+    background-color: #1B263B;
+    color: #FFFFFF;
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 12px;
+}
+
+.data2412 ul {
+    margin-left: 20px;
+    list-style-type: disc;
+    margin-bottom: 12px;
+}
+
+.data2412 li {
+    margin-bottom: 6px;
+}
+
+.data2412 code {
+    background-color: #1B263B;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #dcdcdc;
+}
+
+.data2412 .note {
+    margin-top: 15px;
+    font-style: italic;
+    color: #B89C6F;
+}
+
+.data2412 hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 25px 0;
+}
+
+.data2412 .date {
+    color: #B89C6F;
+    margin-bottom: 20px;
+}

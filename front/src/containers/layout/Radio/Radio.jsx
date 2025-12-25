@@ -48,7 +48,7 @@ const Radio = () => {
                     <img src={currentTrack.image || "/logo.png"} alt="img" />
                     <div>
                         <h4>{currentTrack.title || 'title'}</h4>
-                        <p className='pgray'>{currentTrack.author || ''}</p>
+                        <p className='pgray'>{currentTrack?.author?.split('-')[0] || currentTrack?.author}</p>
                     </div>
                     <div className='radioIcon'>
                         <Icons type='dotver' color='white' size='20px' />

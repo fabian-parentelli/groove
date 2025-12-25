@@ -15,8 +15,16 @@ export default class Music {
         return await musicModel.find(query).lean();
     };
 
+    getById = async (id) => {
+        return await musicModel.findById(id).lean();
+    };
+
     getMusic = async (query, page, limit) => {
         return await musicModel.paginate(query, { page, limit, lean: true });
+    };
+
+    update = async (song) => {
+        return await musicModel.findByIdAndUpdate(song._id, song, { lean: true, new: true });
     };
 
 };

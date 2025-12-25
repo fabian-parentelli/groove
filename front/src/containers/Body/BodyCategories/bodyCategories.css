@@ -8,7 +8,7 @@
     scroll-padding-left: 10px;
 }
 
-.bodyCategories a {
+.bodyCategories div {
     width: 200px;
     padding: 12px;
     background-color: var(--colee);
@@ -22,11 +22,11 @@
     text-decoration: none;
 } 
 
-.bodyCategories a:hover {
+.bodyCategories div:hover {
     background-color: #8080802f;
 }
 
-.bodyCategories a p {
+.bodyCategories div p {
     display: inline;
     white-space: nowrap;
 }

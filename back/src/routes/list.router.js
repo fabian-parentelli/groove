@@ -4,6 +4,6 @@ import { passportEnum } from '../config/enums.config.js';
 
 export default class ListRouter extends Router {
     init() {
-        this.get('/', ['PUBLIC'], passportEnum.NOTHING, listController.getLists);
+        this.get('/', ['PUBLIC'], passportEnum.OPTIONAL, listController.getLists);
     };
 };

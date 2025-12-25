@@ -1,40 +1,44 @@
 import './categoryPage.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import ListSongs from '../ListPage/ListSongs/ListSongs.jsx';
 import { categoriesDic } from "@/utils/dictionary.utils.js";
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from "@/context/RadioContext.jsx";
 import { getMusicApi } from '@/helpers/music/getMusic.api.js';
-import ListSongs from '../ListPage/ListSongs/ListSongs';
-import FeatureImg from '../ListPage/FeatureImg/FeatureImg';
+import FeatureImg from '../ListPage/FeatureImg/FeatureImg.jsx';
 
 const CategoryPage = () => {
 
-    const { cat } = useParams();
     const { showAlert } = useAlertContext();
-    const { currentTrack, setPlayList } = useRadioContext();
+    const { currentTrack, setPlayList, isPlaying, params, setIndex, setParams } = useRadioContext();
 
     const [songs, setSongs] = useState(null);
-    const [query, setQuery] = useState({ category: cat, limit: 50 });
+    const [query, setQuery] = useState({ category: params?.lid, limit: 50 });
 
     useEffect(() => {
+        if (query.page) setParams({ page: query.page });
         const fetchData = async () => {
             const response = await getMusicApi(query);
             if (response.status === 'success') {
                 response.result.songs = response.result.docs;
-                response.result.listName = categoriesDic(cat);
+                response.result.listName = categoriesDic(params?.lid);
                 setSongs(response.result);
-                const list = response.result.docs.map(doc => doc.yid);
-                setPlayList(list);
             } else showAlert(response.error, 'error');
         }; fetchData();
-    }, [query]);
+    }, [query, params?.lid]);
+
+    const handleNewList = (yid) => {
+        const list = songs.docs.map(doc => doc.yid);
+        const index = list.findIndex(doc => doc === yid);
+        setIndex(index);
+        setPlayList(list);
+    };
 
     if (currentTrack) return (
         <div className="categoryPage">
             <section>
                 <FeatureImg currentTrack={currentTrack} songs={songs} />
-                <ListSongs currentTrack={currentTrack} songs={songs} setQuery={setQuery} />
+                <ListSongs currentTrack={currentTrack} songs={songs} handleNewList={handleNewList} setQuery={setQuery} />
             </section>
         </div>
     );

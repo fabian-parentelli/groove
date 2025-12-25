@@ -94,7 +94,7 @@
     display: none !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 100px) {
 
     .listSongs {
         align-items: center;
