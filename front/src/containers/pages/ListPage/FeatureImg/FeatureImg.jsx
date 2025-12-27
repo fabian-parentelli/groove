@@ -19,8 +19,8 @@ const FeatureImg = ({ currentTrack, songs }) => {
 
     return (
         <div className="featureImg">
-            <h2>{currentTrack.title}</h2>
-            <img src={currentTrack?.image || '/list.png'} alt="img" />
+            <h2>{currentTrack.title || 'Groove music'}</h2>
+            <img src={currentTrack?.image || '/list.jpg'} alt="img" />
             <p>{currentTrack?.author?.split('-')[0] || currentTrack?.author}</p>
 
             <section>

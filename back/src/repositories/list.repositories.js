@@ -21,5 +21,10 @@ export default class ListRepository {
         const result = await listManager.getMany(query, get);
         return result;
     };
+    
+    update = async (list) => {
+        const result = await listManager.update(list);
+        return result;
+    };
 
 };

@@ -18,4 +18,8 @@ export default class Musci {
         return await listModel.find(query, get).lean();
     };
 
+    update = async (list) => {
+        return await listModel.findByIdAndUpdate(list._id, list, { lean: true, new: true });
+    };
+
 };

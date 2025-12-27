@@ -14,4 +14,16 @@ const getLists = async (req, res) => {
     };
 };
 
-export { getLists };
+const putLists = async (req, res) => {
+    const user = req.user;
+    try {
+        const result = await listService.putLists({ ...req.body }, user);
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl, user: user._id || null });
+        if (error instanceof CustomNotFound) return res.status(401).res.send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+export { getLists, putLists };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ImgHover, Copy, Tooltip, Icons, Modal } from 'fara-comp-react';
 import ModSongList from '../../../../components/modals/ModSongsList/ModSongList.jsx';
 
-const DashListsTable = ({ lists }) => {
+const DashListsTable = ({ lists, handleDelMusic, load, time }) => {
 
     const [modal, setModal] = useState({ open: false, data: null, type: null });
 
@@ -32,9 +32,9 @@ const DashListsTable = ({ lists }) => {
                                 <Copy text={doc._id} size={10} color='gray' />
                             </td>
 
-                            <td data-label='Canciones' onClick={() => setModal({ open: true, data: doc.list, type: 'songs' })}>
+                            <td data-label='Canciones' onClick={() => setModal({ open: true, data: doc._id, type: 'songs' })}>
                                 <Tooltip text='Ver canciones' position='left' backgroundColor='#1B263B'>
-                                    <Icons type='app' color='white' hover={true} />
+                                    <Icons type='filemusic' color='white' hover={true} />
                                 </Tooltip>
                             </td>
 
@@ -51,7 +51,11 @@ const DashListsTable = ({ lists }) => {
             </table>
 
             <Modal open={modal.open} onClose={() => null} btn={false}>
-                {modal.type === 'songs' && <ModSongList songs={modal.dala} setModal={setModal} />}
+                {modal.type === 'songs' &&
+                    <ModSongList
+                        lid={modal.data} setModal={setModal} handleDelMusic={handleDelMusic} load={load} time={time}
+                    />
+                }
             </Modal>
         </div>
     );

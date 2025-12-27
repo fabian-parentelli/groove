@@ -3,6 +3,9 @@ import { ImgHover, Icons, Copy } from 'fara-comp-react';
 
 const DashSongsTable = ({ songs, user, handleChange, handleUpdate }) => {
 
+    console.log(songs);
+    
+
     const { setPlayList, isPlaying, currentTrack, handlePlayPause, playlist } = useRadioContext();
 
     return (
