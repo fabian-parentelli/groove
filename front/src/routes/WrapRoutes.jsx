@@ -8,6 +8,9 @@ import Radio from "../containers/layout/Radio/Radio.jsx";
 import Body from "../containers/Body/Body.jsx";
 import ListPage from "../containers/pages/ListPage/ListPage.jsx";
 import NotFound from "../containers/layout/NotFound/NotFound.jsx";
+import CategoryPage from "../containers/pages/CategoryPage/CategoryPage.jsx";
+import Footer from "../containers/layout/Footer/Footer.jsx";
+import OurNews from "../containers/pages/info/OurNews/OurNews.jsx";
 
 const WrapRoutes = () => {
 
@@ -23,6 +26,8 @@ const WrapRoutes = () => {
                     <Route path="/" element={<Body />} />
                     <Route path="/user" element={<User />} />
                     <Route path="/list" element={<ListPage />} />
+                    <Route path="/category" element={<CategoryPage />} />
+                    <Route path="/ournews" element={<OurNews />} />
                     
                     <Route path="*" element={<NotFound />} />
 
@@ -34,6 +39,7 @@ const WrapRoutes = () => {
                 </Routes>
 
                 <Radio />
+                <Footer />
 
             </ScrollToTop>
         </BrowserRouter>

@@ -10,7 +10,8 @@
 }
 
 .featureImg img {
-    width: 90%;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
 }
 
@@ -36,7 +37,13 @@
 }
 
 @media (max-width: 767px) {
+
     .featureImg {
-        margin-top: 0;
+        margin-top: 1rem;
+    }
+
+    .featureImg h2 {
+        text-align: center;
+        font-size: 1.4rem;
     }
 }

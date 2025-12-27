@@ -1,8 +1,8 @@
 import './listSongs.css';
-import { Icons } from "fara-comp-react";
+import { Icons, Pager } from "fara-comp-react";
 import { useRadioContext } from '@/context/RadioContext.jsx';
 
-const ListSongs = ({ currentTrack, songs, handleNewList }) => {
+const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
 
     const { handlePlayPause, isPlaying, playAtIndex, params } = useRadioContext();
 
@@ -11,13 +11,28 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
             <h2>{songs?.listName || 'Playlist'}</h2>
 
             <section className='listSongsSect'>
-                {songs && params && params?.lid && songs.songs.map((doc, ind) => (
+                {songs && songs.songs.map((doc, ind) => (
                     <div
                         key={doc._id} className='listSongsOne'
                         style={{ backgroundColor: currentTrack.id == doc.yid ? '#1B263B' : '' }}
                     >
 
                         <section>
+
+                            <div className='listSongCel'>
+                                <Icons
+                                    type={currentTrack.id !== doc.yid ? 'play'
+                                        : isPlaying ? 'pause' : 'play'
+                                    }
+                                    color='white'
+                                    onClick={
+                                        currentTrack.lid === params?.lid
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid) 
+                                            : () => handleNewList(doc.yid)
+                                    }
+                                />
+                            </div>
+
                             <div className='listSongsOneIcon'>
                                 <Icons
                                     type={currentTrack.id !== doc.yid ? 'play'
@@ -26,7 +41,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                                     color='white'
                                     onClick={
                                         currentTrack.lid === params?.lid
-                                            ? currentTrack.id === doc.yid ? handlePlayPause : () => playAtIndex(ind)
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid) 
                                             : () => handleNewList(doc.yid)
                                     }
                                 />
@@ -36,7 +51,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
 
                             <div className='listSongsOneText'>
                                 <h5>{doc.title.split('-')[0]}</h5>
-                                <p className='pgray'>{doc.title.split('-')[1]}</p>
+                                <p className='pgray'>{doc?.author}</p>
                             </div>
                         </section>
 
@@ -46,10 +61,11 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                                 <Icons type='dotver' color='white' onClick={() => console.log('camina')} size='20px' />
                             </div>
                         </section>
-
                     </div>
                 ))}
             </section>
+
+            {setQuery && <Pager docs={songs} setQuery={setQuery} backgroundColor='#1B263B' />}
         </div>
     );
 };

@@ -1,0 +1,17 @@
+.categoryPage {
+    margin-top: 70px;
+    padding-bottom: 140px;
+}
+
+.categoryPage section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoryPage section div:nth-child(1) {
+    flex: 2;
+}
+
+.categoryPage section div:nth-child(1) {
+    flex: 1;
+}

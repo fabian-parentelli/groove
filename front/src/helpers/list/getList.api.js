@@ -6,6 +6,7 @@ const getListApi = async (obj) => {
 
     if (obj.page) urlData += `page=${obj.page}&`;
     if (obj.id) urlData += `id=${obj.id}&`;
+    if (obj.uid) urlData += `uid=${obj.uid}&`;
     if (obj.active !== undefined) urlData += `active=${obj.active}&`;
 
     if (urlData.endsWith('&')) urlData = urlData.slice(0, -1);
