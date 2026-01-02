@@ -10,14 +10,18 @@ const FeatureImg = ({ currentTrack, songs }) => {
     useEffect(() => {
         if (!songs) return;
         const song = songs.songs.find(doc => doc.yid === currentTrack.id);
-        if (song) setCurrentTrack(prev => ({ ...prev, image: song.img, topics: song.topics }));
+        if (song) setCurrentTrack(prev => ({ 
+            ...prev, image: song.img, topics: song.topics,
+            title: song.title.split('-')[0],
+            author: song.author || currentTrack.author
+        }));
     }, [currentTrack.id]);
 
     return (
         <div className="featureImg">
-            <h2>{currentTrack.title}</h2>
-            <img src={currentTrack?.image || '/list.png'} alt="img" style={{ maxWidth: currentTrack?.image ? '500px' : '300px' }} />
-            <p>{currentTrack?.author}</p>
+            <h2>{currentTrack.title || 'Groove music'}</h2>
+            <img src={currentTrack?.image || '/list.jpg'} alt="img" />
+            <p>{currentTrack?.author?.split('-')[0] || currentTrack?.author}</p>
 
             <section>
                 {currentTrack && currentTrack?.topics && currentTrack?.topics.map(doc => (

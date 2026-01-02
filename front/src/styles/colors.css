@@ -6,3 +6,7 @@
   --cole: #141414;
   --colee: #dcdcdc10;
 }
+
+.cola {
+  color: var(--cola);
+}

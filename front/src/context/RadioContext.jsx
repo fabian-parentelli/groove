@@ -13,7 +13,7 @@ const RadioProvider = ({ children }) => {
     const [index, setIndex] = useState(0);
     const [duration, setDuration] = useState(0);
     const [playlist, setPlayList] = useState([]);
-    const [volume, setVolumeState] = useState(50);
+    const [volume, setVolumeState] = useState(100);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '', id: '', lid: '' });

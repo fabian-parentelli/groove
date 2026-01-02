@@ -18,6 +18,8 @@
     display: flex;   
     align-items: center;
     justify-content: center;
+    color: var(--colb);
+    text-decoration: none;
 } 
 
 .bodyCategories div:hover {

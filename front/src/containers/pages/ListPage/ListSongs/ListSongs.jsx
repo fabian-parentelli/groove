@@ -1,23 +1,43 @@
 import './listSongs.css';
-import { Icons } from "fara-comp-react";
+import { useState } from 'react';
+import { formatTime } from '@/utils/time.utils.js';
+import { Icons, Pager, Modal } from "fara-comp-react";
 import { useRadioContext } from '@/context/RadioContext.jsx';
+import ModalOptions from '../../../../components/modals/ModalOptions/ModalOptions';
 
-const ListSongs = ({ currentTrack, songs, handleNewList }) => {
+const ListSongs = ({ currentTrack, songs, handleNewList, setQuery }) => {
 
     const { handlePlayPause, isPlaying, playAtIndex, params } = useRadioContext();
+
+    const [modal, setModal] = useState({ open: false, data: null });
 
     return (
         <div className="listSongs">
             <h2>{songs?.listName || 'Playlist'}</h2>
 
             <section className='listSongsSect'>
-                {songs && params && params?.lid && songs.songs.map((doc, ind) => (
+                {songs && songs.songs.map((doc, ind) => (
                     <div
                         key={doc._id} className='listSongsOne'
                         style={{ backgroundColor: currentTrack.id == doc.yid ? '#1B263B' : '' }}
                     >
 
                         <section>
+
+                            <div className='listSongCel'>
+                                <Icons
+                                    type={currentTrack.id !== doc.yid ? 'play'
+                                        : isPlaying ? 'pause' : 'play'
+                                    }
+                                    color='white'
+                                    onClick={
+                                        currentTrack.lid === params?.lid
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid)
+                                            : () => handleNewList(doc.yid)
+                                    }
+                                />
+                            </div>
+
                             <div className='listSongsOneIcon'>
                                 <Icons
                                     type={currentTrack.id !== doc.yid ? 'play'
@@ -26,7 +46,7 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
                                     color='white'
                                     onClick={
                                         currentTrack.lid === params?.lid
-                                            ? currentTrack.id === doc.yid ? handlePlayPause : () => playAtIndex(ind)
+                                            ? currentTrack.id === doc.yid ? handlePlayPause : !setQuery ? () => playAtIndex(ind) : () => handleNewList(doc.yid)
                                             : () => handleNewList(doc.yid)
                                     }
                                 />
@@ -36,28 +56,29 @@ const ListSongs = ({ currentTrack, songs, handleNewList }) => {
 
                             <div className='listSongsOneText'>
                                 <h5>{doc.title.split('-')[0]}</h5>
-                                <p className='pgray'>{doc.title.split('-')[1]}</p>
+                                <p className='pgray'>{doc?.author}</p>
                             </div>
                         </section>
 
                         <section>
-                            <p>{seconds(doc.duration)}</p>
+                            <p>{formatTime(doc.duration)}</p>
                             <div className='listSongsOneIconTwo'>
-                                <Icons type='dotver' color='white' onClick={() => console.log('camina')} size='20px' />
+                                <Icons type='dotver' color='white' size='20px'
+                                    onClick={() => setModal({ open: true, data: { _id: doc._id, yid: doc.yid } })}
+                                />
                             </div>
                         </section>
-
                     </div>
                 ))}
             </section>
+
+            {setQuery && <Pager docs={songs} setQuery={setQuery} backgroundColor='#1B263B' />}
+
+            <Modal open={modal.open} onClose={() => setModal({ open: false, data: null })}>
+                <ModalOptions data={modal.data} setModal={setModal} />
+            </Modal>
         </div>
     );
 };
 
 export default ListSongs;
-
-function seconds(second) {
-    const min = Math.floor(second / 60);
-    const sec = second % 60
-    return `${min}:${sec.toString().padStart(2, '0')}`
-};
