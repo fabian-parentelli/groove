@@ -19,9 +19,9 @@ const Radio = () => {
         if(isPlaying) {
             const videoId = playerRef.current?.getVideoData()?.video_id;
             const playlist = JSON.parse(sessionStorage.getItem('playlist'));
-            setInfo(playlist.find(doc => doc.yid === videoId))
+            setInfo(playlist.find(doc => doc.yid === videoId));
         };
-    }, [isPlaying]);
+    }, [isPlaying, playerRef.current?.getVideoData()?.video_id]);
 
     useEffect(() => {
         let interval;

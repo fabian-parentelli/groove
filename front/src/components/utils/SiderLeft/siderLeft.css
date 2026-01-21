@@ -4,3 +4,10 @@
     border-right: solid 2px var(--cola);
     padding: 1rem;
 }
+
+@media (max-width: 768px) {
+    
+    .siderLeft {
+        display: none;
+    }
+}

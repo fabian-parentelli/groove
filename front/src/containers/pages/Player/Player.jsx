@@ -12,6 +12,7 @@ const Player = () => {
     const { playlist } = useRadioContext();
     const { showAlert, setLoading } = useAlertContext();
 
+    const [info, setInfo] = useState(null);
     const [songs, setSongs] = useState(null);
 
     useEffect(() => {
@@ -29,8 +30,8 @@ const Player = () => {
     return (
         <div className="player">
             <SiderLeft />
-            <PlayerView />
-            <PlayerList songs={songs} />
+            <PlayerView info={info} setInfo={setInfo} />
+            <PlayerList songs={songs} info={info} />
         </div>
     );
 };
