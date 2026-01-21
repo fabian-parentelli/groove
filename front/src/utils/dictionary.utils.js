@@ -12,8 +12,8 @@ const categoriesDic = (category) => {
         'Soul_music': () => { return 'Soul' },
         'Jazz': () => { return 'Jazz' },
         'Music_of_Asia': () => { return 'Asia' },
-        'Country_Music': () => { return 'Contry' },
-        'Christian_Music': () => { return 'Cristiana' },
+        'Country_music': () => { return 'Contry' },
+        'Christian_music': () => { return 'Cristiana' },
     };
     
     return type[category] ? type[category]() : category;

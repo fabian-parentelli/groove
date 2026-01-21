@@ -7,7 +7,7 @@ export default class Musci {
     };
 
     getLists = async (query, page, limit) => {
-        return await listModel.paginate(query, { page, limit, lean: true });
+        return await listModel.paginate(query, { page, limit, lean: true, sort: { _id: -1 } });
     };
 
     getById = async (id) => {

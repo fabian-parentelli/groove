@@ -1,5 +1,5 @@
 import './bodyList.css';
-import { Icons } from 'fara-comp-react';
+import { Icons, Pager } from 'fara-comp-react';
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { getListApi } from '@/helpers/list/getList.api.js';
@@ -12,15 +12,16 @@ const BodyList = () => {
     const { showAlert } = useAlertContext();
     const { setParams, setPlayList } = useRadioContext();
 
+    const [query, setQuery] = useState({ active: true })
     const [lists, setLists] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getListApi({ active: true });
+            const response = await getListApi(query);
             if (response.status === 'success') setLists(response.result);
             else showAlert(response.error, 'error');
         }; fetchData();
-    }, []);
+    }, [query]);
 
     const handleList = (id) => {
         const ids = lists.docs.find(doc => doc._id === id);
@@ -61,6 +62,7 @@ const BodyList = () => {
                     </div>
                 ))}
             </section>
+            <Pager docs={lists} setQuery={setQuery} backgroundColor='#1B263B' />
         </div>
     );
 };

@@ -3,10 +3,7 @@ import { ImgHover, Icons, Copy } from 'fara-comp-react';
 
 const DashSongsTable = ({ songs, user, handleChange, handleUpdate }) => {
 
-    console.log(songs);
-    
-
-    const { setPlayList, isPlaying, currentTrack, handlePlayPause, playlist } = useRadioContext();
+    const { setPlayList, isPlaying, handlePlayPause, playlist } = useRadioContext();
 
     return (
         <div className="table-container">
@@ -32,12 +29,12 @@ const DashSongsTable = ({ songs, user, handleChange, handleUpdate }) => {
                             <td data-label="Img"><ImgHover img={doc.img} border={false} /></td>
 
                             <td onClick={!playlist.includes(doc.yid) ? () => setPlayList([doc.yid]) : handlePlayPause}>
-                                <Icons color='white' hover={true}
+                                {/* <Icons color='white' hover={true}
                                     type={!isPlaying
                                         ? 'play'
                                         : currentTrack.id === doc.yid ? 'pause' : 'play'
                                     }
-                                />
+                                /> */}
                             </td>
 
                             <td data-label="Nombre" style={{ maxWidth: '120px' }}>

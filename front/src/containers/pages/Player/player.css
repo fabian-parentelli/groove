@@ -1,0 +1,5 @@
+.player {
+    min-height: 88vh;
+    padding-top: 70px;
+    display: flex;
+}

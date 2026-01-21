@@ -23,6 +23,10 @@ export default class Music {
         return await musicModel.paginate(query, { page, limit, lean: true });
     };
 
+    getRandom = async (query, limit = 24) => {
+        return await musicModel.aggregate([{ $match: query }, { $sample: { size: +limit } }]);
+    };
+
     update = async (song) => {
         return await musicModel.findByIdAndUpdate(song._id, song, { lean: true, new: true });
     };

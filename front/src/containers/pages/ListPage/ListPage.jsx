@@ -9,7 +9,7 @@ import { getMusicApi } from "@/helpers/music/getMusic.api.js";
 const ListPage = () => {
 
     const { showAlert } = useAlertContext();
-    const { params, currentTrack, playlist, setPlayList, setIndex } = useRadioContext();
+    const { params, playlist, setPlayList, setIndex } = useRadioContext();
 
     const [songs, setSongs] = useState(null);
 

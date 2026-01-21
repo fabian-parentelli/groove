@@ -10,7 +10,7 @@ import FeatureImg from '../ListPage/FeatureImg/FeatureImg.jsx';
 const CategoryPage = () => {
 
     const { showAlert } = useAlertContext();
-    const { currentTrack, setPlayList, isPlaying, params, setIndex, setParams } = useRadioContext();
+    const {  setPlayList, isPlaying, params, setIndex, setParams } = useRadioContext();
 
     const [songs, setSongs] = useState(null);
     const [query, setQuery] = useState({ category: params?.lid, limit: 50 });
@@ -36,10 +36,10 @@ const CategoryPage = () => {
 
     if (currentTrack) return (
         <div className="categoryPage">
-            <section>
+            {/* <section>
                 <FeatureImg currentTrack={currentTrack} songs={songs} />
                 <ListSongs currentTrack={currentTrack} songs={songs} handleNewList={handleNewList} setQuery={setQuery} />
-            </section>
+            </section> */}
         </div>
     );
 };

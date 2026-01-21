@@ -6,7 +6,7 @@ import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const ModSongListTable = ({ songs, lid, handleDelMusic, load }) => {
 
-    const { setPlayList, isPlaying, currentTrack, handlePlayPause, playlist } = useRadioContext();
+    const { setPlayList, isPlaying, handlePlayPause, playlist } = useRadioContext();
 
     return (
         <div className='modSongListTable'>
@@ -38,12 +38,12 @@ const ModSongListTable = ({ songs, lid, handleDelMusic, load }) => {
 
                                 <td onClick={!playlist.includes(doc.yid) ? () => setPlayList([doc.yid]) : handlePlayPause}>
                                     <Tooltip text='Escuchar' backgroundColor='#1B263B'>
-                                        <Icons color='#1B263B' hover={true} backCol='#1B263B'
+                                        {/* <Icons color='#1B263B' hover={true} backCol='#1B263B'
                                             type={!isPlaying
                                                 ? 'play'
                                                 : currentTrack.id === doc.yid ? 'pause' : 'play'
                                             }
-                                        />
+                                        /> */}
                                     </Tooltip>
                                 </td>
 

@@ -11,6 +11,7 @@ import NotFound from "../containers/layout/NotFound/NotFound.jsx";
 import CategoryPage from "../containers/pages/CategoryPage/CategoryPage.jsx";
 import Footer from "../containers/layout/Footer/Footer.jsx";
 import OurNews from "../containers/pages/info/OurNews/OurNews.jsx";
+import Player from "../containers/pages/Player/Player.jsx";
 
 const WrapRoutes = () => {
 
@@ -28,6 +29,7 @@ const WrapRoutes = () => {
                     <Route path="/list" element={<ListPage />} />
                     <Route path="/category" element={<CategoryPage />} />
                     <Route path="/ournews" element={<OurNews />} />
+                    <Route path="/player" element={<Player />} />
                     
                     <Route path="*" element={<NotFound />} />
 

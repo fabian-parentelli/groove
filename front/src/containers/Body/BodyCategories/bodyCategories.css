@@ -8,6 +8,27 @@
     scroll-padding-left: 10px;
 }
 
+/* Barra de scroll */
+
+.bodyCategories::-webkit-scrollbar {
+    height: 6px;
+}
+
+.bodyCategories::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.bodyCategories::-webkit-scrollbar-thumb {
+    background-color: #8080802f;
+    border-radius: 10px;
+}
+
+.bodyCategories::-webkit-scrollbar-thumb:hover {
+    background-color: #8080802f;
+}
+
+/* **** */
+
 .bodyCategories div {
     width: 200px;
     padding: 12px;

@@ -1,0 +1,5 @@
+.playerList {
+    flex: 1;
+    border-top: solid 2px var(--cola);
+    padding: 1rem;
+}

@@ -5,17 +5,17 @@ import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const FeatureImg = ({ currentTrack, songs }) => {
 
-    const { setCurrentTrack } = useRadioContext();
+    // const { setCurrentTrack } = useRadioContext();
 
-    useEffect(() => {
-        if (!songs) return;
-        const song = songs.songs.find(doc => doc.yid === currentTrack.id);
-        if (song) setCurrentTrack(prev => ({ 
-            ...prev, image: song.img, topics: song.topics,
-            title: song.title.split('-')[0],
-            author: song.author || currentTrack.author
-        }));
-    }, [currentTrack.id]);
+    // useEffect(() => {
+    //     if (!songs) return;
+    //     const song = songs.songs.find(doc => doc.yid === currentTrack.id);
+    //     if (song) setCurrentTrack(prev => ({ 
+    //         ...prev, image: song.img, topics: song.topics,
+    //         title: song.title.split('-')[0],
+    //         author: song.author || currentTrack.author
+    //     }));
+    // }, [currentTrack.id]);
 
     return (
         <div className="featureImg">

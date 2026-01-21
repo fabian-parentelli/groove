@@ -42,9 +42,9 @@ const postMusic = async (body, user) => {
     return { status: 'success', result: saveList._id };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active = true, lid, category }) => {
+const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, random = false, yids }) => {
 
-    // validar datos ...
+    // validar datos
     const query = {};
 
     if (lid) {
@@ -57,8 +57,14 @@ const getMusic = async ({ page = 1, limit = 1, active = true, lid, category }) =
 
     if (category) query.topics = category;
     if (active !== undefined) query.active = active;
+    if (yids) query.yid = { $in: yids.split(',') };
 
-    const result = await musicRepository.getMusic(query, page, limit);
+    let result;
+    if (random) {
+        if (active !== undefined) query.active = active === "true";
+        result = await musicRepository.getRandom(query, limit)
+    } else result = await musicRepository.getMusic(query, page, limit);
+
     if (!result) throw new CustomNotFound('Error al tarer al traer las canciones');
     return { status: 'success', result };
 };
