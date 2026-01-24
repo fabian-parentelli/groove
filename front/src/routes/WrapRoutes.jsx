@@ -6,12 +6,11 @@ import { useLoginContext } from "../context/LoginContext.jsx";
 import DashRouter from "./DashRouter.jsx";
 import Radio from "../containers/layout/Radio/Radio.jsx";
 import Body from "../containers/Body/Body.jsx";
-import ListPage from "../containers/pages/ListPage/ListPage.jsx";
 import NotFound from "../containers/layout/NotFound/NotFound.jsx";
-import CategoryPage from "../containers/pages/CategoryPage/CategoryPage.jsx";
 import Footer from "../containers/layout/Footer/Footer.jsx";
 import OurNews from "../containers/pages/info/OurNews/OurNews.jsx";
 import Player from "../containers/pages/Player/Player.jsx";
+import PreView from "../containers/pages/PreView/PreView.jsx";
 
 const WrapRoutes = () => {
 
@@ -26,10 +25,9 @@ const WrapRoutes = () => {
                 <Routes>
                     <Route path="/" element={<Body />} />
                     <Route path="/user" element={<User />} />
-                    <Route path="/list" element={<ListPage />} />
-                    <Route path="/category" element={<CategoryPage />} />
                     <Route path="/ournews" element={<OurNews />} />
                     <Route path="/player" element={<Player />} />
+                    <Route path="/preview" element={<PreView />} />
                     
                     <Route path="*" element={<NotFound />} />
 

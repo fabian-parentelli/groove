@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react';
 import { categoriesDic } from '@/utils/dictionary.utils.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from '@/context/RadioContext.jsx';
+import { getMusicApi } from '@/helpers/music/getMusic.api.js';
 import { getCategoriesApi } from '@/helpers/categories/getCategories.api.js';
 
 
 const BodyCategories = () => {
 
     const navigate = useNavigate();
+
+    const { setPlayList, isPlaying } = useRadioContext();
     const { showAlert } = useAlertContext();
-    const { setParams } = useRadioContext();
 
     const [categories, setCategories] = useState([]);
 
@@ -23,9 +25,14 @@ const BodyCategories = () => {
         }; fetchData();
     }, []);
 
-    const handleNav = (name) => {
-        navigate(`/category`);
-        setParams({ lid: name, page: 1 });
+    const handleNav = async (name) => {
+        if(isPlaying) return navigate(`/preview?type=category&cat=${name}`);
+        const response = await getMusicApi({ category: name, limit: 50 });
+        if (response.status === 'success') {
+            const yids = response.result.docs.map(doc => doc.yid);
+            setPlayList(yids);
+            navigate(`/player?type=category&name=${categoriesDic(name)}`);
+        };
     };
 
     return (

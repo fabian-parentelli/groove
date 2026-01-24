@@ -1,16 +1,16 @@
 import './bodyList.css';
-import { Icons, Pager } from 'fara-comp-react';
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Icons, Pager } from 'fara-comp-react';
+import { useNavigate } from 'react-router-dom';
 import { getListApi } from '@/helpers/list/getList.api.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
-import { useRadioContext } from '../../../context/RadioContext';
+import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const BodyList = () => {
 
     const navigate = useNavigate();
     const { showAlert } = useAlertContext();
-    const { setParams, setPlayList } = useRadioContext();
+    const { setPlayList } = useRadioContext();
 
     const [query, setQuery] = useState({ active: true })
     const [lists, setLists] = useState(null);
@@ -23,16 +23,15 @@ const BodyList = () => {
         }; fetchData();
     }, [query]);
 
-    const handleList = (id) => {
+    const handleList = (e, id) => {
+        e.stopPropagation();
         const ids = lists.docs.find(doc => doc._id === id);
-        setPlayList(ids.list)
-        navigate(`/list`);
-        setParams({ lid: id })
+        setPlayList(ids.list);
+        navigate(`/player?type=list&name=${ids.name}`);
     };
 
     const handleNav = (id) => {
-        navigate(`/list`);
-        setParams({ lid: id })
+        navigate(`/preview?type=list&id=${id}`);
     };
 
     return (
@@ -51,7 +50,7 @@ const BodyList = () => {
                                     <Icons type='dotver' color='white' size='15px' />
                                 </div>
 
-                                <div className='bodyListImgIconsIc' onClick={() => handleList(doc._id)}>
+                                <div className='bodyListImgIconsIc' onClick={(e) => handleList(e, doc._id)}>
                                     <Icons type='play' color='white' size='15px' />
                                 </div>
                             </div>

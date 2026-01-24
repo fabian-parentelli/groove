@@ -1,0 +1,33 @@
+.equalizer-mini {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar-mini {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(180deg, #2c3e50, #1a2735); /* color principal #2c3e50 */
+  border-radius: 1px;
+  transform-origin: bottom;
+  transform: scaleY(0.25);
+  animation: barBounce 1.8s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+@keyframes barBounce {
+  0%   { transform: scaleY(0.25); opacity: 0.7; }
+  25%  { transform: scaleY(0.9);  opacity: 1; }
+  50%  { transform: scaleY(0.4);  opacity: 0.8; }
+  75%  { transform: scaleY(0.8);  opacity: 1; }
+  100% { transform: scaleY(0.25); opacity: 0.7; }
+}
+
+/* Variaciones de ritmo para que no se muevan todas igual */
+.bar-mini:nth-child(1) { animation-delay: 0ms; }
+.bar-mini:nth-child(2) { animation-delay: 250ms; }
+.bar-mini:nth-child(3) { animation-delay: 500ms; }
+.bar-mini:nth-child(4) { animation-delay: 750ms; }
+.bar-mini:nth-child(5) { animation-delay: 1000ms; }

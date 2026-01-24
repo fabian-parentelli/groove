@@ -1,9 +1,12 @@
 import './radio.css';
-import { useState, useEffect } from 'react';
 import { Icons } from "fara-comp-react";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const Radio = () => {
+
+    const navigate = useNavigate();
 
     const [info, setInfo] = useState(null);
     const [duration, setDuration] = useState(0);
@@ -16,12 +19,12 @@ const Radio = () => {
     const handlePrev = () => playerRef.current?.previousVideo();
 
     useEffect(() => {
-        if(isPlaying) {
+        if (isPlaying) {
             const videoId = playerRef.current?.getVideoData()?.video_id;
             const playlist = JSON.parse(sessionStorage.getItem('playlist'));
             setInfo(playlist.find(doc => doc.yid === videoId));
         };
-    }, [isPlaying, playerRef.current?.getVideoData()?.video_id]);
+    }, [isPlaying, playerRef?.current?.getVideoData()?.video_id]);
 
     useEffect(() => {
         let interval;
@@ -86,7 +89,7 @@ const Radio = () => {
                     <p className='pgray'>{`${formatTime(currentTime)} / ${formatTime(duration)}`}</p>
                 </section>
 
-                <section className='radioData'>
+                <section className='radioData' onClick={() => navigate('/player')}>
                     <img src={info?.img || "/logo.png"} alt="img" />
                     <div>
                         <h4>{info?.author ? info?.title : info?.title.split('-')[1] || 'title'}</h4>

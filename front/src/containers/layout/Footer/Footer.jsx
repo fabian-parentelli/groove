@@ -62,7 +62,7 @@ const columnA = {
         { text: 'Qiénes somos', link: '/us' },
         { text: 'Videos tutoriales ', link: '/videotut' },
         { text: 'Noticias y Avances', link: '/ournews' },
-        { text: 'Próximamente en UnderPass', link: '/future' },
+        { text: 'Proximamente en Groove', link: '/future' },
         { text: 'Preguntas frecuentes', link: '/asked' },
         { text: 'Galería', link: '/gallery' },
     ]

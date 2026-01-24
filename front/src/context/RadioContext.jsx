@@ -47,8 +47,7 @@ const RadioProvider = ({ children }) => {
 
     return (
         <RadioContext.Provider value={{
-            isPlaying, setParams,
-            setPlayList, params, playlist, playAtIndex, setIndex, playerRef
+            isPlaying, setParams, setPlayList, params, playlist, playAtIndex, setIndex, playerRef
         }}>
             {children}
         </RadioContext.Provider>

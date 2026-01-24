@@ -28,7 +28,15 @@ const BodySongs = () => {
     const handlePlayList = () => {
         const yids = songs.map(doc => doc.yid);
         setPlayList(yids);
-        navigate('/player');
+        navigate('/player?type=random');
+    };
+
+    const handleOnePLay = (yid) => {
+        const yids = songs.map(doc => doc.yid);
+        const restYids = yids.filter(doc => doc !== yid);
+        restYids.unshift(yid);
+        setPlayList(restYids)
+        navigate('/player?type=random');
     };
 
     return (
@@ -71,7 +79,9 @@ const BodySongs = () => {
                         </div>
 
                         <div className='bodySongsTabCardPlay'>
-                            <Icons type='play' color='white' size='25px' />
+                            <Icons type='play' color='white' size='25px'
+                                onClick={() => handleOnePLay(doc.yid)}
+                            />
                         </div>
                     </div>
                 ))}

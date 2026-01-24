@@ -3,3 +3,17 @@
     min-height: 100vh;
     padding-bottom: 150px;
 }
+
+.body .bodyRadio {
+    position: fixed;
+    background-color: var(--cold);
+    padding: 6px;
+    bottom: 90px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.body .bodyRadio:hover {
+    opacity: 0.8;
+}

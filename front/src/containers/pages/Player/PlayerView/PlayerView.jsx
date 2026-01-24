@@ -20,7 +20,7 @@ const PlayerView = ({ info, setInfo }) => {
         playerRef.current?.addEventListener('onStateChange', updateInfo);
         if (isPlaying) updateInfo();
         return () => {
-            playerRef.current?.removeEventListener('onStateChange', updateInfo);
+            playerRef?.current?.removeEventListener('onStateChange', updateInfo);
         };
     }, [playerRef, isPlaying]);
 
