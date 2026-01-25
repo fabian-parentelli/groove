@@ -13,7 +13,7 @@ const PreView = () => {
 
     const navigate = useNavigate();
     const [params] = useQueryParams();
-    const { setPlayList } = useRadioContext();
+    const { setPlayList, videoId } = useRadioContext();
     const { showAlert, setLoading } = useAlertContext();
 
     const [songs, setSongs] = useState(null);

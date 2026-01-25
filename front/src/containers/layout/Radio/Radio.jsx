@@ -13,7 +13,7 @@ const Radio = () => {
     const [volume, setVolumeState] = useState(100);
     const [currentTime, setCurrentTime] = useState(0);
 
-    const { isPlaying, playerRef } = useRadioContext();
+    const { isPlaying, playerRef, videoId } = useRadioContext();
 
     const handleNext = () => playerRef.current?.nextVideo();
     const handlePrev = () => playerRef.current?.previousVideo();
@@ -24,7 +24,7 @@ const Radio = () => {
             const playlist = JSON.parse(sessionStorage.getItem('playlist'));
             setInfo(playlist.find(doc => doc.yid === videoId));
         };
-    }, [isPlaying, playerRef?.current?.getVideoData()?.video_id]);
+    }, [isPlaying, videoId]);
 
     useEffect(() => {
         let interval;

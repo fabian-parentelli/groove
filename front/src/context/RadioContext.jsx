@@ -14,6 +14,8 @@ const RadioProvider = ({ children }) => {
     const [playlist, setPlayList] = useState([]);
     const [isPlaying, setIsPlaying] = useState(false);
 
+    const [videoId, setVideoId] = useState(null);
+
     useEffect(() => {
         if (playlist.length > 0) {
             currentLidRef.current = params.lid;
@@ -47,7 +49,8 @@ const RadioProvider = ({ children }) => {
 
     return (
         <RadioContext.Provider value={{
-            isPlaying, setParams, setPlayList, params, playlist, playAtIndex, setIndex, playerRef
+            isPlaying, setParams, setPlayList, params, playlist, playAtIndex, setIndex, playerRef,
+            videoId
         }}>
             {children}
         </RadioContext.Provider>
@@ -74,13 +77,21 @@ function createPlayer(playerRef, setIsPlaying, playlist, currentLidRef) {
                 event.target.setLoop(true);
             },
             onStateChange: (event) => {
+                const player = event?.target;
+                if (!player || typeof player.getVideoData !== "function") return;
                 if (event.data === window.YT.PlayerState.PLAYING) {
                     setIsPlaying(true);
-                    const data = event.target.getVideoData();
-                } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+                    if (typeof player.getVideoData === "function") {
+                        const data = player.getVideoData();
+                        setCurrentVideoId(data.video_id);
+                    }
+                } else if (
+                    event.data === window.YT.PlayerState.PAUSED ||
+                    event.data === window.YT.PlayerState.ENDED
+                ) {
                     setIsPlaying(false);
-                };
-            },
+                }
+            }
         }
     });
 };
