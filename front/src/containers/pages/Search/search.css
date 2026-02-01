@@ -1,0 +1,145 @@
+.search {
+    margin-top: 70px;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    width: 94%;
+    margin: 4rem auto;
+    gap: 2rem;
+}
+
+/* Song */
+
+.search .searchSong {
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 1rem;
+    border: 2px solid var(--cola);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px black;
+}
+
+.search .searchSong img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px black;
+}
+
+.search .searchSong .searchSongTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.search .searchSong .searchSongTitle h4 {
+    font-size: 1.6rem;
+}
+
+.search .searchSong .searchSongTitle h5 {
+    font-size: 1.2rem;
+    color: var(--cold);
+}
+
+.search .searchSong .searchSongTitle .searchSongIcon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.search .searchSong .searchSongTitle .searchSongIcon:hover {
+    background-color: #f0f8ff17;
+}
+
+/* List */
+
+.search .searchSongs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.search .searchSongs .searchSongsTop {
+    display: flex;
+    padding-bottom: 1rem;
+    border-bottom: solid 3px var(--cola);
+}
+
+.search .searchSongsSect {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search .searchSongsSect .searchSongsCard {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 8px;
+    overflow: hidden;
+    padding-right: 6px;
+    justify-content: space-between;
+}
+
+.search .searchSongsSect .searchSongsCard .searchSongsCardSub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search .searchSongsSect .searchSongsCard .searchSongsCardSub img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.search .searchSongsSect .searchSongsCard .searchSongsCardSub .searchSongsCardText p {
+    font-size: 12px;
+    color: var(--cold);
+    margin-top: 3px;
+}
+
+.search .searchSongsSect .searchSongsCard .searchSongsCardIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.search .searchSongsSect .searchSongsCard .searchSongsCardIcon:hover {
+    background-color: #f0f8ff17;
+}
+
+@media (max-width: 767px) {
+
+    .search .searchSong {
+        flex-direction: column;
+    }
+
+    .search .searchSong .searchSongTitle {
+        align-items: center;
+    }
+
+    .search .searchSongsSect {
+        justify-content: center;
+    }
+}

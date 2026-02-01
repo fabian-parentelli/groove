@@ -27,7 +27,7 @@ const BodyList = () => {
         e.stopPropagation();
         const ids = lists.docs.find(doc => doc._id === id);
         setPlayList(ids.list);
-        navigate(`/player?type=list&name=${ids.name}`);
+        navigate(`/player?type=list&name=${ids.name}`);        
     };
 
     const handleNav = (id) => {

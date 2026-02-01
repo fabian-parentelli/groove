@@ -42,7 +42,16 @@ const postMusic = async (body, user) => {
     return { status: 'success', result: saveList._id };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, random = false, yids }) => {
+const getSearch = async ({ id }) => {
+    const song = await musicRepository.getById(id);
+    if (!song) throw new CustomNotFound('Error al traer la canción de db');
+    let result = await musicRepository.getSearch(song.topics);
+    if(!result) throw new CustomNotFound('Error al tarer el resto de las canciones');
+    result.unshift(song);
+    return { status: 'success', result };
+};
+
+const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, random = false, yids, name }) => {
 
     // validar datos
     const query = {};
@@ -58,6 +67,15 @@ const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, ran
     if (category) query.topics = category;
     if (active !== undefined) query.active = active;
     if (yids) query.yid = { $in: yids.split(',') };
+
+    if (name) {
+        const search = name.trim();
+        query.$or = [
+            { title: { $regex: search, $options: 'i' } },
+            { album: { $regex: search, $options: 'i' } },
+            { author: { $regex: search, $options: 'i' } }
+        ];
+    };
 
     let result;
     if (random) {
@@ -81,4 +99,4 @@ const putMusic = async (body, user) => {
     return { status: 'success', result };
 };
 
-export { postMusic, getMusic, putMusic };
+export { postMusic, getSearch, getMusic, putMusic };

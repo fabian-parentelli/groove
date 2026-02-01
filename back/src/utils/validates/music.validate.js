@@ -33,7 +33,8 @@ const putMusicVal = (body, user) => {
         { k: 'img', t: 'string', r: true },
         { k: 'topics', t: 'array', r: true },
         { k: 'duration', t: 'number', r: true, min: 1 },
-        { k: 'active', t: 'boolean', r: true }
+        { k: 'active', t: 'boolean', r: true },
+        { k: 'album', t: 'string', r: false, clean: true }
     ];
 
     return ALLOWED_FIELDS.reduce((acc, field) => {

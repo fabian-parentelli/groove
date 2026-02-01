@@ -9,6 +9,7 @@ const getMusicApi = async (obj) => {
     if (obj.uid) urlData += `uid=${obj.uid}&`;
     if (obj.yids) urlData += `yids=${obj.yids}&`;
     if (obj.lid) urlData += `lid=${obj.lid}&`;
+    if (obj.name) urlData += `name=${obj.name}&`;
     if (obj.category) urlData += `category=${obj.category}&`;
     if (obj.active !== undefined) urlData += `active=${obj.active}&`;
     if (obj.random !== undefined) urlData += `random=${obj.random}&`;

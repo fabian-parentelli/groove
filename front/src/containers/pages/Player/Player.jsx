@@ -24,8 +24,10 @@ const Player = () => {
             if (response.status === 'success') {
                 setSongs(response.result);
                 sessionStorage.setItem('playlist', JSON.stringify(response.result.docs));
-                if (params.type === 'random') sessionStorage.setItem('type', params.type);
-                else sessionStorage.setItem('type', params.name);
+                if(params.type) {
+                    if (params.type === 'random') sessionStorage.setItem('type', params.type);
+                    else sessionStorage.setItem('type', params.name);
+                };
             } else showAlert(response.error, 'error');
             setLoading(false);
         }; fetchData();
@@ -33,7 +35,7 @@ const Player = () => {
 
     return (
         <div className="player">
-            <SiderLeft />
+            <SiderLeft info={info} setInfo={setInfo} />
             <PlayerView info={info} setInfo={setInfo} />
             <PlayerList songs={songs} info={info} />
         </div>

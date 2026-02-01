@@ -19,7 +19,7 @@ const Radio = () => {
     const handlePrev = () => playerRef.current?.previousVideo();
 
     useEffect(() => {
-        if (isPlaying) {
+        if (videoId) {
             const videoId = playerRef.current?.getVideoData()?.video_id;
             const playlist = JSON.parse(sessionStorage.getItem('playlist'));
             setInfo(playlist.find(doc => doc.yid === videoId));

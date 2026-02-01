@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Icons, Tooltip } from 'fara-comp-react';
 import NavBarMenu from '../NavBarMenu/NavBarMenu.jsx';
 import { useLoginContext } from '@/context/LoginContext.jsx';
+import Navbarinput from '../NavbarInput/Navbarinput.jsx';
 
 const NavBarCont = () => {
 
@@ -15,22 +16,14 @@ const NavBarCont = () => {
         <div className="navBarCont">
 
             <section className='navBarContNav'>
-
-                <div className='navBarContNavMenu'>
-                    <Icons type='menu' color='white' />
-                </div>
-
+                <br />
                 <Link to={'/'} className='navBarContTit'>
                     <img src="/logo.png" width='30px' alt="img" />
                     <h1>Groove</h1>
                 </Link>
-
             </section>
 
-            <div className='navBarContCent'>
-                <Icons type='question' size='20px' color='gray' />
-                <input type="text" placeholder='Buscar canciones y artistas' />
-            </div>
+            <Navbarinput />
 
             <section className='navBarContR'>
 

@@ -16,7 +16,7 @@ const PlayerList = ({ songs, info }) => {
 
     return (
         <div className="playerList">
-            <h3>{title}</h3>
+            <h3>{title || 'Canciones Groove'}</h3>
 
             <section className='playerListSongs'>
                 {songs && songs.docs.map((doc, ind) => (

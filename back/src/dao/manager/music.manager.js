@@ -15,6 +15,13 @@ export default class Music {
         return await musicModel.find(query).lean();
     };
 
+    getSearch = async (topics) => {
+        return await musicModel.aggregate([
+            { $match: { topics: { $in: topics }, active: true } },
+            { $sample: { size: 50 } }
+        ]);
+    };
+
     getById = async (id) => {
         return await musicModel.findById(id).lean();
     };

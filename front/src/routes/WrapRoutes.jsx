@@ -11,6 +11,7 @@ import Footer from "../containers/layout/Footer/Footer.jsx";
 import OurNews from "../containers/pages/info/OurNews/OurNews.jsx";
 import Player from "../containers/pages/Player/Player.jsx";
 import PreView from "../containers/pages/PreView/PreView.jsx";
+import Search from "../containers/pages/Search/Search.jsx";
 
 const WrapRoutes = () => {
 
@@ -28,6 +29,7 @@ const WrapRoutes = () => {
                     <Route path="/ournews" element={<OurNews />} />
                     <Route path="/player" element={<Player />} />
                     <Route path="/preview" element={<PreView />} />
+                    <Route path="/search/:id" element={<Search />} />
                     
                     <Route path="*" element={<NotFound />} />
 

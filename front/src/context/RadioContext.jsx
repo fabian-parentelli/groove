@@ -20,12 +20,12 @@ const RadioProvider = ({ children }) => {
         if (playlist.length > 0) {
             currentLidRef.current = params.lid;
             if (!playerRef.current) {
-                if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, playlist, currentLidRef);
+                if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId);
                 else {
                     const tag = document.createElement("script");
                     tag.src = "https://www.youtube.com/iframe_api";
                     document.body.appendChild(tag);
-                    window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, playlist, currentLidRef);
+                    window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId);
                 };
             } else {
                 playerRef.current.stopVideo();
@@ -59,7 +59,7 @@ const RadioProvider = ({ children }) => {
 
 export default RadioProvider;
 
-function createPlayer(playerRef, setIsPlaying, playlist, currentLidRef) {
+function createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId) {
 
     if (playerRef.current) return;
 
@@ -83,7 +83,7 @@ function createPlayer(playerRef, setIsPlaying, playlist, currentLidRef) {
                     setIsPlaying(true);
                     if (typeof player.getVideoData === "function") {
                         const data = player.getVideoData();
-                        setCurrentVideoId(data.video_id);
+                        setVideoId(data.video_id);
                     }
                 } else if (
                     event.data === window.YT.PlayerState.PAUSED ||

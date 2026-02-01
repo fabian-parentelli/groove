@@ -1,0 +1,51 @@
+.navbarinput {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbarinput .navbarinputInput {
+    display: flex;
+    background-color: var(--cola);
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+}
+
+.navbarinput .navbarinputInput input {
+    border: none;
+}
+
+.navbarinput .navbarinputView {
+    position: absolute;
+    top: 62px;
+    background-color: var(--cola);
+    width: 400px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.navbarinput .navbarinputView p {
+    padding: 1.4rem 1rem;
+    cursor: pointer;
+}
+
+.navbarinput .navbarinputView p:hover {
+    background-color: #212f49;
+}
+
+.navbarinputView p.selected {
+    background-color: #eee;
+}
+
+@media(max-width: 767px) {
+
+    .navbarinput .navbarinputInput {
+        width: 80%;
+    }
+
+    .navbarinput .navbarinputInput input {
+        display: none;
+    }
+}

@@ -60,39 +60,10 @@
     color: var(--colb);
 }
 
-/* center */
-
-.navBarCont .navBarContCent {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    background-color: var(--cola);
-    padding: 6px 1rem;
-    max-width: 400px;
-    width: 100%;
-    border-radius: 8px;
-}
-
-.navBarCont .navBarContCent input {
-    padding-left: 5px;
-}
-
-.navBarCont .navBarContCent input:hover {
-    border: 1px solid var(--cola);
-}
-
-.navBarCont .navBarContCent input:focus {
-    border: 1px solid var(--cola);
-}
-
 @media (max-width: 767px) {
 
     .navBarCont {
         padding: 0 3px;
-    }
-
-    .navBarCont .navBarContCent {
-        width: 50px;
     }
 
     .navBarCont .navBarContCent input {
