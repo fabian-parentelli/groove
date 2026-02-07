@@ -1,7 +1,5 @@
-// const url = 'https://api.groovemusic.online';
-const url = 'http://localhost:9092';
-
-// Esto es un comentario
+const url = 'https://api.groovemusic.online';
+// const url = 'http://localhost:9092';
 
 export const apiFetch = async (path, options = {}, isFormData = false) => {
 

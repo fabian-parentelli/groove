@@ -65,14 +65,37 @@
     padding-bottom: 1rem;
 }
 
-.playerView .playerViewSect .playerViewSectTopics p {
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     padding: 1rem;
     cursor: pointer;
-    width: 100%;
 }
 
-.playerView .playerViewSect .playerViewSectTopics p:hover {
-    background-color: rgba(0, 0, 0, 0.171);
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics .pvdtIcons {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics .pvdtIcons svg {
+    display: none;
+}
+
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics .pvdtIcons:hover {
+    background-color: rgba(255, 255, 255, 0.068);
+} 
+
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics:hover {
+    background-color: #0000004b;
+}
+
+.playerView .playerViewSect .playerViewSectTopics .playerViewDivTopics:hover .pvdtIcons svg {
+    display: flex;
 }
 
 @media(max-width: 767px) {
