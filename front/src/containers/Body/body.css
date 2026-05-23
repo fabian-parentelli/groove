@@ -34,3 +34,36 @@
 .body .bodySect .bodyModules::-webkit-scrollbar-thumb:hover {
     background: #6366f1;
 }
+
+.bodyOverlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .body {
+        padding-bottom: calc(10vh + 10px);
+        position: relative;
+    }
+
+    .body .bodySect .bodyModules {
+        padding: 0.5rem;
+        max-height: none;
+        height: 100%;
+    }
+
+    .body .bodySect > .flex {
+        flex-direction: column;
+    }
+
+    .bodyOverlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 90;
+    }
+}

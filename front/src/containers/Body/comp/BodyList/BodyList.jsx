@@ -21,9 +21,12 @@ const BodyList = () => {
     }, [changeList]);
 
     return (
-        <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
-            <h3>{music?.name || 'Titulo de la playlist'}</h3>
-            {music?.is === 'album' && <p className='bodyListAuthor'>{music?.author}</p>}
+            <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
+                <div className='bodyListHeader'>
+                    <h3>{music?.name || 'Titulo de la playlist'}</h3>
+                    <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
+                </div>
+                {music?.is === 'album' && <p className='bodyListAuthor'>{music?.author}</p>}
 
             <section className='bodyListSect'>
                 {music?.list?.map((doc, ind) => (

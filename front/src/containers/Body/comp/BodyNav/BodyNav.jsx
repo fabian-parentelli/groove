@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbarinput from './comp/NavbarInput/Navbarinput.jsx';
 import { useLoginContext } from '@/context/LoginContext.jsx';
 
-const BodyNav = () => {
+const BodyNav = ({ onMenuToggle }) => {
 
     const { user } = useLoginContext();
 
@@ -11,6 +11,11 @@ const BodyNav = () => {
 
     return (
         <div className="bodyNav">
+            <button className='bodyNavHamburger' onClick={onMenuToggle} aria-label='Menú'>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <Navbarinput />
 
             <button className='btn btnF w-150'

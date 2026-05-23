@@ -3,15 +3,16 @@ import { Icons } from 'fara-comp-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLoginContext } from '@/context/LoginContext.jsx';
 
-const BodyPanel = () => {
+const BodyPanel = ({ mobileOpen, onClose }) => {
 
     const { user } = useLoginContext();
     const { pathname } = useLocation();
 
     return (
-        <div className="bodyPanel">
+        <div className={`bodyPanel ${mobileOpen ? 'bodyPanel--open' : ''}`}>
 
             <section className='bodyPanelTitle'>
+                <button className='bodyPanelClose' onClick={onClose}>✕</button>
                 <img src="/logo.png" width='50px' alt="logo" />
                 <div>
                     <h1>Groove</h1>

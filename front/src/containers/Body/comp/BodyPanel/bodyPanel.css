@@ -84,3 +84,44 @@
     color: gray;
     margin-top: 10px;
 }
+
+.bodyPanelClose {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.bodyPanelClose:hover {
+    background: var(--cole);
+}
+
+@media (max-width: 768px) {
+    .bodyPanelClose {
+        display: block;
+    }
+
+    .bodyPanel {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 280px;
+        height: 100%;
+        z-index: 100;
+        transition: left 0.3s ease;
+        padding-bottom: 10vh;
+    }
+
+    .bodyPanel--open {
+        left: 0;
+    }
+
+    .bodyPanel .bodyPanelTitle {
+        justify-content: flex-start;
+    }
+}

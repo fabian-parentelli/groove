@@ -15,10 +15,10 @@
 
 .bodyAlbum .bodyAlbumDiv .bodyAlbumImg:hover img {
     transform: translateY(-3px);
-} 
+}
 
 .bodyAlbum .bodyAlbumDiv .bodyAlbumImg {
-    width: 100%;
+    width: 250px;
     height: 250px;
     border-radius: 12px;
     overflow: hidden;
@@ -59,4 +59,16 @@
 .bodyAlbum .bodyAlbumDiv .bodyAlbumSect div p {
     font-size: 12px;
     color: var(--colf);
+}
+
+@media (max-width: 767px) {
+
+.bodyAlbum {
+    padding-bottom: 15vh;
+}
+
+    .bodyAlbum .bodyAlbumDiv {
+        width: 100%;
+        align-items: center;
+    }
 }

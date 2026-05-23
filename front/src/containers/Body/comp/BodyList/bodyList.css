@@ -114,3 +114,49 @@
 .bodyListDiv:hover .bodyListTimeIcon {
     display: inline;
 }
+
+.bodyListHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bodyListClose {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.bodyListClose:hover {
+    background: var(--cole);
+}
+
+@media (max-width: 768px) {
+    .bodyListClose {
+        display: block;
+    }
+    .bodyList {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        z-index: 100;
+        opacity: 1;
+        padding: 1rem 6px 5rem 6px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .bodyList--visible {
+        right: 0;
+        width: 80%;
+        max-width: 320px;
+    }
+}
