@@ -29,13 +29,17 @@ const RadioProvider = ({ children }) => {
                 };
             } else {
                 playerRef.current.stopVideo();
-                playerRef.current.loadPlaylist({
-                    playlist: playlist, index, startSeconds: 0, suggestedQuality: 'default'
-                });
+                playerRef.current.clearVideo();
+
                 setTimeout(() => {
+                    playerRef.current.loadPlaylist({
+                        playlist: playlist,
+                        index: 0,
+                        startSeconds: 0,
+                    });
                     playerRef.current.playVideo();
                     setIsPlaying(true);
-                }, 500);
+                }, 300);
             };
         };
     }, [playlist]);

@@ -4,20 +4,24 @@ const getYoutubeId = (body) => {
     if (body.type === 'purl') return getListId(body.path);
 };
 
-function formatYoTube(music) {
+function formatYoTube(music, body) {
 
-    const result = music.map(doc => {
+    return music.map(doc => {
+        const rawTitle = doc?.snippet?.title ?? '';
+        const parts = rawTitle.split(/\s*\|\s*|\s*-\s*/);
+
+        const titlePart = parts[1]?.trim() || rawTitle;
+        const authorPart = parts[0]?.trim() || parts[0]?.trim() || rawTitle;
 
         return {
-            yid: doc.id,
-            title: doc.snippet.title,
-            img: doc.snippet.thumbnails.medium.url,
-            duration: timeFormat(doc.contentDetails.duration),
-            topics: getTopicNames(doc.topicDetails.topicCategories),
-        }
+            yid: doc?.id,
+            title: titlePart,
+            img: doc?.snippet?.thumbnails?.medium?.url,
+            duration: timeFormat(doc?.contentDetails?.duration),
+            topics: getTopicNames(doc?.topicDetails?.topicCategories),
+            author: body?.is === 'album' ? body.author : authorPart
+        };
     });
-
-    return result;
 };
 
 export { getYoutubeId, formatYoTube };

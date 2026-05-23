@@ -6,7 +6,7 @@ import cors from 'cors';
 import env from './config/env.config.js';
 import cookieParser from 'cookie-parser';
 
-import { musicRouter, sessionRouter, categoryRouter, listRouter } from './routes/index.router.js';
+import { musicRouter, sessionRouter, categoryRouter, listRouter, albumRouter } from './routes/index.router.js';
 
 const app = express();
 mongoDB();
@@ -23,5 +23,6 @@ app.use('/api/music', musicRouter);
 app.use('/api/session', sessionRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/list', listRouter);
+app.use('/api/album', albumRouter);
 
 app.listen(env.port, async () => console.log(`Server conected ${env.port}`));

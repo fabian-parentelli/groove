@@ -1,12 +1,19 @@
 :root {
-  --cola: #1B263B;
+  --cola: #0c0d0d;
   --colb: #FFFFFF;
   --colc: #1B263B;
   --cold: #B89C6F;
-  --cole: #141414;
+  --cole: #101217;
   --colee: #dcdcdc10;
+
+  --colf: #4f46e5;
+  --colff: #6366f1;
 }
 
 .cola {
   color: var(--cola);
+}
+
+.cold {
+  color: var(--cold);
 }

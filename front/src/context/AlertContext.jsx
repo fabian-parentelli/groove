@@ -10,13 +10,18 @@ const AlertProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [textLoader, setTextLoader] = useState(false);
 
+    const [viewPlayList, setViewPlayList] = useState(true);
+    const [changeList, setChangeList] = useState(0);
+
     const showAlert = (message, status = 'success') => {
         setSnack({ open: true, message, status });
         setTimeout(() => { setSnack({ open: false, message: '', status: 'success' }) }, 4000);
     };
 
     return (
-        <AlertContext.Provider value={{ showAlert, setLoading, setTextLoader }}>
+        <AlertContext.Provider value={{ showAlert, setLoading, setTextLoader, viewPlayList, 
+            setViewPlayList, changeList, setChangeList
+        }}>
             {children}
 
             <Snackbar snack={snack} />

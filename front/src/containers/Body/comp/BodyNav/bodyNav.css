@@ -1,0 +1,11 @@
+.bodyNav {
+    width: 100%;
+    height: 70px;
+    flex-shrink: 0;
+    background-color: var(--cola);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}

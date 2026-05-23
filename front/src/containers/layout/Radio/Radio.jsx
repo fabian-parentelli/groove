@@ -3,6 +3,8 @@ import { Icons } from "fara-comp-react";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRadioContext } from '@/context/RadioContext.jsx';
+import { useAlertContext } from '@/context/AlertContext.jsx';
+import { getMusic } from '../../../utils/db.utils';
 
 const Radio = () => {
 
@@ -14,16 +16,16 @@ const Radio = () => {
     const [currentTime, setCurrentTime] = useState(0);
 
     const { isPlaying, playerRef, videoId } = useRadioContext();
+    const { viewPlayList, setViewPlayList } = useAlertContext();
 
     const handleNext = () => playerRef.current?.nextVideo();
     const handlePrev = () => playerRef.current?.previousVideo();
 
     useEffect(() => {
-        if (videoId) {
-            const videoId = playerRef.current?.getVideoData()?.video_id;
-            const playlist = JSON.parse(sessionStorage.getItem('playlist'));
-            setInfo(playlist.find(doc => doc.yid === videoId));
-        };
+        const fetchData = async () => {
+            const response = await getMusic()
+            setInfo(response.list?.find(doc => doc?.yid === videoId));
+        }; if (videoId) fetchData();
     }, [isPlaying, videoId]);
 
     useEffect(() => {
@@ -70,6 +72,7 @@ const Radio = () => {
             <div className="radioProgress" onClick={handleSeek}>
                 <div className="radioProgressFill" style={{ width: progress }} />
             </div>
+
             <div className="radio">
 
                 <div id='radioTv'></div>
@@ -102,7 +105,7 @@ const Radio = () => {
 
                 <section className='radioInputs'>
 
-                    <div className='flex-center radioInputsVol'>
+                    <div className='flex radioInputsVol'>
 
                         <input
                             type="range" id="volume" name="volume" min="0" max="100" value={volume} onChange={(e) => changeVolume(e.target.value)}
@@ -123,9 +126,17 @@ const Radio = () => {
                     <div className='radioIcon'>
                         <Icons color='white' type='replace' size='25px' />
                     </div>
+
                     <div className='radioIcon'>
                         <Icons color='white' type='exchange' size='25px' />
                     </div>
+
+                    <div className='radioIcon'>
+                        <Icons type='ejection' size='25px' color={viewPlayList ? 'white' : '#4f46e5'}
+                            onClick={() => setViewPlayList(!viewPlayList)}
+                        />
+                    </div>
+
                 </section>
             </div>
         </>

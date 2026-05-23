@@ -1,19 +1,36 @@
 .body {
-    margin-top: 70px;
-    min-height: 100vh;
+    height: 90vh;
     padding-bottom: 150px;
+    width: 100%;
+    overflow: hidden;
 }
 
-.body .bodyRadio {
-    position: fixed;
-    background-color: var(--cold);
-    padding: 6px;
-    bottom: 90px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: .3s ease-in-out;
+.body .bodySect {
+    height: 90vh;
 }
 
-.body .bodyRadio:hover {
-    opacity: 0.8;
+.body .bodySect .bodyModules {
+    flex: 1;
+    min-width: 0;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 1rem 2rem;
+}
+
+.body .bodySect .bodyModules::-webkit-scrollbar {
+    width: 6px;
+}
+
+.body .bodySect .bodyModules::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 10px;
+}
+
+.body .bodySect .bodyModules::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 10px;
+}
+
+.body .bodySect .bodyModules::-webkit-scrollbar-thumb:hover {
+    background: #6366f1;
 }

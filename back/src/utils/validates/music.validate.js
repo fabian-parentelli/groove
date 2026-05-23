@@ -4,7 +4,7 @@ import { isMongoId } from "./validates.js";
 const postMusicVal = (body, user) => {
 
     const errors = [];
-    if (!isMongoId(user._id)) throw new CustomNotFound('Id del usuario no es válido');
+    if (!isMongoId(user._id)) throw new CustomNotFound('Id del usuario no es válido', 'info');
 
     ['path', 'type'].forEach(field => {
         if (body[field] === undefined || body[field] === null || body[field] === '') {
@@ -13,12 +13,12 @@ const postMusicVal = (body, user) => {
     });
 
     Object.keys(body).forEach(key => {
-        if (!['path', 'type', 'name'].includes(key)) {
+        if (!['path', 'type', 'name', 'is', 'author'].includes(key)) {
             errors.push(`Campo no permitido: ${key}`);
         };
     });
 
-    if (errors.length) throw new CustomNotFound(errors.join(', '));
+    if (errors.length) throw new CustomNotFound(errors.join(', '), 'info');
 };
 
 const putMusicVal = (body, user) => {
@@ -49,7 +49,7 @@ const putMusicVal = (body, user) => {
             (field.t === 'boolean' && typeof val !== 'boolean') ||
             (field.t === 'array' && !Array.isArray(val))) throw new Error(`${field.k} inválido`);
         acc[field.k] = field.clean ? cleanString(val) : val;
-        
+
         return acc;
     }, {});
 };

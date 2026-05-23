@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "@/components/utils/ScrollToTop.jsx";
 import NavBar from "../containers/layout/NavBar/NavBar.jsx";
@@ -5,26 +6,28 @@ import User from "../containers/pages/User/User.jsx";
 import { useLoginContext } from "../context/LoginContext.jsx";
 import DashRouter from "./DashRouter.jsx";
 import Radio from "../containers/layout/Radio/Radio.jsx";
-import Body from "../containers/Body/Body.jsx";
 import NotFound from "../containers/layout/NotFound/NotFound.jsx";
 import Footer from "../containers/layout/Footer/Footer.jsx";
 import OurNews from "../containers/pages/info/OurNews/OurNews.jsx";
 import Player from "../containers/pages/Player/Player.jsx";
 import PreView from "../containers/pages/PreView/PreView.jsx";
 import Search from "../containers/pages/Search/Search.jsx";
+import BodyRouter from "./BodyRouter.jsx";
 
 const WrapRoutes = () => {
 
-    const { user } = useLoginContext();
+    const { user, current } = useLoginContext();
+
+    useEffect(() => { current() }, []);
 
     return (
         <BrowserRouter>
             <ScrollToTop>
 
-                <NavBar />
-
                 <Routes>
-                    <Route path="/" element={<Body />} />
+
+                    {BodyRouter()}
+
                     <Route path="/user" element={<User />} />
                     <Route path="/ournews" element={<OurNews />} />
                     <Route path="/player" element={<Player />} />
@@ -41,7 +44,6 @@ const WrapRoutes = () => {
                 </Routes>
 
                 <Radio />
-                <Footer />
 
             </ScrollToTop>
         </BrowserRouter>
