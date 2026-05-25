@@ -8,8 +8,8 @@ import { useRadioContext } from '@/context/RadioContext.jsx';
 
 const BodyList = () => {
 
-    const { videoId, playAtIndex } = useRadioContext();
     const { viewPlayList, changeList } = useAlertContext();
+    const { videoId, playAtIndex, playlist, setPlayList } = useRadioContext();
 
     const [music, setMusic] = useState(null);
 
@@ -20,38 +20,49 @@ const BodyList = () => {
         }; fetchData();
     }, [changeList]);
 
+    const handlePlay = async (index) => {
+        if (playlist.length === 0) {
+            const response = await getMusic();
+            if (response) {
+                const ids = response.list.map(doc => doc.yid);
+                const reordered = [ids[index], ...ids.filter((_, i) => i !== index)];
+                setPlayList(reordered);
+            };
+        } else playAtIndex(index);
+    };
+
     return (
-            <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
-                <div className='bodyListHeader'>
-                    <h3>{music?.name || 'Titulo de la playlist'}</h3>
-                    <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
-                </div>
-                {music?.is === 'album' && <p className='bodyListAuthor'>{music?.author}</p>}
+        <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
+            <div className='bodyListHeader'>
+                <h3>{music?.name || 'Titulo de la playlist'}</h3>
+                <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
+            </div>
+            {music?.is === 'album' && <p className='bodyListAuthor'>{music?.author}</p>}
 
             <section className='bodyListSect'>
                 {music?.list?.map((doc, ind) => (
-                    <div key={doc._id} className='bodyListDiv'
-                        style={{ backgroundColor: videoId === doc.yid ? '#171919' : '' }}
+                    <div key={ind} className='bodyListDiv'
+                        style={{ backgroundColor: videoId === doc?.yid ? '#171919' : '' }}
                     >
 
                         <section className='flex ai-center'>
                             <div className='bodyListImg'>
-                                <img src={doc.img} alt="img" />
+                                <img src={doc?.img} alt="img" />
                                 <div className='bodyListImgOverlay'>
                                     <Icons type='play' color='white' size='20px'
-                                        onClick={() => playAtIndex(ind)}
+                                        onClick={() => handlePlay(ind)}
                                     />
                                 </div>
                             </div>
 
                             <div className='w-150'>
-                                <h6 className='p-elipsis'>{doc.title}</h6>
-                                <p className='bodyListAuthor p-elipsis'>{doc.author}</p>
+                                <h6 className='p-elipsis'>{doc?.title}</h6>
+                                <p className='bodyListAuthor p-elipsis'>{doc?.author}</p>
                             </div>
                         </section>
 
                         <div className='bodyListTime'>
-                            <span className='bodyListTimeText'>{formatTime(doc.duration)}</span>
+                            <span className='bodyListTimeText'>{formatTime(doc?.duration)}</span>
                             <span className='bodyListTimeIcon'>
                                 <Icons type='dotver' color='white' size='25px' onClick={() => console.log('dotver clicked')} />
                             </span>

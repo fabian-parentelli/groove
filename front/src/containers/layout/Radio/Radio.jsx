@@ -1,10 +1,10 @@
 import './radio.css';
 import { Icons } from "fara-comp-react";
 import { useState, useEffect } from 'react';
+import { getMusic } from '@/utils/db.utils.js';
 import { useNavigate } from 'react-router-dom';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { useAlertContext } from '@/context/AlertContext.jsx';
-import { getMusic } from '../../../utils/db.utils';
 
 const Radio = () => {
 
@@ -15,8 +15,8 @@ const Radio = () => {
     const [volume, setVolumeState] = useState(100);
     const [currentTime, setCurrentTime] = useState(0);
 
-    const { isPlaying, playerRef, videoId } = useRadioContext();
     const { viewPlayList, setViewPlayList } = useAlertContext();
+    const { isPlaying, playerRef, videoId, playlist, setPlayList } = useRadioContext();
 
     const handleNext = () => playerRef.current?.nextVideo();
     const handlePrev = () => playerRef.current?.previousVideo();
@@ -59,7 +59,11 @@ const Radio = () => {
         };
     };
 
-    const handlePlayPause = () => {
+    const handlePlayPause = async () => {
+        if(playlist.length === 0) {
+            const response = await getMusic();
+            if(response) setPlayList(response.list.map(doc => doc.yid));
+        };
         if (!playerRef.current) return;
         if (isPlaying) playerRef.current.pauseVideo();
         else playerRef.current.playVideo();

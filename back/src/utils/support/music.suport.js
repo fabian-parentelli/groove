@@ -19,7 +19,8 @@ function formatYoTube(music, body) {
             img: doc?.snippet?.thumbnails?.medium?.url,
             duration: timeFormat(doc?.contentDetails?.duration),
             topics: getTopicNames(doc?.topicDetails?.topicCategories),
-            author: body?.is === 'album' ? body.author : authorPart
+            author: body?.is === 'album' ? body.author : authorPart,
+            album: body?.is === 'album' ? body.name : null,
         };
     });
 };

@@ -3,6 +3,7 @@ import Body from '../containers/Body/Body.jsx';
 import BodyGeneric from '../containers/Body/modules/BodyGeneric/BodyGeneric.jsx';
 import BodyExplore from '../containers/Body/modules/BodyExplore/BodyExplore.jsx';
 import BodyAlbums from '../containers/Body/modules/BodyAlbums/BodyAlbums.jsx';
+import ViewAlbum from '../containers/Body/views/ViewAlbum/ViewAlbum.jsx';
 
 const BodyRouter = () => {
 
@@ -12,6 +13,7 @@ const BodyRouter = () => {
             <Route path='explore' element={<BodyExplore />} />
             <Route path='albums' element={<BodyAlbums />} />
 
+            <Route path='album/:id' element={<ViewAlbum />} />
         </Route>
     );
 };

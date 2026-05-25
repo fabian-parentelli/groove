@@ -6,6 +6,7 @@ const dashModules = [
     { icon: 'playlist', name: 'Playlist', link: 'lists' },
     { icon: 'activity', name: 'Actividad', link: 'activity' },
     { icon: 'message', name: 'Mensaje', link: 'message' },
+    { icon: 'direction', name: 'Categorías', link: 'topics' },
     { icon: 'setting', name: 'Opciones', link: 'setting' },
 ];
 

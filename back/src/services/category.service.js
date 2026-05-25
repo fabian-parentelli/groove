@@ -1,6 +1,12 @@
 import { categoryRepository } from "../repositories/index.repositories.js";
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
 
+const postOneCategory = async (body) => {
+    const result = await categoryRepository.postCategory(body);
+    if(!result) throw new CustomNotFound('Error al crear el tópico');
+    return { status: 'success', result };
+};
+
 const postCategory = async (songs) => {
 
     if (!songs) throw new CustomNotFound('No hay canciones para obtener las categorías');
@@ -32,4 +38,4 @@ const getCategories = async () => {
     return { status: 'success', result };
 };
 
-export { postCategory, getCategories };
+export { postCategory, postOneCategory, getCategories };

@@ -2,6 +2,7 @@
     background-color: var(--cola);
     color: var(--colb);
     transition: .3s ease-in-out;
+    height: 40px;
 }
 
 .btnF {

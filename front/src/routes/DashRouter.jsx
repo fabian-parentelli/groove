@@ -5,6 +5,7 @@ import DashAdMusic from '../containers/Dashboard/modules/DashAdMusic/DashAdMusic
 import NotFound from '../containers/layout/NotFound/NotFound';
 import DashSongs from '../containers/Dashboard/modules/DashSongs/DashSongs';
 import DashLists from '../containers/Dashboard/modules/DashLists/DashLists';
+import DashTopics from '../containers/Dashboard/modules/DashTopics/DashTopics';
 
 const DashRouter = () => {
 
@@ -14,6 +15,7 @@ const DashRouter = () => {
             <Route path='admusic' element={<DashAdMusic />} />
             <Route path='songs' element={<DashSongs />} />
             <Route path='lists' element={<DashLists />} />
+            <Route path='topics' element={<DashTopics />} />
             <Route path='*' element={<NotFound />} />
         </Route>
     );

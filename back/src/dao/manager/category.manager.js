@@ -2,6 +2,10 @@ import { categoryModel } from '../models/category.model.js';
 
 export default class Category {
 
+    postCategory = async (category) => {
+        return await categoryModel.create(category);
+    };
+    
     postMany = async (categories) => {
         return await categoryModel.insertMany(categories);
     };

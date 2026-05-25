@@ -1,0 +1,27 @@
+.dothor-hidden {
+    visibility: hidden;
+}
+
+.cell-number {
+    cursor: default;
+}
+
+.icon-play {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.listSongsImg {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.listSongsImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

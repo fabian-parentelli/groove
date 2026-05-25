@@ -1,4 +1,5 @@
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js'
+import { isValidObjectId } from './validations.val.js';
 
 const getAlbums = (query) => {
 
@@ -21,6 +22,26 @@ const getAlbums = (query) => {
     return query;
 };
 
+const getById = (params) => {
+
+    const keys = Object.keys(params);
+    if (keys.length !== 1 || keys[0] !== 'id') {
+        throw new CustomNotFound('El objeto params invadido', 'info');
+    };
+
+    if (!params.id) {
+        throw new CustomNotFound('El objeto params no contiene un id', 'info');
+    };
+
+    if (!isValidObjectId(params.id)) {
+        throw new CustomNotFound('El id no es válido', 'info');
+    };
+
+    return params;
+};
+
+
 export const validation = {
-    getAlbums
+    getAlbums,
+    getById
 };

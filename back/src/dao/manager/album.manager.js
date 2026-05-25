@@ -10,4 +10,8 @@ export default class Album {
         return await albumModel.paginate(query, { ...options, lean: true, sort: { _id: -1 } });
     };
 
+    getById = async (id) => {
+        return await albumModel.findById(id).lean();
+    };
+
 };

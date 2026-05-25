@@ -2,6 +2,11 @@ import { categoryManager } from '../dao/manager/index.manager.js';
 
 export default class CategoryRepository {
 
+    postCategory = async (category) => {
+        const result = await categoryManager.postCategory(category);
+        return result;
+    };
+    
     postMany = async (categories) => {
         const result = await categoryManager.postMany(categories);
         return result;
