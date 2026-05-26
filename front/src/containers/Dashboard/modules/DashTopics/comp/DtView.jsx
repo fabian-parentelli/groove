@@ -3,7 +3,7 @@ import { Icons, Tooltip } from 'fara-comp-react';
 import { useAlertContext } from "@/context/AlertContext.jsx";
 import { getCategoriesApi } from "@/helpers/categories/getCategories.api.js";
 
-const DtView = ({ topics, setTopics }) => {
+const DtView = ({ topics, setTopics, setTopic }) => {
 
     const { showAlert } = useAlertContext();
 
@@ -21,6 +21,7 @@ const DtView = ({ topics, setTopics }) => {
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Tópico</th>
                         <th>Cantidad</th>
                         <th></th>
                         <th></th>
@@ -31,10 +32,13 @@ const DtView = ({ topics, setTopics }) => {
                     {topics && topics?.map((doc, ind) => (
                         <tr key={ind}>
                             <td>{doc?.name}</td>
+                            <td>{doc?.topic}</td>
                             <td>{doc?.amount || 0}</td>
                             <td>
                                 <Tooltip text='Actualizar' backgroundColor='#1B263B' cursor='pointer'>
-                                    <Icons type='pencil' color='white' size='20px' />
+                                    <Icons type='pencil' color='white' size='20px'
+                                        onClick={() => setTopic(doc)}
+                                    />
                                 </Tooltip>
                             </td>
 
@@ -46,7 +50,7 @@ const DtView = ({ topics, setTopics }) => {
 
                             <td>
                                 <Tooltip text={doc.active ? 'Desactivar' : 'Activar'} backgroundColor='#1B263B' cursor='pointer'>
-                                    <Icons type={doc.active ? 'success': 'error'} color='white' size='20px' />
+                                    <Icons type={doc.active ? 'success' : 'error'} color='white' size='20px' />
                                 </Tooltip>
                             </td>
                         </tr>

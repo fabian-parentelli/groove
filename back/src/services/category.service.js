@@ -1,9 +1,10 @@
 import { categoryRepository } from "../repositories/index.repositories.js";
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
+import { validation } from '../validations/category.val.js';
 
 const postOneCategory = async (body) => {
     const result = await categoryRepository.postCategory(body);
-    if(!result) throw new CustomNotFound('Error al crear el tópico');
+    if (!result) throw new CustomNotFound('Error al crear el tópico');
     return { status: 'success', result };
 };
 
@@ -38,4 +39,13 @@ const getCategories = async () => {
     return { status: 'success', result };
 };
 
-export { postCategory, postOneCategory, getCategories };
+const putCategory = async (body, user) => {
+    body = validation.putCategory(body);
+    const category = await categoryRepository.getById(body._id);
+    if (!category) return { status: 'error', message: `Error al traer la categoria: ${body._id}` };
+    const result = await categoryRepository.update({ ...category, ...body });
+    if (!result) return { status: 'error', message: `Error al editar la categoria: ${body._id}` };
+    return { status: 'success', result };
+};
+
+export { postCategory, postOneCategory, getCategories, putCategory };

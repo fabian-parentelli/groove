@@ -4,7 +4,7 @@ const BodyGeneric = () => {
 
     return (
         <div className="bodyGeneric">
-            
+            BodyGeneric
         </div>
     );
 };

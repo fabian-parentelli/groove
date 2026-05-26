@@ -1,0 +1,66 @@
+.bodyTopics {
+    width: 100%;
+}
+
+.bodyTopics section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.topic-card {
+    position: relative;
+    width: 280px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.topic-card img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.topic-card:hover img {
+    transform: translateY(-5px);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .3s;
+    z-index: 2;
+}
+
+.topic-card:hover .play-btn {
+    opacity: 1;
+}
+
+.topic-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 1;
+}

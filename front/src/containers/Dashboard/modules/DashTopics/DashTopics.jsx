@@ -6,12 +6,12 @@ import DtView from './comp/DtView.jsx';
 const DashTopics = () => {
 
     const [topics, setTopics] = useState([]);
-    const [topic, setTopic] = useState({ name: '', img: '' });
+    const [topic, setTopic] = useState({ name: '', img: '', topic: '' });
 
     return (
         <div className="flex-col">
-            <DtNiew setTopics={setTopics} topic={topic} setTopic={setTopic} />
-            <DtView topics={topics} setTopics={setTopics} />
+            <DtNiew topics={topics} setTopics={setTopics} topic={topic} setTopic={setTopic} />
+            <DtView topics={topics} setTopics={setTopics} setTopic={setTopic} />
         </div>
     );
 };

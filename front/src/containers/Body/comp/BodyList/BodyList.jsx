@@ -33,14 +33,19 @@ const BodyList = () => {
 
     return (
         <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
+
             <div className='bodyListHeader'>
-                <h3>{music?.name || 'Titulo de la playlist'}</h3>
+                <h3>{music?.is === 'album' ? music?.name : music?.is === 'topics' ? 'Género' : 'Titulo de la playlist'}</h3>
                 <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
             </div>
-            {music?.is === 'album' && <p className='bodyListAuthor'>{music?.author}</p>}
+            
+            {music?.is === 'album' 
+                ? <p className='bodyListAuthor'>{music?.author}</p>
+                : <p className='bodyListAuthor'>{music?.name}</p>          
+            }
 
             <section className='bodyListSect'>
-                {music?.list?.map((doc, ind) => (
+                {music && music?.list?.length > 0 && music?.list?.map((doc, ind) => (
                     <div key={ind} className='bodyListDiv'
                         style={{ backgroundColor: videoId === doc?.yid ? '#171919' : '' }}
                     >

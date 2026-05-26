@@ -11,9 +11,19 @@ export default class CategoryRepository {
         const result = await categoryManager.postMany(categories);
         return result;
     };
+   
+    getById = async (id) => {
+        const result = await categoryManager.getById(id);
+        return result;
+    };
     
     getAll = async () => {
         const result = await categoryManager.getAll();
+        return result;
+    };
+    
+    update = async (category) => {
+        const result = await categoryManager.update(category);
         return result;
     };
     

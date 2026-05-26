@@ -5,13 +5,21 @@ export default class Category {
     postCategory = async (category) => {
         return await categoryModel.create(category);
     };
-    
+
     postMany = async (categories) => {
         return await categoryModel.insertMany(categories);
     };
 
+    getById = async (id) => {
+        return await categoryModel.findById(id).lean();
+    };
+
     getAll = async () => {
         return await categoryModel.find().lean();
+    };
+
+    update = async (category) => {
+        return await categoryModel.findByIdAndUpdate(category._id, category, { returnDocument: 'after' }).lean();
     };
 
     updManyAmount = async (categories) => {

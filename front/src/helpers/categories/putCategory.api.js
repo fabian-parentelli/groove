@@ -1,12 +1,12 @@
 import { apiFetch } from "../apiFetch.api.js";
 
-const postCategoryApi = async (category) => {
+const putCategoryApi = async (category) => {
     
     return await apiFetch('/api/category', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(category)
     });
 
 };
 
-export { postCategoryApi };
+export { putCategoryApi };
