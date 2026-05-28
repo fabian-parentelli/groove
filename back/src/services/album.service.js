@@ -21,4 +21,13 @@ const getAlbums = async (query) => {
     return { status: 'success', result };
 };
 
-export { getById, getAlbums };
+const putAlbum = async (body) => {
+    body = validation.putAlbum(body);
+    const album = await albumRepository.getById(body._id, false);
+    if (!album) throw new CustomNotFound('Error al traer el álbum');
+    const result = await albumRepository.update({ ...album, ...body });
+    if (!result) throw new CustomNotFound('Error al editar el álbum');
+    return { status: 'success', result };
+};
+
+export { getById, getAlbums, putAlbum };

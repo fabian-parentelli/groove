@@ -6,7 +6,7 @@ import { useDebounce } from '@/hooks/useDebounce.jsx';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { getMusicApi } from '@/helpers/music/getMusic.api.js';
 
-const Navbarinput = () => {
+const Navbarinput = ({ setModal }) => {
 
     const viewRef = useRef(null);
     const navigate = useNavigate();
@@ -33,10 +33,11 @@ const Navbarinput = () => {
         return () => document.removeEventListener('mousedown', fn);
     }, []);
 
-    const handleGo = (id) => {        
+    const handleGo = (id) => {
         setSekker('');
         setList(null);
-        navigate(`/search/${id}`);
+        if (setModal) setModal({ open: false });
+        navigate(`/song/${id}`);
     };
 
     return (

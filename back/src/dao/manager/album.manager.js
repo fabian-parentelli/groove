@@ -14,4 +14,8 @@ export default class Album {
         return await albumModel.findById(id).lean();
     };
 
+    update = async (album) => {
+        return await albumModel.findByIdAndUpdate(album._id, album, { returnDocument: 'after' }).lean();
+    };
+
 };

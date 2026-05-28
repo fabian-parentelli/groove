@@ -85,3 +85,14 @@
 .cardSongPlay svg {
     pointer-events: none;
 }
+
+@media(max-width: 767px) {
+    
+    .cardSongs {
+        justify-content: center;
+    }
+
+    .cardSong {
+        width: 140px;
+    }
+}

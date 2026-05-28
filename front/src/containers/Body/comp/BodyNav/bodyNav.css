@@ -12,25 +12,18 @@
 
 .bodyNavHamburger {
     display: none;
-    flex-direction: column;
-    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-}
-
-.bodyNavHamburger span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: white;
-    border-radius: 2px;
-    transition: 0.3s;
 }
 
 @media (max-width: 768px) {
+
     .bodyNavHamburger {
         display: flex;
+    }
+
+    .bodyNavSearch {
+        display: none;
     }
 }

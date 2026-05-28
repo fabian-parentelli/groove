@@ -59,7 +59,8 @@ const getSearch = async ({ id }) => {
     return { status: 'success', result };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, random = false, yids, name, id }) => {
+const getMusic = async ({ 
+    page = 1, limit = 1, active = true, lid, category, random = false, yids, name, id, author }) => {
 
     // validar datos
     const query = {};
@@ -75,6 +76,7 @@ const getMusic = async ({ page = 1, limit = 1, active = true, lid, category, ran
     if (id) query._id = id;
 
     if (category) query.topics = { $in: [category] };
+    if (author) query.author = { $regex: author, $options: 'i' };
 
     if (active !== undefined) query.active = active;
     if (yids) query.yid = { $in: yids.split(',') };

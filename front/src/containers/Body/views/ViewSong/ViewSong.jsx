@@ -1,22 +1,27 @@
 import './viewSong.css';
 import { useEffect, useState } from 'react';
-import { getMusic } from '@/utils/db.utils.js';
 import { Spinner, Icons } from 'fara-comp-react';
 import { formatTime } from '@/utils/time.utils.js';
+import { getMusic, saveMusic } from '@/utils/db.utils.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAlertContext } from '@/context/AlertContext.jsx';
+import { useRadioContext } from '@/context/RadioContext.jsx';
 import ViewSongCat from './comps/ViewSongCat/ViewSongCat.jsx';
+import { getMusicApi } from '@/helpers/music/getMusic.api.js';
 import { getAlbumsApi } from '@/helpers/albums/getAlbums.api.js';
 import VewSongAlbum from './comps/VewSongAlbum/VewSongAlbum.jsx';
-import { getMusicApi } from '../../../../helpers/music/getMusic.api.js';
+import ListSongs from '@/components/utils/ListSongs/ListSongs.jsx';
 
 const ViewSong = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const { showAlert } = useAlertContext();
+
+    const { setPlayList } = useRadioContext();
+    const { showAlert, setChangeList } = useAlertContext();
 
     const [song, setSong] = useState(null);
+    const [songs, setSongs] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,8 +35,29 @@ const ViewSong = () => {
         }; fetchData();
     }, [id]);
 
-    const handlePlay = async (index = -1) => {
+    useEffect(() => {
+        if (!song?.author) return;
+        const fetchSongs = async () => {
+            const response = await getMusicApi({ author: song.author, limit: 24 });
+            if (response?.status === 'success') setSongs(response.result.docs);
+            else showAlert(response.error);
+        }; fetchSongs();
+    }, [song?.author]);
 
+    const handlePlay = async (index = -1) => {
+        const yids = songs.map(doc => doc.yid);
+        if (index >= 0) {
+            const yid = yids[index];
+            const newList = yids.filter((_, ind) => ind !== index);
+            setPlayList([yid, ...newList]);
+            const son = songs[index];
+            const newSongs = songs.filter((_, ind) => ind !== index);
+            saveMusic({ is: 'list', name: son.author, list: [son, ...songs] })
+        } else {
+            setPlayList([song.yid, ...yids]);
+            saveMusic({ is: 'list', name: song.author, list: [song, ...songs] })
+        };
+        setChangeList(p => p + 1);
     };
 
     const handleAlbum = async (yid) => {
@@ -81,16 +107,19 @@ const ViewSong = () => {
                         </button>
                     </div>
                 </div>
-            </section>
 
-            <div>
-                <h3 className='cold'>Categorías</h3>
+                <br />
                 <ViewSongCat song={song} />
-            </div>
+            </section>
 
             <div>
                 <h3 className='cold'>Álbumes</h3>
                 <VewSongAlbum song={song} />
+            </div>
+
+            <div>
+                <h3 className='cold'>Canciones del artista</h3>
+                <ListSongs songs={songs} handlePlay={handlePlay} />
             </div>
 
         </div>

@@ -24,4 +24,15 @@ const getAlbums = async (req, res) => {
     };
 };
 
-export { getById, getAlbums };
+const putAlbum = async (req, res) => {
+    try {
+        const result = await service.putAlbum({ ...req.body });
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl, user: req.user._id });
+        if (error instanceof CustomNotFound) return res.status(401).res.send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+export { getById, getAlbums, putAlbum };

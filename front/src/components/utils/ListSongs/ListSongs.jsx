@@ -29,26 +29,26 @@ const ListSongs = ({ songs, handlePlay }) => {
                             onMouseEnter={() => setHoveredRow(ind)}
                             onMouseLeave={() => setHoveredRow(null)}
                         >
-                            <td className="cell-number" style={{ width: '50px' }}>
+                            <td className="cell-number" style={{ width: '50px' }} data-label='Acción'>
                                 {hoveredRow === ind ? (
                                     <div className="icon-play">
                                         <Icons type='play' color='white' size='20px' onClick={() => handlePlay(ind)} />
                                     </div>
                                 ) : (ind + 1)}
                             </td>
-                            <td>
+                            <td data-label='Imágen'>
                                 <div className='listSongsImg'>
                                     <img src={doc.img} alt="img" />
                                 </div>
                             </td>
-                            <td>{doc?.title}</td>
-                            <td>{doc?.author}</td>
-                            <td>{doc?.album}</td>
-                            <td className={hoveredRow === ind ? '' : 'dothor-hidden'}>
+                            <td data-label='Título'>{doc?.title}</td>
+                            <td data-label='Autor'>{doc?.author}</td>
+                            <td data-label='Album'>{doc?.album}</td>
+                            <td className={hoveredRow === ind ? '' : 'dothor-hidden'} data-label='Acción'>
                                 <Icons type='dothor' color='white' size='20px' />
                             </td>
-                            <td><Icons type='heart' color='white' size='20px' /></td>
-                            <td>{formatTime(doc?.duration)}</td>
+                            <td data-label='Favorito'><Icons type='heart' color='white' size='20px' /></td>
+                            <td data-label='Tiempo'>{formatTime(doc?.duration)}</td>
                         </tr>
                     ))}
                 </tbody>

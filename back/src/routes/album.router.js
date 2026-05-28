@@ -6,5 +6,6 @@ export default class AlbumRouter extends Router {
     init() {
         this.get('/:id', ['PUBLIC'], passportEnum.NOTHING, controller.getById);
         this.get('/', ['PUBLIC'], passportEnum.OPTIONAL, controller.getAlbums);
+        this.put('/', ['ADMIN', 'MASTER'], passportEnum.JWT, controller.putAlbum);
     };
 };
