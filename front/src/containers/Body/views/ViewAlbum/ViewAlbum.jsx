@@ -16,7 +16,7 @@ const ViewAlbum = () => {
     const { setPlayList } = useRadioContext();
     const { showAlert, setChangeList } = useAlertContext();
 
-    const [album, setAlbum] = useState();
+    const [album, setAlbum] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {

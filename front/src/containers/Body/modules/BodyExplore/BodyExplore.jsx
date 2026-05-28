@@ -4,7 +4,7 @@ const BodyExplore = () => {
 
     return (
         <div className="bodyExplore">
-            BodyExplore
+            Estamos trabajando...
         </div>
     );
 };

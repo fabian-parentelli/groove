@@ -6,6 +6,8 @@ const getAlbumsApi = async (obj = {}) => {
 
     if (obj.page) urlData += `page=${obj.page}&`;
     if (obj.limit) urlData += `limit=${obj.limit}&`;
+    if (obj.yid) urlData += `yid=${obj.yid}&`;
+    if (obj.author) urlData += `author=${obj.author}&`;
 
     if (obj.active !== undefined) urlData += `active=${obj.active}&`;
 

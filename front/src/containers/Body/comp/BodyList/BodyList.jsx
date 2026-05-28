@@ -35,7 +35,7 @@ const BodyList = () => {
         <div className={`bodyList ${viewPlayList ? 'bodyList--visible' : ''}`}>
 
             <div className='bodyListHeader'>
-                <h3>{music?.is === 'album' ? music?.name : music?.is === 'topics' ? 'Género' : 'Titulo de la playlist'}</h3>
+                <h3>{music?.is === 'album' ? music?.name : music?.is === 'topics' ? 'Género' : 'Playlist Groove'}</h3>
                 <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
             </div>
             

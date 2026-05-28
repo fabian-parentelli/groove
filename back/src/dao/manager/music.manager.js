@@ -27,7 +27,7 @@ export default class Music {
     };
 
     getMusic = async (query, page, limit) => {
-        return await musicModel.paginate(query, { page, limit, lean: true });
+        return await musicModel.paginate(query, { page, limit, lean: true, sort: { _id: -1 } });
     };
 
     getRandom = async (query, limit = 24) => {

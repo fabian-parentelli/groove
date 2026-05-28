@@ -10,12 +10,16 @@ export default class Category {
         return await categoryModel.insertMany(categories);
     };
 
+    getCategory = async (query, get) => {
+        return await categoryModel.findOne(query, get).lean();
+    };
+
     getById = async (id) => {
         return await categoryModel.findById(id).lean();
     };
 
-    getAll = async () => {
-        return await categoryModel.find().lean();
+    getAll = async (query, limit) => {
+        return await categoryModel.find(query).sort({ _id: -1 }).limit(limit).lean();
     };
 
     update = async (category) => {

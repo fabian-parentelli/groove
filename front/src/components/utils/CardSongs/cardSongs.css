@@ -1,0 +1,87 @@
+.cardSongs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 6rem;
+}
+
+.cardSong {
+    width: 160px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1e1e1e;
+    transition: transform 0.2s;
+}
+
+.cardSong:hover {
+    transform: translateY(-4px);
+}
+
+.cardSongImg {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.cardSongImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cardSongInfo {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.cardSongText {
+    flex: 1;
+    min-width: 0;
+}
+
+.cardSongTitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 2px;
+}
+
+.cardSongAuthor {
+    font-size: 11px;
+    color: #aaa;
+    margin: 0 0 2px;
+}
+
+.cardSongDuration {
+    font-size: 11px;
+    color: #888;
+    margin: 0;
+}
+
+.cardSongPlay {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.cardSongPlay:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.cardSongPlay svg {
+    pointer-events: none;
+}

@@ -31,9 +31,9 @@ const ListSongs = ({ songs, handlePlay }) => {
                         >
                             <td className="cell-number" style={{ width: '50px' }}>
                                 {hoveredRow === ind ? (
-                                    <Icons type='play' color='white' size='20px' className="icon-play"
-                                        onClick={() => handlePlay(ind)}
-                                    />
+                                    <div className="icon-play">
+                                        <Icons type='play' color='white' size='20px' onClick={() => handlePlay(ind)} />
+                                    </div>
                                 ) : (ind + 1)}
                             </td>
                             <td>

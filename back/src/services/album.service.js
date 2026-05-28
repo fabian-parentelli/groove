@@ -11,8 +11,12 @@ const getById = async (params) => {
 
 const getAlbums = async (query) => {
     query = validation.getAlbums(query);
-    const { page = 1, limit = 12 } = query;
-    const result = await albumRepository.getAlbums({}, { page, limit });
+    const { page = 1, limit = 12, yid, author } = query;
+    let queries = {};
+    if (yid) queries.list = { $in: [yid] };
+    if (author) queries.author = { $regex: author.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $options: 'i' };
+
+    const result = await albumRepository.getAlbums(queries, { page, limit });
     if (!result) throw new CustomNotFound('Error al tarer los álbumes');
     return { status: 'success', result };
 };

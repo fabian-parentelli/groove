@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import BodyAlbumHtml from './BodyAlbumHtml.jsx';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { useAlertContext } from '@/context/AlertContext.jsx';
+import { saveMusicInfo } from '@/utils/saveMusicInfo.utils.js';
 import { getAlbumsApi } from '@/helpers/albums/getAlbums.api.js';
-import { saveMusicInfo } from '../../../../utils/saveMusicInfo.utils.js';
 
-const BodyAlbums = () => {
+const BodyAlbums = ({ limit = 100 }) => {
 
     const { setPlayList } = useRadioContext();
     const { showAlert, setChangeList } = useAlertContext();
@@ -16,7 +16,7 @@ const BodyAlbums = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getAlbumsApi({});
+            const response = await getAlbumsApi({ limit });
             if (response.status === 'success') setAlbums(response.result);
             else showAlert(response.error, 'error');
         }; fetchData();

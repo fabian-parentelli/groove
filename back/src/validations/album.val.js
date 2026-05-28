@@ -3,7 +3,7 @@ import { isValidObjectId } from './validations.val.js';
 
 const getAlbums = (query) => {
 
-    const queries = ['page', 'limit'];
+    const queries = ['page', 'limit', 'yid', 'author'];
 
     Object.keys(query).forEach(key => {
         if (!queries.includes(key)) {

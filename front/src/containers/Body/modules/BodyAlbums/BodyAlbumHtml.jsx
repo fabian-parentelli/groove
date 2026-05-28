@@ -1,5 +1,6 @@
 import { Icons } from 'fara-comp-react';
 import { useNavigate } from 'react-router-dom';
+import { images } from '@/utils/images.utils.js';
 
 const BodyAlbumHtml = ({ albums, handleList }) => {
 
@@ -11,7 +12,7 @@ const BodyAlbumHtml = ({ albums, handleList }) => {
                 <div key={doc._id} className="bodyAlbumDiv">
 
                     <div className="bodyAlbumImg" onClick={()=> navigate(`/album/${doc._id}`)}>
-                        <img src={doc.img} alt="img" />
+                        <img src={doc?.img || images.topic} alt="img" />
                     </div>
 
                     <section className='flex-line bodyAlbumSect'>

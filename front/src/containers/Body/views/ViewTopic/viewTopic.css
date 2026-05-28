@@ -1,0 +1,29 @@
+.viewTopic {
+    padding-bottom: 2rem;
+}
+
+.viewTopic .viewTopicSect {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.viewTopic .viewTopicSect img {
+    border-radius: 8px;
+}
+
+.viewTopic .viewTopicSect .viewTopicSectDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (max-width: 767px) {
+    
+    .viewTopic .viewTopicSect .viewTopicSectDiv {
+        width: 100%;
+        align-items: center;
+    }
+
+}

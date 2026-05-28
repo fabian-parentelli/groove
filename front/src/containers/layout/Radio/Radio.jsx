@@ -60,9 +60,9 @@ const Radio = () => {
     };
 
     const handlePlayPause = async () => {
-        if(playlist.length === 0) {
+        if (playlist.length === 0) {
             const response = await getMusic();
-            if(response) setPlayList(response.list.map(doc => doc.yid));
+            if (response) setPlayList(response.list.map(doc => doc.yid));
         };
         if (!playerRef.current) return;
         if (isPlaying) playerRef.current.pauseVideo();
@@ -96,7 +96,7 @@ const Radio = () => {
                     <p className='pgray'>{`${formatTime(currentTime)} / ${formatTime(duration)}`}</p>
                 </section>
 
-                <section className='radioData' onClick={() => navigate('/player')}>
+                <section className='radioData' onClick={info?._id ? () => navigate(`/song/${info._id}`) : () => null}>
                     <img src={info?.img || "/logo.png"} alt="img" />
                     <div>
                         <h4>{info?.author ? info?.title : info?.title.split('-')[1] || 'title'}</h4>

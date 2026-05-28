@@ -3,22 +3,23 @@ import { Spinner } from 'fara-comp-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { saveMusic } from "@/utils/db.utils.js";
+import { images } from '@/utils/images.utils.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { getMusicApi } from '@/helpers/music/getMusic.api.js';
 import { getCategoriesApi } from '@/helpers/categories/getCategories.api.js';
 
-const BodyTopics = () => {
+const BodyTopics = ({ query = {} }) => {
 
     const navigate = useNavigate();
-    const { showAlert, setChangeList } = useAlertContext();
     const { setPlayList } = useRadioContext();
+    const { showAlert, setChangeList } = useAlertContext();
 
     const [topcis, setTopics] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getCategoriesApi();
+            const response = await getCategoriesApi(query);
             if (response.status === 'success') setTopics(response.result);
             else showAlert(response.error, 'error');
         }; fetchData();
@@ -41,8 +42,8 @@ const BodyTopics = () => {
             <section>
                 {topcis && topcis.map(doc => (
                     <div key={doc._id} className="topic-card">
-                        <img src={doc.img} alt={doc?.topic || doc?.name}
-                            onClick={() => navigate(`/topic/${doc._id}`)}
+                        <img src={doc?.img || images.topic} alt={doc?.topic || doc?.name}
+                            onClick={() => navigate(`/topic/${doc.name}`)}
                         />
                         <button className="play-btn" onClick={() => handleClick(doc.name)}>▶</button>
                         <span className="topic-label">{doc.topic}</span>
