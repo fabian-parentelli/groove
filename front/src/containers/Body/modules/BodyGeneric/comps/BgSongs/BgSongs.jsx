@@ -15,7 +15,7 @@ const BgSongs = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await getMusicApi({ limit: 25, random: true });
+            const response = await getMusicApi({ limit: 24, random: true });
             if (response.status === 'success') setSongs(response.result);
             else showAlert(response.error, 'error');
         }; fetchData();
@@ -40,8 +40,8 @@ const BgSongs = () => {
     return (
         <div className="flex-col">
 
-            <section className='flex-line'>
-                <h1 className='cold'>Canciones</h1>
+            <section className='flex-line ml-1'>
+                <h1 className='cold ml-1'>Canciones</h1>
                 <div className='cardSongPlay' onClick={handlePlay}>
                     <Icons type='play' color='white' backCol='white' hover={true} />
                 </div>

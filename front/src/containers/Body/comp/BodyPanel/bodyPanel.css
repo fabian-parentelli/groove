@@ -1,6 +1,6 @@
 .bodyPanel {
-    max-width: 260px;
-    width: 100%;
+    width: 260px;
+    flex-shrink: 0;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -74,7 +74,7 @@
 }
 
 .bodyPanel .bodyPanelSect a p {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .bodyPanel h3 {

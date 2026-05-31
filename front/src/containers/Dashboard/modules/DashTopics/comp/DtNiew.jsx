@@ -33,14 +33,14 @@ const DtNiew = ({ topics, setTopics, topic, setTopic }) => {
 
             <label className="pgray flex flex-col-base">
                 Categoría
-                <input type="text" className="w-300" value={topic?.name || ''} placeholder="Nombre"
+                <input type="text" className="w-200" value={topic?.name || ''} placeholder="Nombre"
                     onChange={(e) => setTopic({ ...topic, name: e.target.value })}
                 />
             </label>
 
             <label className="pgray flex flex-col-base">
                 Tópico
-                <input type="text" className="w-250" value={topic?.topic || ''} placeholder="Topcio"
+                <input type="text" className="w-20" value={topic?.topic || ''} placeholder="Topcio"
                     onChange={(e) => setTopic({ ...topic, topic: e.target.value })}
                 />
             </label>

@@ -42,3 +42,14 @@
 .vewSongAlbumImg:hover img {
     transform: translateY(-3px);
 }
+
+@media (max-width: 767px) {
+
+    .vewSongAlbum {
+        justify-content: center;
+    }
+
+    .vewSongAlbumCard {
+        text-align: center;
+    }
+}

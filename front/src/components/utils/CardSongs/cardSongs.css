@@ -1,12 +1,13 @@
 .cardSongs {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     padding-bottom: 6rem;
 }
 
 .cardSong {
-    width: 160px;
+    width: 155px;
     border-radius: 8px;
     overflow: hidden;
     background: #1e1e1e;

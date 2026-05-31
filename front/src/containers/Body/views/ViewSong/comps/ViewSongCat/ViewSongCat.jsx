@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { getCategoriesApi } from '@/helpers/categories/getCategories.api.js';
 
-const ViewSongCat = ({ song }) => {
+const ViewSongCat = ({ song, view }) => {
 
     const navigate = useNavigate();
     const { showAlert } = useAlertContext();
-    
+
     const [topics, setTopics] = useState(null);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const ViewSongCat = ({ song }) => {
 
     if (!topics) return <Spinner color='#4f46e5' />
     return (
-        <div className="viewSongCat">
+        <div className="viewSongCat" style={{ flexDirection: view }}>
             {topics.map(topic => (
                 <div key={topic._id} className="viewSongCatItem">
                     <div className="viewSongCatImg" onClick={() => navigate(`/topic/${topic.name}`)}>

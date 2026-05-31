@@ -18,7 +18,7 @@ const ViewSong = () => {
     const navigate = useNavigate();
 
     const { setPlayList } = useRadioContext();
-    const { showAlert, setChangeList } = useAlertContext();
+    const { showAlert, setChangeList, viewPlayList } = useAlertContext();
 
     const [song, setSong] = useState(null);
     const [songs, setSongs] = useState([]);
@@ -75,7 +75,7 @@ const ViewSong = () => {
                     <img src={song?.img || '/list.jpg'} alt="img" />
                 </div>
                 <div className='viewAlbumDiv'>
-                    <h1>{song.title}</h1>
+                    <h2 className='p-elipsis mw-400'>{song.title}</h2>
                     <div className='flex-line gap-05'>
                         <div className='viewAlbumImgSmall'>
                             <img src={song?.img || '/list.jpg'} alt="img" />
@@ -108,17 +108,28 @@ const ViewSong = () => {
                     </div>
                 </div>
 
-                <br />
-                <ViewSongCat song={song} />
+                {!viewPlayList &&
+                    <>
+                        <br />
+                        <ViewSongCat song={song} view='column' />
+                    </>
+                }
             </section>
 
+            {viewPlayList &&
+                <>
+                    <h3 className='cold'>Topics</h3>
+                    <ViewSongCat song={song} view='row' />
+                </>
+            }
+
             <div>
-                <h3 className='cold'>Álbumes</h3>
+                <h3 className='cold viewSongh3'>Álbumes</h3>
                 <VewSongAlbum song={song} />
             </div>
 
             <div>
-                <h3 className='cold'>Canciones del artista</h3>
+                <h3 className='cold viewSongh3'>Canciones del artista</h3>
                 <ListSongs songs={songs} handlePlay={handlePlay} />
             </div>
 

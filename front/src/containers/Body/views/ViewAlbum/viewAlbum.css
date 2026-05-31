@@ -1,5 +1,6 @@
 .viewAlbum {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 
@@ -48,6 +49,10 @@
 }
 
 @media (max-width: 767px) {
+
+    .viewAlbum {
+        text-align: center;
+    }
 
     .viewAlbumCont {
         padding-bottom: 6rem;

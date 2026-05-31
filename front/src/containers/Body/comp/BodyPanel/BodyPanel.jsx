@@ -25,7 +25,7 @@ const BodyPanel = ({ mobileOpen, onClose }) => {
                     <Link key={doc.icon} to={`/${doc.to}`}
                         style={{ color: pathname.slice(1) == doc.to ? '#4f46e5' : 'white' }}
                     >
-                        <Icons type={doc.icon} size='25px'
+                        <Icons type={doc.icon} size='22px'
                             color={pathname.slice(1) == doc.to ? '#4f46e5' : 'white'}
                         />
                         <p>{doc.name}</p>
@@ -40,7 +40,7 @@ const BodyPanel = ({ mobileOpen, onClose }) => {
                     <Link key={doc.icon} to={`/${doc.to}`}
                         style={{ color: pathname.slice(1) == doc.to ? '#4f46e5' : 'gray' }}
                     >
-                        <Icons type={doc.icon} size='20px'
+                        <Icons type={doc.icon} size='19px'
                             color={pathname.slice(1) == doc.to ? '#4f46e5' : 'gray'}
                         />
                         <p style={{ fontSize: '14px' }}>{doc.name}</p>
