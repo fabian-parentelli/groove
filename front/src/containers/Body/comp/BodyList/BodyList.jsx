@@ -1,10 +1,11 @@
 import './bodyList.css';
-import { Icons } from 'fara-comp-react';
 import { useEffect, useState } from 'react';
 import { getMusic } from '@/utils/db.utils.js';
+import { Icons, Popup } from 'fara-comp-react';
 import { formatTime } from '@/utils/time.utils.js';
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from '@/context/RadioContext.jsx';
+import PopUpConf from '@/components/modals/PopUpConf/PopUpConf.jsx';
 
 const BodyList = () => {
 
@@ -38,10 +39,10 @@ const BodyList = () => {
                 <h3>{music?.is === 'album' ? music?.name : music?.is === 'topics' ? 'Género' : 'Playlist Groove'}</h3>
                 <button className='bodyListClose' onClick={() => setViewPlayList(false)}>✕</button>
             </div>
-            
-            {music?.is === 'album' 
+
+            {music?.is === 'album'
                 ? <p className='bodyListAuthor'>{music?.author}</p>
-                : <p className='bodyListAuthor'>{music?.name}</p>          
+                : <p className='bodyListAuthor'>{music?.name}</p>
             }
 
             <section className='bodyListSect'>
@@ -69,7 +70,11 @@ const BodyList = () => {
                         <div className='bodyListTime'>
                             <span className='bodyListTimeText'>{formatTime(doc?.duration)}</span>
                             <span className='bodyListTimeIcon'>
-                                <Icons type='dotver' color='white' size='25px' onClick={() => console.log('dotver clicked')} />
+                                <Popup icon='dotver'
+                                    styles={{ position: music.list.length - ind <= 3 ? 'lt' : 'l', width: '230px' }}
+                                >
+                                    <PopUpConf song={doc} />
+                                </Popup>
                             </span>
                         </div>
                     </div>

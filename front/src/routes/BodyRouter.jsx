@@ -7,6 +7,7 @@ import ViewAlbum from '../containers/Body/views/ViewAlbum/ViewAlbum.jsx';
 import BodyTopics from '../containers/Body/modules/BodyTopics/BodyTopics.jsx';
 import ViewTopic from '../containers/Body/views/ViewTopic/ViewTopic.jsx';
 import ViewSong from '../containers/Body/views/ViewSong/ViewSong.jsx';
+import BodyPlayList from '../containers/Body/modules/BodyPlayList/BodyPlayList.jsx';
 
 const BodyRouter = () => {
 
@@ -20,6 +21,7 @@ const BodyRouter = () => {
             <Route path='album/:id' element={<ViewAlbum />} />
             <Route path='topic/:topname' element={<ViewTopic />} />
             <Route path='song/:id' element={<ViewSong />} />
+            <Route path='playlist' element={<BodyPlayList />} />
         </Route>
     );
 };

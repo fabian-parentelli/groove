@@ -12,7 +12,7 @@ const Login = ({ values, setValues, setParams }) => {
 
             <Password values={values} setValues={setValues} />
 
-            <button className="btn btnA">Iniciar sesión</button>
+            <button className="btn btnF">Iniciar sesión</button>
             <br />
 
             <p className="userFirst"  onClick={()=> setParams({path: 'register'})} >Regístrate</p>

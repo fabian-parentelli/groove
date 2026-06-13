@@ -2,11 +2,12 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    
+    z-index: 10;
+
     width: 100%;
     min-height: 10vh;
     background-color: var(--cola);
-    
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,14 +15,14 @@
 }
 
 .radioProgress {
-    position: fixed; 
-    bottom: 10vh; 
+    position: fixed;
+    bottom: 10vh;
     left: 0;
     width: 100%;
     height: 4px;
     background: #333;
     cursor: pointer;
-    z-index: 10;
+    z-index: 5;
 }
 
 .radioProgressFill {
@@ -71,8 +72,8 @@
 }
 
 .radio .radioData img {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
 }
 
@@ -80,11 +81,14 @@
     position: relative;
 }
 
+.radio .radioPlayIcon {
+    display: none;
+}
 
 @media (max-width: 767px) {
 
-    .radio {
-        justify-content: center;
+    .radio .radioPlayIcon {
+        display: flex;
     }
 
     .radio .radioBtns p {

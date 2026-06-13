@@ -9,7 +9,7 @@
 .bar-mini {
   flex: 1;
   height: 100%;
-  background: linear-gradient(180deg, #2c3e50, #1a2735); /* color principal #2c3e50 */
+  background: linear-gradient(180deg, #4f46e5, #1B263B); /* color principal #2c3e50 */
   border-radius: 1px;
   transform-origin: bottom;
   transform: scaleY(0.25);

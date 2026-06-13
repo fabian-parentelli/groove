@@ -19,7 +19,7 @@ const Register = ({ values, setValues, setParams }) => {
             
             <Password values={values} setValues={setValues} />
 
-            <button className="btn btnA">Registrarte</button>
+            <button className="btn btnF">Registrarte</button>
 
             <p className="userFirst" onClick={() => setParams({ path: 'login' })} >Iniciar sesión</p>
             <p className="userSecond" onClick={() => setParams({ path: 'password' })} >Recuperar password</p>

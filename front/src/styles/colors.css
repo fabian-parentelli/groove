@@ -17,3 +17,11 @@
 .cold {
   color: var(--cold);
 }
+
+.colf {
+  color: var(--colf);
+}
+
+.bgcold {
+  background-color: var(--cold);
+}

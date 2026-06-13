@@ -52,6 +52,12 @@
     align-items: center;
     padding: 6px 0;
     border-bottom: 1px solid var(--colc);
+    position: relative;
+    z-index: 1;
+}
+
+.bodyList .bodyListSect .bodyListDiv:hover {
+    z-index: 10;
 }
 
 .bodyList .bodyListSect .bodyListDiv .bodyListImg {
@@ -140,6 +146,7 @@
     .bodyListClose {
         display: block;
     }
+
     .bodyList {
         position: fixed;
         top: 0;

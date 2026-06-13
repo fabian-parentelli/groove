@@ -1,0 +1,13 @@
+.addToPlaylist h3 {
+    text-align: center;
+    border-bottom: 1px solid var(--colf);
+    padding-bottom: 12px;
+}
+
+.addToPlaylist .addToPlaylistNot {
+    margin: 1rem 0;
+}
+
+.addToPlaylist form input {
+    height: 40px;
+}

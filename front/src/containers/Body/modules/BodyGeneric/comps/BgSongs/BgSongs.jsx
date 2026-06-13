@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { saveMusic } from "@/utils/db.utils.js";
 import { Spinner, Icons } from 'fara-comp-react';
+import { saveMusic, getMusic } from "@/utils/db.utils.js";
 import { useAlertContext } from '@/context/AlertContext.jsx';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { getMusicApi } from '@/helpers/music/getMusic.api.js';
@@ -16,8 +16,14 @@ const BgSongs = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getMusicApi({ limit: 24, random: true });
-            if (response.status === 'success') setSongs(response.result);
-            else showAlert(response.error, 'error');
+            if (response.status === 'success') {
+                setSongs(response.result);
+                const music = await getMusic();
+                if(!music) {
+                    await saveMusic({ is: 'list', name: 'Lista de canciones', list: response.result });
+                    setChangeList(p => p + 1);
+                };
+            } else showAlert(response.error, 'error');
         }; fetchData();
     }, []);
 

@@ -1,10 +1,12 @@
 import './radio.css';
-import { Icons } from "fara-comp-react";
 import { useState, useEffect } from 'react';
 import { getMusic } from '@/utils/db.utils.js';
 import { useNavigate } from 'react-router-dom';
+import { Icons, Popup } from "fara-comp-react";
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { useAlertContext } from '@/context/AlertContext.jsx';
+import Equalizer from '../../../components/Tools/Equalizer/Equalizer';
+import PopUpConf from '../../../components/modals/PopUpConf/PopUpConf';
 
 const Radio = () => {
 
@@ -81,6 +83,10 @@ const Radio = () => {
 
                 <div id='radioTv'></div>
 
+                <div className='radioPlayIcon' onClick={() => navigate('/playlist')}>
+                    <Icons type='playlist' hover={true} color='#4f46e5' />
+                </div>
+
                 <section className='radioBtns'>
                     <div className='radioIcon' onClick={handlePrev}>
                         <Icons color='white' type='playback' />
@@ -96,16 +102,29 @@ const Radio = () => {
                     <p className='pgray'>{`${formatTime(currentTime)} / ${formatTime(duration)}`}</p>
                 </section>
 
-                <section className='radioData' onClick={info?._id ? () => navigate(`/song/${info._id}`) : () => null}>
-                    <img src={info?.img || "/logo.png"} alt="img" />
-                    <div>
-                        <h4>{info?.author ? info?.title : info?.title.split('-')[1] || 'title'}</h4>
-                        <p className='pgray'>{info?.author || info?.title.split('-')[0]}</p>
-                    </div>
-                    <div className='radioIcon'>
-                        <Icons type='dotver' color='white' size='20px' />
-                    </div>
-                </section>
+                <div className='flex-line'>
+                    <section className='radioData' onClick={info?._id ? () => navigate(`/song/${info._id}`) : () => null}>
+                        <img src={info?.img || "/logo.png"} alt="img" />
+                        <div>
+                            <h4 className='colf'>{info?.author ? info?.title : info?.title.split('-')[1] || 'Groove'}</h4>
+                            <p className='pgray cold'>{info?.author || info?.title.split('-')[0] || 'Música sin publicidad'}</p>
+                        </div>
+                    </section>
+
+                    {info &&
+                        <div className='radioIcon'>
+                            <Popup icon='dotver' styles={{ position: 't', width: '230px' }}>
+                                <PopUpConf song={info} />
+                            </Popup>
+                        </div>
+                    }
+
+                    {isPlaying &&
+                        <div className='radioEqualizer cur-pointer' onClick={() => navigate('/playlist')}>
+                            <Equalizer />
+                        </div>
+                    }
+                </div>
 
                 <section className='radioInputs'>
 
