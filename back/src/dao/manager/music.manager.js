@@ -22,6 +22,10 @@ export default class Music {
         ]);
     };
 
+    getOne = async (query, get) => {
+        return await musicModel.findOne(query, get).lean();
+    };
+
     getById = async (id) => {
         return await musicModel.findById(id).lean();
     };

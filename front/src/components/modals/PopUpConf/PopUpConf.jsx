@@ -25,8 +25,8 @@ const PopUpConf = ({ song }) => {
             {!user.logged
                 ? <p>Usuario no logeado</p>
                 : <section className='popUpConfList'>
-                    {list.map(doc => (
-                        <div onClick={() => setModal({ open: true, data: song, type: doc.type })}>
+                    {list.map((doc, ind) => (
+                        <div key={ind} onClick={() => setModal({ open: true, data: song, type: doc.type })}>
                             <Icons type={doc.icon} size='20px' color='white' />
                             <p>{doc.name}</p>
                         </div>

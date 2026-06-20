@@ -1,9 +1,8 @@
 import { Snackbar, Loader, Modal } from 'fara-comp-react'
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ModSettings from '../components/modals/ModSettings/ModSettings';
-
-const AlertContext = createContext();
-export const useAlertContext = () => useContext(AlertContext);
+import { AlertContext } from './alertContext.core.js';
+export { useAlertContext } from './alertContext.core.js';
 
 const AlertProvider = ({ children }) => {
 

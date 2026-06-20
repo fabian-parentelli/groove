@@ -1,4 +1,4 @@
-import { useAlertContext } from "./AlertContext.jsx";
+import { useAlertContext } from "./alertContext.core.js";
 import { createContext, useContext, useState } from "react";
 import { logoutApi } from "../helpers/session/logout.api.js";
 // import { putUserApi } from "../helpers/users/putUser.api.js";

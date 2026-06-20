@@ -11,9 +11,14 @@ export default class MusicRepository {
         const result = await musicManager.getAll(query);
         return result;
     };
-    
+
     getSearch = async (topics) => {
         const result = await musicManager.getSearch(topics);
+        return result;
+    };
+
+    getOne = async (query = {}, get = {}) => {
+        const result = await musicManager.getOne(query, get);
         return result;
     };
 

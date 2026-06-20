@@ -1,7 +1,10 @@
-.addToPlaylist h3 {
+.addToPlaylist .addToPlaylistTitle {
     text-align: center;
     border-bottom: 1px solid var(--colf);
     padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .addToPlaylist .addToPlaylistNot {
@@ -10,4 +13,30 @@
 
 .addToPlaylist form input {
     height: 40px;
+}
+
+.addToPlaylistDiv {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1rem 6px;
+    background-color: #1B263B;
+    cursor: pointer;
+}
+
+.addToPlaylistDiv:hover {
+    background-color: #162031;
+}
+
+.addToPlaylistImg {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.addToPlaylistImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

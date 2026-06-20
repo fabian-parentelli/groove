@@ -66,13 +66,13 @@ const items = [
     { icon: 'direction', name: 'Explorar', to: 'explore' },
     { icon: 'album', name: 'Álbumes', to: 'albums' },
     { icon: 'filemusic', name: 'Géneros', to: 'topics' },
-    { icon: 'warning', name: 'Información', to: 'help' },
+    { icon: 'warning', name: 'Información', to: 'info' },
     { icon: 'youtube', name: 'Importar playlist', to: 'newplaylist' },
     { icon: 'email', name: 'Contacto', to: 'contact' },
 ];
 
 const yourMusic = [
-    { icon: 'playlist', name: 'Canciones', to: 'yoursongs' },
+    { icon: 'playlist', name: 'Playlist', to: 'yoursongs' },
     { icon: 'square', name: 'Álbumes', to: 'youralbums' },
     { icon: 'user', name: 'Artistas', to: 'yourartist' },
     { icon: 'book', name: 'Historial', to: 'yourhistory' },
