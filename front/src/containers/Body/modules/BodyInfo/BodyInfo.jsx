@@ -10,6 +10,17 @@ const BodyInfo = () => {
                 <p>Mantente al dia con los avances de Groove</p>
             </div>
 
+            <span className="bodyInfoDate">26 de junio de 2026</span>
+
+            <div className="bodyInfoSection">
+                <h3>Evolucion</h3>
+                <ul className="bodyInfoList">
+                    <li>Nuevo menú contextual en playlists: podés escuchar, editar (nombre, imagen y quitar canciones), eliminar y reproducir de forma aleatoria.</li>
+                    <li>Reproducción aleatoria: escuchá tus playlists en orden random con un solo clic.</li>
+                    <li>Vista por artista: ahora podés navegar a la página de un artista, ver su imagen, todos sus álbumes y canciones en un solo lugar.</li>
+                </ul>
+            </div>
+
             <span className="bodyInfoDate">19 de junio de 2026</span>
 
             <div className="bodyInfoSection">
@@ -27,13 +38,13 @@ const BodyInfo = () => {
             <div className="bodyInfoFuture">
                 <h3>A futuro</h3>
                 <ul className="bodyInfoFutureList">
-                    <li>Eliminar canciones de tu playlist.</li>
-                    <li>Reproduccion aleatoria de canciones.</li>
+                    <li>Me gusta en álbumes, canciones y artistas para marcar tus favoritos.</li>
                     <li>Formulario de contacto. Por ahora escribinos a{' '}
                         <a href="mailto:fabianparentelli007code@gmail.com" className='cold'>
                             fabianparentelli007code@gmail.com
                         </a>
                     </li>
+                    <li>Sección Explorar: las últimas novedades en álbumes y sencillos.</li>
                 </ul>
             </div>
 

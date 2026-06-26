@@ -1,3 +1,4 @@
+import { putManyForAlbum } from './music.service.js';
 import { validation } from "../validations/album.val.js";
 import { CustomNotFound } from "../utils/custom-exceptions.utils.js";
 import { albumRepository } from '../repositories/index.repositories.js';
@@ -25,8 +26,23 @@ const putAlbum = async (body) => {
     body = validation.putAlbum(body);
     const album = await albumRepository.getById(body._id, false);
     if (!album) throw new CustomNotFound('Error al traer el álbum');
+
+    const nameChanged = body.name !== album.name;
+    const authorChanged = body.author !== album.author;
+
     const result = await albumRepository.update({ ...album, ...body });
     if (!result) throw new CustomNotFound('Error al editar el álbum');
+
+    if (nameChanged || authorChanged) {
+        setImmediate(async () => {
+            await putManyForAlbum({
+                yids: body.list || album.list,
+                album: body.name,
+                author: body.author
+            });
+        });
+    }
+
     return { status: 'success', result };
 };
 

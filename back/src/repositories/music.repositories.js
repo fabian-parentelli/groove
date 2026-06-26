@@ -45,4 +45,9 @@ export default class MusicRepository {
         return result;
     };
 
+    putMany = async (yids, update) => {
+        const result = await musicManager.putMany(yids, update);
+        return result;
+    };
+
 };

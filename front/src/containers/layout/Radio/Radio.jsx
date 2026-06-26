@@ -1,12 +1,12 @@
 import './radio.css';
 import { useState, useEffect } from 'react';
-import { getMusic } from '@/utils/db.utils.js';
 import { useNavigate } from 'react-router-dom';
 import { Icons, Popup } from "fara-comp-react";
+import { getMusic, saveMusic } from '@/utils/db.utils.js';
 import { useRadioContext } from '@/context/RadioContext.jsx';
 import { useAlertContext } from '@/context/AlertContext.jsx';
-import Equalizer from '../../../components/Tools/Equalizer/Equalizer';
-import PopUpConf from '../../../components/modals/PopUpConf/PopUpConf';
+import Equalizer from '@/components/Tools/Equalizer/Equalizer.jsx';
+import PopUpConf from '@/components/modals/PopUpConf/PopUpConf.jsx';
 
 const Radio = () => {
 
@@ -17,7 +17,7 @@ const Radio = () => {
     const [volume, setVolumeState] = useState(100);
     const [currentTime, setCurrentTime] = useState(0);
 
-    const { viewPlayList, setViewPlayList } = useAlertContext();
+    const { viewPlayList, setViewPlayList, setChangeList } = useAlertContext();
     const { isPlaying, playerRef, videoId, playlist, setPlayList } = useRadioContext();
 
     const handleNext = () => playerRef.current?.nextVideo();
@@ -69,6 +69,19 @@ const Radio = () => {
         if (!playerRef.current) return;
         if (isPlaying) playerRef.current.pauseVideo();
         else playerRef.current.playVideo();
+    };
+
+    const handleRandom = async () => {
+        const response = await getMusic();
+        if (!response?.list || response.list.length === 0) return;
+        const shuffled = [...response.list];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        await saveMusic({...response, list: shuffled});
+        setPlayList(shuffled.map(doc => doc.yid));
+        setChangeList(p => p + 1);
     };
 
     const progress = duration > 0 ? `${(currentTime / duration) * 100}%` : '0%';
@@ -150,8 +163,9 @@ const Radio = () => {
                         <Icons color='white' type='replace' size='25px' />
                     </div>
 
+
                     <div className='radioIcon'>
-                        <Icons color='white' type='exchange' size='25px' />
+                        <Icons color='white' type='exchange' size='25px' onClick={handleRandom} />
                     </div>
 
                     <div className='radioIcon'>

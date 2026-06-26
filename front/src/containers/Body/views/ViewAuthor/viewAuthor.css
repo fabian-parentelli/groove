@@ -1,0 +1,54 @@
+.viewAuthorCont {
+    padding-bottom: 6rem;
+}
+
+.viewAlbum {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.viewAlbum .viewAlbumImg {
+    width: 260px;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.viewAlbum .viewAlbumImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.viewAlbum .viewAlbumDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+@media (max-width: 767px) {
+    .viewAuthorCont {
+        padding-bottom: 6rem;
+    }
+
+    .viewAuthorCont h2 {
+        text-align: center;
+    }
+
+    .viewAlbum {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .viewAlbum .viewAlbumDiv {
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .viewAlbumBtns button:nth-child(2),
+    .viewAlbumBtns button:nth-child(3) {
+        display: none;
+    }
+}

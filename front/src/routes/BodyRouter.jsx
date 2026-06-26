@@ -11,6 +11,7 @@ import ViewSong from '../containers/Body/views/ViewSong/ViewSong.jsx';
 import BodyPlayList from '../containers/Body/modules/BodyPlayList/BodyPlayList.jsx';
 import YourSongs from '../containers/Body/profilmod/YourSongs/YourSongs.jsx';
 import BodyInfo from '../containers/Body/modules/BodyInfo/BodyInfo.jsx';
+import ViewAuthor from '../containers/Body/views/ViewAuthor/ViewAuthor.jsx';
 
 const BodyRouter = () => {
 
@@ -28,6 +29,7 @@ const BodyRouter = () => {
             <Route path='topic/:topname' element={<ViewTopic />} />
             <Route path='song/:id' element={<ViewSong />} />
             <Route path='playlist' element={<BodyPlayList />} />
+            <Route path='author/:name' element={<ViewAuthor />} />
 
             {user.logged &&
                 <>

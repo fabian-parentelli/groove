@@ -61,4 +61,40 @@ const putAddSong = async (req, res) => {
     };
 };
 
-export { postList, getListsAll, getLists, putLists, putAddSong };
+const putDelSong = async (req, res) => {
+    const user = req.user;
+    try {
+        const result = await listService.putDelSong({ ...req.body }, user);
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl, user: user._id || null });
+        if (error instanceof CustomNotFound) return res.status(401).send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+const deleteList = async (req, res) => {
+    const user = req.user;
+    try {
+        const result = await listService.deleteList({ ...req.body }, user);
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl, user: user._id || null });
+        if (error instanceof CustomNotFound) return res.status(401).send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+const putImg = async (req, res) => {
+    const user = req.user;
+    try {
+        const result = await listService.putImg(req, user);
+        if (result) return res.sendSuccess(result);
+    } catch (error) {
+        logger({ error, route: req.originalUrl, user: user._id || null });
+        if (error instanceof CustomNotFound) return res.status(401).send(error.message);
+        res.sendServerError(error.message);
+    };
+};
+
+export { postList, getListsAll, getLists, putLists, putAddSong, putDelSong, deleteList, putImg };

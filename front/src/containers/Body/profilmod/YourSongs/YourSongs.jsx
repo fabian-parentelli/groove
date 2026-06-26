@@ -28,11 +28,17 @@ const YourSongs = () => {
         }; fetchData();
     }, []);
 
-    const handlePlay = async (list) => {
+    const handlePlay = async (list, random = false) => {
         if (list.list.length == 0) return;
         const response = await getMusicApi({ yids: list.list, limit: list.list.length });
         if (response.status === 'success') {
             const music = response.result.docs;
+            if (random) {
+                for (let i = music.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [music[i], music[j]] = [music[j], music[i]];
+                }
+            }
             await saveMusic({ name: list.name, is: 'list', list: music });
             setChangeList(pre => (pre + 1));
             setPlayList(music.map(doc => doc.yid));

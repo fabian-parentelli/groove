@@ -27,4 +27,9 @@ export default class ListRepository {
         return result;
     };
 
+    delete = async (id) => {
+        const result = await listManager.delete(id);
+        return result;
+    };
+
 };

@@ -22,4 +22,8 @@ export default class Musci {
         return await listModel.findByIdAndUpdate(list._id, list, { returnDocument: 'after' }).lean();
     };
 
+    delete = async (id) => {
+        return await listModel.findByIdAndDelete(id).lean();
+    };
+
 };

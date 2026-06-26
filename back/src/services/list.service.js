@@ -2,6 +2,7 @@ import { listRepository, musicRepository } from "../repositories/index.repositor
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
 import *  as listValidate from '../utils/validates/list.validat.js';
 import { validation } from "../validations/list.val.js";
+import { deleteImg, getPublicId } from '../config/cloudinary.config.js';
 
 const postList = async (body, user) => {
     const name = validation.postList(body);
@@ -55,4 +56,58 @@ const putAddSong = async (body, user) => {
     return { status: 'success', result };
 };
 
-export { postList, getListsAll, getLists, putLists, putAddSong };
+const putDelSong = async (body, user) => {
+    const { _id, yid } = validation.putDelSong(body);
+    const list = await listRepository.getById(_id);
+    if (!list) throw new CustomNotFound('Playlist no encontrada', 'info');
+    if (list.uid !== user._id) throw new CustomNotFound('No autorizado', 'info');
+
+    list.list = list.list.filter(id => id !== yid);
+
+    const result = await listRepository.update(list);
+    if (!result) throw new CustomNotFound('Error al eliminar la canción', 'info');
+    return { status: 'success', result };
+};
+
+const deleteList = async (body, user) => {
+    const { _id } = validation.deleteList(body);
+    const list = await listRepository.getById(_id);
+    if (!list) throw new CustomNotFound('Playlist no encontrada', 'info');
+    if (list.uid !== user._id) throw new CustomNotFound('No autorizado', 'info');
+
+    if (list.img) {
+        try {
+            const publicId = getPublicId(list.img);
+            if (publicId) await deleteImg(publicId);
+        } catch (error) {}
+    }
+
+    const result = await listRepository.delete(_id);
+    if (!result) throw new CustomNotFound('Error al eliminar la playlist', 'info');
+    return { status: 'success', result };
+};
+
+const putImg = async (req, user) => {
+
+    const body = validation.putImg(req.body);
+    const list = await listRepository.getById(body._id);
+    if (!list) throw new CustomNotFound('Playlist no encontrada', 'info');
+    if (list.uid !== user._id) throw new CustomNotFound('No autorizado', 'info');
+
+    if (body.name) list.name = body.name;
+    if (req.cloudinaryUrl) {
+        if (list.img) {
+            try {
+                const publicId = getPublicId(list.img);
+                await deleteImg(publicId);
+            } catch (error) {}
+        }
+        list.img = req.cloudinaryUrl;
+    }
+
+    const result = await listRepository.update(list);
+    if (!result) throw new CustomNotFound('Error al actualizar la playlist', 'info');
+    return { status: 'success', result };
+};
+
+export { postList, getListsAll, getLists, putLists, putAddSong, putDelSong, deleteList, putImg };

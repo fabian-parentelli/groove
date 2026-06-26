@@ -1,0 +1,55 @@
+.deletePlaylist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deletePlaylist h3 {
+    text-align: center;
+    border-bottom: 1px solid var(--colf);
+    padding-bottom: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.deletePlaylist .switch {
+    justify-content: center;
+}
+
+.deletePlaylistBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.deletePlaylistBtn .btnClose {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    background: transparent;
+    color: var(--cold);
+}
+
+.deletePlaylistBtn .btnClose:hover {
+    color: var(--colb);
+}
+
+.deletePlaylistBtn .btnDelete {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #e74c3c;
+    color: white;
+}
+
+.deletePlaylistBtn .btnDelete:hover {
+    background: #c0392b;
+}
+
+.deletePlaylistBtn .btnDelete:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

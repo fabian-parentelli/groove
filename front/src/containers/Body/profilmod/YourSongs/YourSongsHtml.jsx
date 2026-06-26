@@ -1,5 +1,6 @@
 import './yourSongsHtml.css';
-import { Icons } from 'fara-comp-react';
+import { Icons, Popup } from 'fara-comp-react';
+import PopUpConf from '../../../../components/modals/PopUpConf/PopUpConf';
 
 const YourSongsHtml = ({ lists, handlePlay, handleView }) => {
 
@@ -20,10 +21,18 @@ const YourSongsHtml = ({ lists, handlePlay, handleView }) => {
                         </div>
                     </div>
 
-                    <div className="yourSongsHtmlInfo">
-                        <h6 className='capitalize'>{doc.name}</h6>
-                        <p>{doc.list?.length || 0} canciones</p>
-                    </div>
+                    <section className='flex-between yourSongsHtmlSect'>
+                        <div className="yourSongsHtmlInfo">
+                            <h6 className='capitalize'>{doc.name}</h6>
+                            <p>{doc.list?.length || 0} canciones</p>
+                        </div>
+
+                        <span className="yourSongsHtmlPopupWrap" onClick={(e) => e.stopPropagation()}>
+                            <Popup icon='dotver' styles={{ color: 'var(--colf)', width: '200px', position: 'r' }}>
+                                <PopUpConf type='playlist' song={doc} handlePlay={handlePlay} />
+                            </Popup>
+                        </span>
+                    </section>
                 </div>
             ))}
         </div>

@@ -42,4 +42,9 @@ export default class Music {
         return await musicModel.findByIdAndUpdate(song._id, song, { lean: true, new: true });
     };
 
+    putMany = async (yids, update) => {
+        const ops = yids.map(yid => ({ updateOne: { filter: { yid }, update: { $set: update } } }));
+        return await musicModel.bulkWrite(ops);
+    };
+
 };

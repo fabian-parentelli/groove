@@ -112,4 +112,14 @@ const putMusic = async (body, user) => {
     return { status: 'success', result };
 };
 
-export { postMusic, getSearch, getMusic, putMusic };
+const putManyForAlbum = async (data) => {
+    const { yids, album, author } = data;
+    if (!yids?.length) return;
+    const update = {};
+    if (album) update.album = album;
+    if (author) update.author = author;
+    if (Object.keys(update).length === 0) return;
+    await musicRepository.putMany(yids, update);
+};
+
+export { postMusic, getSearch, getMusic, putMusic, putManyForAlbum };
