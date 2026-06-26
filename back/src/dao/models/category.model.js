@@ -5,7 +5,9 @@ const categoryCollection = 'categories';
 
 const categorySchema = new mongoose.Schema({
     name: { type: String },
-    amount: { type: Number },
+    topic: { type: String },
+    amount: { type: Number, default: 0 },
+    img: { type: String },
     active: { type: Boolean, default: true }
 });
 

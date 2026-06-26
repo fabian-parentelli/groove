@@ -2,8 +2,15 @@
     background-color: var(--cola);
     color: var(--colb);
     transition: .3s ease-in-out;
+    height: 40px;
 }
 
-.btnA:hover {
-    filter: brightness(1.1);
+.btnF {
+    background-color: var(--colf);
+    color: var(--colb);
+    transition: .3s ease-in-out;
+}
+
+.btn:hover {
+    opacity: 0.8;
 }

@@ -1,0 +1,15 @@
+.footerSocial {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footerSocialIcon {
+    color: var(--colorJ);
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.footerSocialIcon:hover {
+    color: var(--colorD);
+}

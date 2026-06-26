@@ -1,0 +1,79 @@
+.viewAlbum {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Img */
+
+.viewAlbum .viewAlbumImg {
+    width: 260px;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.viewAlbum .viewAlbumImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Container div */
+
+.viewAlbum .viewAlbumDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.viewAlbum .viewAlbumDiv .viewAlbumImgSmall {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.viewAlbum .viewAlbumDiv .viewAlbumImgSmall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.viewAlbumAuthor {
+    cursor: pointer;
+}
+
+.viewAlbumAuthor:hover {
+    color: var(--colf);
+}
+
+@media (max-width: 767px) {
+
+    .viewAlbum {
+        text-align: center;
+    }
+
+    .viewAlbumCont {
+        padding-bottom: 6rem;
+    }
+
+    .viewAlbumCont h2 {
+        text-align: center;
+    }
+
+    .viewAlbum {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .viewAlbum .viewAlbumDiv {
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .viewAlbumBtns button:nth-child(2), .viewAlbumBtns button:nth-child(3) {
+        display: none;
+    }
+
+}

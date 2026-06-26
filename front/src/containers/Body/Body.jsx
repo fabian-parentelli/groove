@@ -1,24 +1,40 @@
 import './body.css';
-import { useEffect, useState } from 'react';
-import BodyList from './BodyList/BodyList.jsx';
-import BodyCategories from './BodyCategories/bodyCategories.jsx';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import BodyNav from './comp/BodyNav/BodyNav.jsx';
+import BodyList from './comp/BodyList/BodyList.jsx';
+import BodyPanel from './comp/BodyPanel/BodyPanel.jsx';
+import { useAlertContext } from '@/context/AlertContext.jsx';
 
 const Body = () => {
 
-    const [list, setList] = useState(null);
+    const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
+    const { viewPlayList, setViewPlayList } = useAlertContext();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            
-        }; fetchData();
-    }, []);
+    const handleOverlayClick = () => {
+        setMobilePanelOpen(false);
+        if (viewPlayList) setViewPlayList(false);
+    };
 
     return (
-        <div className="body">
-            <BodyCategories />
-            <BodyList />
+        <div className="body flex">
+            {(mobilePanelOpen || viewPlayList) && <div className="bodyOverlay" onClick={handleOverlayClick} />}
+            <BodyPanel mobileOpen={mobilePanelOpen} onClose={() => setMobilePanelOpen(false)} />
+            <section className='flex w-100per flex-col-base bodySect'>
+                <BodyNav onMenuToggle={() => setMobilePanelOpen(!mobilePanelOpen)} />
+
+                <div className='flex h-100per' >
+
+                    <div className='bodyModules'>
+                        <Outlet />
+                    </div>
+
+                    <BodyList />
+                </div>
+            </section>
         </div>
     );
+
 };
 
 export default Body;

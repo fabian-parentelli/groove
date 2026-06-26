@@ -65,12 +65,8 @@ export default class Router {
                 next();
             })(req, res, next);
         } else if (strategy === passportEnum.OPTIONAL) {
-            passport.authenticate('jwt', { session: false }, (err, user, info) => {
+            passport.authenticate('jwt', { session: false }, (err, user) => {
                 if (err) return next(err);
-                if (!user) {
-                    if (!req.cookies?.refreshToken) return res.send({ user: null });
-                    return res.status(401).send({ error: info?.message || 'Unauthorized' });
-                };
                 if (user) req.user = user;
                 next();
             })(req, res, next);

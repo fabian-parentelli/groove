@@ -7,11 +7,23 @@ export default class Musci {
     };
 
     getLists = async (query, page, limit) => {
-        return await listModel.paginate(query, { page, limit, lean: true });
+        return await listModel.paginate(query, { page, limit, lean: true, sort: { _id: -1 } });
     };
 
     getById = async (id) => {
         return await listModel.findById(id).lean();
+    };
+
+    getMany = async (query, get = {}) => {
+        return await listModel.find(query, get).lean();
+    };
+
+    update = async (list) => {
+        return await listModel.findByIdAndUpdate(list._id, list, { returnDocument: 'after' }).lean();
+    };
+
+    delete = async (id) => {
+        return await listModel.findByIdAndDelete(id).lean();
     };
 
 };

@@ -1,5 +1,22 @@
-import { categoryRepository } from "../repositories/index.repositories.js";
+import { categoryRepository, musicRepository } from "../repositories/index.repositories.js";
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
+import { validation } from '../validations/category.val.js';
+
+const postOneCategory = async (body) => {
+    const result = await categoryRepository.postCategory(body);
+    if (!result) throw new CustomNotFound('Error al crear el tópico');
+    return { status: 'success', result };
+};
+
+const getByName = async ({ name }) => {
+    const result = await categoryRepository.getCategory({ name });
+    if (!result) throw new CustomNotFound('Error al tarer la categoría');
+    const music = await musicRepository.getRandom({ topics: { $in: [name] } }, 50);
+    if (!music) throw new CustomNotFound('Error al traer la música');
+    result.list = music;
+    result.yids = music.map(doc => doc.yid);
+    return { status: 'success', result };
+};
 
 const postCategory = async (songs) => {
 
@@ -26,10 +43,24 @@ const postCategory = async (songs) => {
     return { status: 'develop' };
 };
 
-const getCategories = async () => {
-    const result = await categoryRepository.getAll() || [];
+const getCategories = async ({ limit = 100, names }) => {
+    const query = {};
+    if (names) {
+        const arr = Array.isArray(names) ? names : names.split(',');
+        query.name = { $in: arr };
+    };
+    const result = await categoryRepository.getAll(query, limit) || [];
     if (!result || result.length == 0) throw new CustomNotFound('Error al obtener las categorías');
     return { status: 'success', result };
 };
 
-export { postCategory, getCategories };
+const putCategory = async (body, user) => {
+    body = validation.putCategory(body);
+    const category = await categoryRepository.getById(body._id);
+    if (!category) return { status: 'error', message: `Error al traer la categoria: ${body._id}` };
+    const result = await categoryRepository.update({ ...category, ...body });
+    if (!result) return { status: 'error', message: `Error al editar la categoria: ${body._id}` };
+    return { status: 'success', result };
+};
+
+export { postCategory, postOneCategory, getByName, getCategories, putCategory };

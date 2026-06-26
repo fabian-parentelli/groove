@@ -1,134 +1,138 @@
-.sidebar-4 button {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-}
-
 .sidebar-4 {
-    position: absolute;
-    overflow: hidden;
-    top: 70px;
+    position: fixed;
+    top: 0;
     left: 0;
-    bottom: 0;
-    width: 60px;
-    min-height: 100vh;
+    width: 40px;
+    height: 100vh;
     background: var(--cola);
-    transition: width 0.4s;
-    z-index: 2;
+    transition: width 0.3s ease;
+    overflow: hidden;
 }
 
-@media (min-width: 769px) {
-    
-    .sidebar-4:hover {
-        width: 200px;
+@media (min-width: 768px) {
+    .sidebar-4 {
+        width: 220px;
     }
 }
 
 .sidebar-4 .inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem 0;
 }
 
 .sidebar-4 .header {
     display: flex;
     align-items: center;
-    height: 72px;
-    padding: 0 15px;
-    background: rgb(0 0 0 / 15%);
-}
-
-.sidebar-4 .header h2 {
-    margin-left: 15px;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: var(--cold);
+    justify-content: center;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .sidebar-4 .header img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
-.sidebar-4 .logo {
-    height: 28px;
-    scale: 1.1;
-    transition: 0.5s;
+@media (min-width: 768px) {
+    .sidebar-4 .header img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.sidebar-4 .header h2 {
+    display: none;
+    font-size: .8rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+    .sidebar-4 .header h2 {
+        display: block;
+    }
 }
 
 .sidebar-4 .menu {
-    position: relative;
-    display: grid;
-}
-
-.sidebar-4 .menu::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 56px;
-    width: 6px;
-    background: var(--cold);
-    translate: 0 var(--top);
-    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0;
 }
 
 .sidebar-4 .menu button {
     display: flex;
-    gap: 16px;
     align-items: center;
-    height: 56px;
-    width: 100%;
-    /* font-family: "Poppins"; */
-    font-size: 17px;
-    text-transform: capitalize;
-    line-height: 1;
-    padding: 0 22px;
-    color: rgb(255 255 255 / 60%);
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    color: #a2a3b7;
     cursor: pointer;
-    opacity: 0.8;
-    transition: 0.5s;
+    border-radius: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+    text-align: left;
 }
 
-.sidebar-4:hover .menu button:hover:not(.active) {
-    background: rgb(0 0 0 / 8%);
+@media (min-width: 768px) {
+    .sidebar-4 .menu button {
+        justify-content: flex-start;
+        padding: 0.75rem 0.75rem;
+    }
+
+    .sidebar-4 .menu button p {
+        display: block;
+    }
 }
 
-.sidebar-4 .menu :is(button:hover, .active) {
-    background: rgb(0 0 0 / 35%);
-    color: rgb(255 255 255 / 100%);
-    opacity: 1;
+.sidebar-4 .menu button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
 }
 
-.sidebar-4:hover .menu .active {
-    cursor: default;
+.sidebar-4 .menu button.active {
+    background: var(--colf);
+    color: #fff;
 }
 
-.sidebar-4 .menu button:hover>span {
-    opacity: 1;
+.sidebar-4 .menu button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
 }
 
-.sidebar-4 .menu button p,
-.sidebar-4 .header h1 {
-    opacity: 0;
-    transition: 0.5s;
+@media (min-width: 768px) {
+    .sidebar-4 .menu button span {
+        width: 25px;
+        height: 25px;
+    }
 }
 
-.sidebar-4:hover :is(.sidebar-4 .menu button p, .sidebar-4 .header h1) {
-    opacity: 1;
+.sidebar-4 .menu button p {
+    display: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
 }
 
-.sidebar-4:hover .logo {
-    scale: 1;
-}
-
-.sidebar-4 .menu button>img {
-    width: 24px;
-    height: 24px;
+@media (min-width: 768px) {
+    
+    .sidebar-4 .menu button p {
+        display: block;
+    }
 }

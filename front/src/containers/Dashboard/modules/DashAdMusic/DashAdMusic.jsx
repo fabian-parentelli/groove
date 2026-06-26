@@ -12,18 +12,19 @@ const DashAdMusic = () => {
     const { showAlert, setLoading } = useAlertContext();
 
     const [type, setType] = useState(null);
-    const [values, setValues] = useState({ path: '', type: '' });
+    const [values, setValues] = useState({ path: '', type: 'pid', is: 'list' });
+    // is: album, list, song
 
     useEffect(() => {
-        if (type) setValues({ ...values, type: type._id });
-        else setValues({ ...values, type: '' });
+        if (!type) return;
+        if (type) setValues({ ...values, type: type._id, is: 'song' });
     }, [type]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        if (values.path == '' || values.type == '') return showAlert('Debes completar los dos inputs', 'error');
         const response = await postMusicApi(values);
+        console.log(response);
         if (response.status === 'success') {
             showAlert('Operación exitosa');
             const path = `/${values.type.startsWith("p") ? 'list' : 'song'}?id=${response.result}`;
@@ -35,15 +36,18 @@ const DashAdMusic = () => {
     return (
         <div className="dashAdMusic">
 
-            <section className='flex-col'>
+            <section className='flex-col bgdash'>
 
                 <form className='flex-col' onSubmit={handleSubmit}>
+
+                    <p className='cold'>Solo ingresar los id:</p>
 
                     <CheckBoxes
                         labels={labels}
                         direction='row'
                         setType={setType}
-                        accentColor='#1B263B'
+                        accentColor='#4f46e5'
+                        selecteds={[{ _id: 'pid', name: 'Id de playlist' }]}
                     />
 
                     <input
@@ -53,15 +57,31 @@ const DashAdMusic = () => {
 
                     {values.type.startsWith("p") &&
                         <input
-                            type="text" placeholder='Nombre de la playlist' value={values?.name || ''}
-                            onChange={(e) => setValues({ ...values, name: e.target.value })} required
+                            type="text" value={values?.name || ''} required
+                            onChange={(e) => setValues({ ...values, name: e.target.value })}
+                            placeholder={`Nombre ${values?.is}`}
                         />
                     }
 
-                    <button className='btn btnA'>Agragar</button>
+                    <select name="is" value={values.is || ''} required
+                        onChange={(e) => setValues({ ...values, is: e.target.value })}
+                    >
+                        <option value="list">Playlist</option>
+                        <option value="album">Álbum</option>
+                        <option value="song">Canción</option>
+                    </select>
+
+                    {values.is === 'album' &&
+                        <input
+                            type="text" placeholder='Nombre del autor' value={values?.author || ''}
+                            onChange={(e) => setValues({ ...values, author: e.target.value })} required
+                        />
+                    }
+
+                    <button className='btn btnF w-150'>Agragar</button>
                 </form>
 
-                <div>
+                <div style={{ color: 'gray' }}>
                     Aqui va la lista de id que ha colaborado el usaurio
                 </div>
 
@@ -91,9 +111,7 @@ const DashAdMusic = () => {
 export default DashAdMusic;
 
 const labels = [
-    { _id: 'surl', name: 'Url de canción' },
     { _id: 'sid', name: 'Id de canción' },
-    { _id: 'purl', name: 'Url de playlist' },
     { _id: 'pid', name: 'Id de playlist' },
 ];
 

@@ -1,0 +1,22 @@
+.modalOptions {
+    display: flex;
+    flex-direction: column;
+    color: var(--cola);
+    font-weight: 600;
+}
+
+.modalOptions h4 {
+    margin: 6px 12px;
+} 
+
+.modalOptions .modalOptionsDiv {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 1rem;
+    cursor: pointer;
+}
+
+.modalOptions .modalOptionsDiv:hover {
+    background-color: gainsboro;
+}

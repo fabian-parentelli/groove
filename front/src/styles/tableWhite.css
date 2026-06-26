@@ -1,0 +1,104 @@
+/* ===== Tabla fondo blanco ===== */
+
+.table-white {
+    width: 96%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #222;
+}
+
+.table-white table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-white th {
+    background-color: #f2f2f2;
+    height: 60px;
+    color: #111;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+.table-white td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #222;
+}
+
+.table-white tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.table-white tr:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* ===== Responsive ===== */
+
+@media screen and (max-width: 768px) {
+
+    .table-white table,
+    .table-white thead,
+    .table-white tbody,
+    .table-white th,
+    .table-white td,
+    .table-white tr {
+        display: block;
+    }
+
+    .table-white thead tr {
+        display: none;
+    }
+
+    .table-white tr {
+        margin-bottom: 10px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        padding: 6px 8px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .table-white tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .table-white td {
+        position: relative;
+        padding-left: 28%;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 12px;
+        color: #222;
+    }
+
+    .table-white td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        font-weight: bold;
+        color: #666;
+        font-size: 12px;
+        width: 20%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table-white td:last-child {
+        border-bottom: none;
+    }
+
+    .table-white td img {
+        width: 30px;
+        height: 30px;
+    }
+}

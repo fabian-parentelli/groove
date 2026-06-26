@@ -11,7 +11,7 @@ const Sidebar = ({ user }) => {
 
     const goto = (index, link) => {
         setActive(index);
-        navigate( index === 1 ? '/dashboard' : `/dashboard/${link}`);
+        navigate(index === 1 ? '/dashboard' : `/dashboard/${link}`);
     };
 
     return (
@@ -19,7 +19,7 @@ const Sidebar = ({ user }) => {
 
             <div className="inner">
 
-                <div className="header">
+                <div className="header" onClick={() => navigate('/')}>
                     <img src={user?.img?.[0] ?? '/logo.png'} alt="img" />
                     <h2>{user?.name.toUpperCase()}</h2>
                 </div>
@@ -36,7 +36,7 @@ const Sidebar = ({ user }) => {
                             onClick={() => goto(index, item.link)}
                         >
                             <span><Icons type={item.icon} color="gray" size="25px" /></span>
-                            {(user.role === 'user' && item.icon === 'user') 
+                            {(user.role === 'user' && item.icon === 'user')
                                 ? <p>Perfil</p>
                                 : <p>{item.name}</p>
                             }

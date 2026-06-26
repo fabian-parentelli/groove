@@ -1,0 +1,127 @@
+.bodyPanel {
+    width: 260px;
+    flex-shrink: 0;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--cola);
+    overflow-y: auto;
+}
+
+/* Barra de scroll */
+
+.bodyPanel::-webkit-scrollbar {
+    width: 4px;
+}
+
+.bodyPanel::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 6px;
+}
+
+.bodyPanel::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+    border-radius: 6px;
+}
+
+.bodyPanel::-webkit-scrollbar-thumb:hover {
+    background: #6366f1;
+}
+
+/* ##################################### */
+
+.bodyPanel .bodyPanelTitle {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 5px;
+}
+
+.bodyPanel .bodyPanelTitle h1 {
+    color: var(--colf);
+}
+
+.bodyPanel .bodyPanelTitle div p {
+    font-size: 12px;
+    color: var(--cold);
+}
+
+/* Sections */
+
+.bodyPanel .bodyPanelSect {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+.bodyPanel .bodyPanelSect a svg {
+    transition: .3s ease-in-out;
+}
+
+.bodyPanel .bodyPanelSect a {
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    gap: 10px;
+    padding: 1rem;
+    transition: color .3s ease-in-out;
+}
+
+.bodyPanel .bodyPanelSect a:hover {
+    background-color: var(--cole);
+}
+
+.bodyPanel .bodyPanelSect a p {
+    font-size: 16px;
+}
+
+.bodyPanel h3 {
+    border-top: 1px solid var(--colf);
+    width: 85%;
+    padding: 2rem 0 0 1rem;
+    color: gray;
+    margin-top: 10px;
+}
+
+.bodyPanelClose {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.bodyPanelClose:hover {
+    background: var(--cole);
+}
+
+@media (max-width: 768px) {
+    .bodyPanelClose {
+        display: block;
+    }
+
+    .bodyPanel {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 280px;
+        height: 100%;
+        z-index: 100;
+        transition: left 0.3s ease;
+        padding-bottom: 10vh;
+    }
+
+    .bodyPanel--open {
+        left: 0;
+    }
+
+    .bodyPanel .bodyPanelTitle {
+        justify-content: flex-start;
+    }
+}

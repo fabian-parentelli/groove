@@ -1,4 +1,5 @@
-import { musicRepository, activityRepository, listRepository } from "../repositories/index.repositories.js";
+import { musicRepository, activityRepository, listRepository, albumRepository } from "../repositories/index.repositories.js";
+import { formatYoTube, getYoutubeId } from "../utils/support/music.suport.js";
 import { getPlayListApi } from '../helpers/getPlayList.api.js';
 import { getVideoInfoApi } from '../helpers/getVideoInfo.api.js';
 import { CustomNotFound } from '../utils/custom-exceptions.utils.js';
@@ -17,7 +18,8 @@ const postMusic = async (body, user) => {
         if (!videoIds && videoIds.length == 0) throw new CustomNotFound('Error al traer los listId de Youtube');
         music = await getVideoInfoApi(videoIds);
     } else music = await getVideoInfoApi([id]);
-    const musicFormat = formatYoTube(music);
+
+    const musicFormat = formatYoTube(music, body);
 
     const saveMusic = await musicRepository.postMany(musicFormat);
     if (!saveMusic || saveMusic.length === 0) throw new CustomNotFound('No se insertó ninguna canción, todas ya existían');
@@ -30,20 +32,38 @@ const postMusic = async (body, user) => {
         return { status: 'success', result: saveMusic.upsertedIds[0] };
     };
 
-    const saveList = await listRepository.postList({ name: body.name, list: videoIds, uid: user._id, originUrl: body.path });
-    if (!saveList) throw new CustomNotFound('Error al guardar la lisat');
+    const objSave = {
+        name: body.name, list: videoIds, uid: user._id, originUrl: body.path, img: musicFormat[0].img
+    };
+
+    let result;
+    if (body.is === 'list') result = await listRepository.postList(objSave);
+    else result = await albumRepository.postAlbum({ ...objSave, author: body.author });
+
+    if (!result) throw new CustomNotFound('Error al guardar la lisat');
 
     setImmediate(async () => {
-        await activityRepository.postActivity({ eid: saveList._id, uid: user._id, type: 'newList' });
+        await activityRepository.postActivity({ eid: result._id, uid: user._id, type: 'newList' });
         await postCategory(musicFormat);
     });
 
-    return { status: 'success', result: saveList._id };
+    return { status: 'success', result: result._id };
 };
 
-const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
+const getSearch = async ({ id }) => {
+    const song = await musicRepository.getById(id);
+    if (!song) throw new CustomNotFound('Error al traer la canción de db');
+    let result = await musicRepository.getSearch(song.topics);
+    if (!result) throw new CustomNotFound('Error al tarer el resto de las canciones');
+    result.unshift(song);
+    return { status: 'success', result };
+};
 
-    // validar datos ...
+const getMusic = async ({ 
+    page = 1, limit = 1, active = true, lid, category, random = false, yids, name, id, author }) => {
+
+    // validar datos
+    const query = {};
 
     if (lid) {
         const list = await listRepository.getById(lid);
@@ -53,56 +73,53 @@ const getMusic = async ({ page = 1, limit = 1, active, id, lid }) => {
         return { status: 'success', result: { songs, listName: list.name, lid } };
     };
 
-    // paginador ....
+    if (id) query._id = id;
+
+    if (category) query.topics = { $in: [category] };
+    if (author) query.author = { $regex: author, $options: 'i' };
+
+    if (active !== undefined) query.active = active;
+    if (yids) query.yid = { $in: yids.split(',') };
+
+    if (name) {
+        const search = name.trim();
+        query.$or = [
+            { title: { $regex: search, $options: 'i' } },
+            { album: { $regex: search, $options: 'i' } },
+            { author: { $regex: search, $options: 'i' } }
+        ];
+    };
+
+    let result;
+    if (random) {
+        if (active !== undefined) query.active = active === true || active === 'true';
+        result = await musicRepository.getRandom(query, +limit || 24)
+    } else result = await musicRepository.getMusic(query, page, limit);
+
+    if (!result) throw new CustomNotFound('Error al tarer al traer las canciones');
+    return { status: 'success', result };
 };
 
-export { postMusic, getMusic };
-
-function getYoutubeId(body) {
-    if (body.type === 'sid' || body.type === 'pid') return body.path;
-    if (body.type === 'surl') return getSongId(body.path);
-    if (body.type === 'purl') return getListId(body.path);
-};
-
-function getListId(url) {
-    const match = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : null;
-};
-
-function getSongId(url) {
-    const match = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
-    return match ? match[1] : null;
-};
-
-function formatYoTube(music) {
-
-    const result = music.map(doc => {
-
-        return {
-            yid: doc.id,
-            title: doc.snippet.title,
-            img: doc.snippet.thumbnails.medium.url,
-            duration: timeFormat(doc.contentDetails.duration),
-            topics: getTopicNames(doc.topicDetails.topicCategories)
-        }
+const putMusic = async (body, user) => {
+    const fbody = musicValidate.putMusicVal(body, user);
+    const song = await musicRepository.getById(fbody._id);
+    if (!song) throw new CustomNotFound('Error al traer la canción de Bd');
+    const result = await musicRepository.update({ ...song, ...fbody });
+    if (!result) throw new CustomNotFound('Error al actualizar la canción');
+    setImmediate(async () => {
+        await activityRepository.postActivity({ eid: fbody._id, uid: user._id, type: 'putMusic' });
     });
-
-    return result;
+    return { status: 'success', result };
 };
 
-const timeFormat = (isoDuration) => {
-    const matches = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-    if (!matches) return 0;
-
-    const hours = parseInt(matches[1] || 0) * 3600;
-    const minutes = parseInt(matches[2] || 0) * 60;
-    const seconds = parseInt(matches[3] || 0);
-
-    return hours + minutes + seconds;
+const putManyForAlbum = async (data) => {
+    const { yids, album, author } = data;
+    if (!yids?.length) return;
+    const update = {};
+    if (album) update.album = album;
+    if (author) update.author = author;
+    if (Object.keys(update).length === 0) return;
+    await musicRepository.putMany(yids, update);
 };
 
-function getTopicNames(topics = []) {
-    return topics
-        .map(url => url.split('/').pop())
-        .filter(name => name !== 'Music');
-}
+export { postMusic, getSearch, getMusic, putMusic, putManyForAlbum };

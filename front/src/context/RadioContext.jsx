@@ -11,45 +11,38 @@ const RadioProvider = ({ children }) => {
     const currentLidRef = useRef(params.lid);
 
     const [index, setIndex] = useState(0);
-    const [duration, setDuration] = useState(0);
     const [playlist, setPlayList] = useState([]);
-    const [volume, setVolumeState] = useState(50);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [currentTrack, setCurrentTrack] = useState({ title: '', image: '', author: '', id: '', lid: '' });
+
+    const [videoId, setVideoId] = useState(null);
 
     useEffect(() => {
         if (playlist.length > 0) {
             currentLidRef.current = params.lid;
             if (!playerRef.current) {
-                if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist, currentLidRef);
+                if (window.YT && window.YT.Player) createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId);
                 else {
                     const tag = document.createElement("script");
                     tag.src = "https://www.youtube.com/iframe_api";
                     document.body.appendChild(tag);
-                    window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist, currentLidRef);
+                    window.onYouTubeIframeAPIReady = () => createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId);
                 };
             } else {
                 playerRef.current.stopVideo();
-                playerRef.current.loadPlaylist({
-                    playlist: playlist, index, startSeconds: 0, suggestedQuality: 'default'
-                });
+                playerRef.current.clearVideo();
+
                 setTimeout(() => {
+                    playerRef.current.loadPlaylist({
+                        playlist: playlist,
+                        index: 0,
+                        startSeconds: 0,
+                    });
                     playerRef.current.playVideo();
                     setIsPlaying(true);
-                }, 500);
+                }, 300);
             };
         };
     }, [playlist]);
-
-    const handlePlayPause = () => {
-        if (!playerRef.current) return;
-        if (isPlaying) playerRef.current.pauseVideo();
-        else playerRef.current.playVideo();
-    };
-
-    const handleNext = () => playerRef.current?.nextVideo();
-    const handlePrev = () => playerRef.current?.previousVideo();
 
     const playAtIndex = (index) => {
         if (playerRef.current && typeof playerRef.current.playVideoAt === 'function') {
@@ -58,39 +51,10 @@ const RadioProvider = ({ children }) => {
         };
     };
 
-    useEffect(() => {
-        let interval;
-        if (isPlaying && playerRef.current) {
-            interval = setInterval(() => {
-                const elapsed = playerRef.current.getCurrentTime();
-                setCurrentTime(elapsed);
-                const total = playerRef.current.getDuration();
-                setDuration(total);
-            }, 1000);
-        } else clearInterval(interval);
-        return () => clearInterval(interval);
-    }, [isPlaying]);
-
-    const seekTime = (seconds) => {
-        if (playerRef.current && typeof playerRef.current.seekTo === 'function') {
-            playerRef.current.seekTo(seconds, true);
-            setCurrentTime(seconds);
-        };
-    };
-
-    const changeVolume = (newVolume) => {
-        const vol = Number(newVolume);
-        setVolumeState(vol);
-        if (playerRef.current && typeof playerRef.current.setVolume === 'function') {
-            playerRef.current.setVolume(vol);
-        }
-    };
-
     return (
         <RadioContext.Provider value={{
-            isPlaying, handlePlayPause, handleNext, handlePrev, currentTrack, setParams,
-            setPlayList, params, playlist, playAtIndex, setCurrentTrack, setIndex, duration, currentTime,
-            seekTime, changeVolume, volume
+            isPlaying, setParams, setPlayList, params, playlist, playAtIndex, setIndex, playerRef,
+            videoId
         }}>
             {children}
         </RadioContext.Provider>
@@ -99,7 +63,7 @@ const RadioProvider = ({ children }) => {
 
 export default RadioProvider;
 
-function createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist, currentLidRef) {
+function createPlayer(playerRef, setIsPlaying, playlist, currentLidRef, setVideoId) {
 
     if (playerRef.current) return;
 
@@ -117,20 +81,21 @@ function createPlayer(playerRef, setIsPlaying, setCurrentTrack, playlist, curren
                 event.target.setLoop(true);
             },
             onStateChange: (event) => {
+                const player = event?.target;
+                if (!player || typeof player.getVideoData !== "function") return;
                 if (event.data === window.YT.PlayerState.PLAYING) {
                     setIsPlaying(true);
-                    const data = event.target.getVideoData();
-                    setCurrentTrack({
-                        id: data.video_id,
-                        title: data.title,
-                        author: data.author,
-                        image: `https://img.youtube.com/vi/${data.video_id}/maxresdefault.jpg`,
-                        lid: currentLidRef.current
-                    });
-                } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+                    if (typeof player.getVideoData === "function") {
+                        const data = player.getVideoData();
+                        setVideoId(data.video_id);
+                    }
+                } else if (
+                    event.data === window.YT.PlayerState.PAUSED ||
+                    event.data === window.YT.PlayerState.ENDED
+                ) {
                     setIsPlaying(false);
-                };
-            },
+                }
+            }
         }
     });
 };

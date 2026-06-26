@@ -1,0 +1,10 @@
+.bodyPlayList {
+    padding-bottom: 6rem;
+}
+
+@media(max-width: 767px) {
+
+    .bodyPlayList .viewSongh3 {
+        text-align: center;
+    }
+}

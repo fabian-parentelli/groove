@@ -21,7 +21,7 @@ const DashTitle = () => {
         <div className="dashTitle">
 
             <section className='dashTitleLeft'>
-                <Icons type={data?.icon} color='#1B263B' />
+                <Icons type={data?.icon} color='white' />
                 <h4>{data?.name}</h4>
             </section>
 

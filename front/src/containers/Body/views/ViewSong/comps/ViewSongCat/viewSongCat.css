@@ -1,0 +1,46 @@
+.viewSongCat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    
+    .viewSongCat {
+        justify-content: center;
+        max-width: 100%;
+        flex-direction: row !important;
+    }
+}
+
+.viewSongCatItem {
+    width: 110px;
+}
+
+.viewSongCatImg {
+    position: relative;
+    width: 100%;
+    height: 65px;
+    overflow: hidden;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.viewSongCatImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.viewSongCatImg:hover img {
+    transform: scale(1.1);
+}
+
+.viewSongCatTopic {
+    font-size: 11px;
+    margin-top: 4px;
+    text-align: center;
+    color: #fff;
+}

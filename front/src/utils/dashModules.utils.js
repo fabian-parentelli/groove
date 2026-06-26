@@ -1,10 +1,12 @@
 const dashModules = [
     { icon: 'user', name: 'Usuarios', link: 'users' },
     { icon: 'dashboard', name: 'Panel', link: 'panel' },
-    { icon: 'playlistad', name: 'Agregar', link: 'admusic' },
-    { icon: 'computer', name: 'Prodcutos', link: 'product' },
+    { icon: 'playlistad', name: 'Subir música', link: 'admusic' },
+    { icon: 'album', name: 'Albums', link: 'album' },
+    { icon: 'filemusic', name: 'Canciones', link: 'songs' },
     { icon: 'activity', name: 'Actividad', link: 'activity' },
     { icon: 'message', name: 'Mensaje', link: 'message' },
+    { icon: 'direction', name: 'Categorías', link: 'topics' },
     { icon: 'setting', name: 'Opciones', link: 'setting' },
 ];
 

@@ -5,10 +5,16 @@ const getMusicApi = async (obj) => {
     let urlData = '/api/music?';
 
     if (obj.page) urlData += `page=${obj.page}&`;
-    if (obj.limit) urlData += `limit=${obj.lmit}&`;
+    if (obj.limit) urlData += `limit=${obj.limit}&`;
     if (obj.id) urlData += `id=${obj.id}&`;
+    if (obj.uid) urlData += `uid=${obj.uid}&`;
+    if (obj.yids) urlData += `yids=${obj.yids}&`;
     if (obj.lid) urlData += `lid=${obj.lid}&`;
+    if (obj.name) urlData += `name=${obj.name}&`;
+    if (obj.author) urlData += `author=${obj.author}&`;
+
     if (obj.active !== undefined) urlData += `active=${obj.active}&`;
+    if (obj.random !== undefined) urlData += `random=${obj.random}&`;
 
     if (urlData.endsWith('&')) urlData = urlData.slice(0, -1);
 

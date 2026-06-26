@@ -6,7 +6,9 @@ const musicCollection = 'musics';
 const musicSchema = new mongoose.Schema({
     yid: { type: String, unique: true, index: true },
     title: { type: String },
+    author: { type: String },
     img: { type: String },
+    album: { type: String },
     duration: { type: Number },
     topics: [{ type: String }],
     active: { type: Boolean, default: true }
